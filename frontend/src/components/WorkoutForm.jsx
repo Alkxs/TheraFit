@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Select from 'react-select'
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { FaArrowLeft } from "react-icons/fa"
 
 const CreateWorkout = () => {
   const { dispatch } = useWorkoutsContext()
@@ -18,6 +19,29 @@ const CreateWorkout = () => {
   })
   const [error, setError] = useState(null)
   const [emptyFields, setEmptyFields] = useState([])
+
+  const validateDates = () => {
+    const startDate = new Date(options.startDate)
+    const endDate = new Date(options.endDate)
+    const currentDate = new Date()
+
+    currentDate.setHours(0, 0, 0, 0)
+
+    if (startDate < currentDate) {
+      setError('Start date cannot be in the past')
+      return false
+    }
+    if (startDate > endDate) {
+      setError('Start date cannot be greater than end date')
+      return false
+    }
+    if (endDate < startDate) {
+      setError('End date cannot be less than start date')
+      return false
+    }
+    setError(null)
+    return true
+  }
 
   const frequency = [
     { value: 1, label: '1' },
@@ -72,6 +96,10 @@ const CreateWorkout = () => {
       return
     }
 
+    if (!validateDates()) {
+      return
+    }
+
     const {title, startDate, endDate, frequency, type} = options
 
     const workout = { title, startDate, endDate, frequency, type }
@@ -109,11 +137,13 @@ const CreateWorkout = () => {
   }
 
   return (
-    <div className='container'>
-      <button type='button' onClick={() => navigate('/')}>
-        Back
-      </button>
-      <form onSubmit={handleSubmit}>
+    <div className='form-container'>
+      <div className='card'>
+      <button type='button' onClick={() => navigate(`/`)} className='button-back'>
+          <FaArrowLeft size={25}/>
+        </button>
+      <form onSubmit={handleSubmit}
+      className="form-section">
         <h1>Add a New Workout</h1>
         <div className='main-section'>
           <div className='choices'>
@@ -144,7 +174,7 @@ const CreateWorkout = () => {
               />
             </div>
 
-            <div>
+            <div className='select-container'>
               <label>Frequency x week</label>
               <Select
                 options={frequency}
@@ -154,7 +184,7 @@ const CreateWorkout = () => {
               />
             </div>
 
-            <div>
+            <div className="select-container">
               <label>Type</label>
               <Select
                 options={type}
@@ -164,22 +194,13 @@ const CreateWorkout = () => {
               />
             </div>
           </div>
-
-          {/* <div className='img-container'>
-            <label>Upload Picture:</label>
-            <input 
-              type='file' 
-              accept='image/*' 
-              onChange={handleFileChange} 
-              className={emptyFields.includes() ? 'error' : ''}
-              />
-          </div> */}
         </div>
 
-        <button type='submit'>Create Workout</button>
+        <button type='submit' className="primary-button">Create Workout</button>
         {error && <div className='error'>{error}</div>}
       </form>
     </div>
+  </div>
   )
 }
 export default CreateWorkout

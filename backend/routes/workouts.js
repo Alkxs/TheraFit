@@ -13,9 +13,6 @@ const {
 
 const requireAuth = require('../middleware/requireAuth')
 
-
-// router.use(requireAuth)
- 
 //GET all workouts
 router.get('/', requireAuth, getWorkouts)
  

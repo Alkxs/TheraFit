@@ -47,12 +47,12 @@ const exerciseComponent = ({ exercise, workoutId }) => {
 
         <p>{formatDistanceToNow(new Date(exercise.createdAt), { addSuffix: true })}</p>
 
-        <span className='trash-icon' onClick={handleDelete}>
+        <span className='workout-icon trash' onClick={handleDelete}>
           <FaTrashAlt />
         </span>
 
-        <span className='edit-icon'>
-          <FaEdit onClick={handleEdit} />
+        <span className='workout-icon edit'>
+          <FaEdit onClick={handleEdit}/>
         </span>
 
         <button onClick={() => navigate(`/${workoutId}/exercises/${exerciseId}/show-details`)}>Show Details</button>

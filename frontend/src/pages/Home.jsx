@@ -35,12 +35,22 @@ const home = () => {
     <div className='home'>
       <div className='main'>
         <h2 className='main-title'> Welcome {user.username}</h2>
-        <div className='workouts'>{workouts && workouts.map((workout) => <WorkoutComponent key={workout._id} workout={workout} />)}</div>
-        <div className='btn-container'>
-          <button className='btn-primary' onClick={() => navigate(`/create-workout`)}>
+        <div className='workouts'>
+          {workouts ? (
+          workouts.map((workout) => <WorkoutComponent 
+          key={workout._id} 
+          workout={workout} />)
+          ) : (
+            <p>No workouts yet for this workout</p>
+          )}
+          </div>
+
+        <div className='button-container'>
+          <button className='secondary-button' onClick={() => navigate(`/create-workout`)}>
             Create New Workout
           </button>
         </div>
+
       </div>
     </div>
   )

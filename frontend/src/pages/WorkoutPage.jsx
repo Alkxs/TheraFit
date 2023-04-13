@@ -2,16 +2,21 @@
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 // Custom Hooks
+import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
 import { useExercisesContext } from '../hooks/useExercisesContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 //components
 import ExerciseComponent from '../components/ExerciseComponent'
+import { FaArrowLeft } from 'react-icons/fa'
 
 const WorkoutPage = () => {
   const { workoutId } = useParams()
+  const { workouts } = useWorkoutsContext()
   const { exercises, dispatch } = useExercisesContext()
   const { user } = useAuthContext()
   const navigate = useNavigate()
+
+  const workout = workouts.find((w) => w._id === workoutId)
 
   useEffect(() => {
    
@@ -35,21 +40,27 @@ const WorkoutPage = () => {
   }, [dispatch, user, workoutId])
 
   return (
-    <div className='home'>
+    <div className='workout-page'>
       <div className='main'>
-        <button type='button' onClick={() => navigate(`/`)}>
-          Back
+        <button type='button' onClick={() => navigate(`/`)} className='button-back'>
+          <FaArrowLeft size={25} />
         </button>
-        <div className='workouts'>
-          {exercises ? (
+
+        <h2 className='main-title'>{workout && workout.title}</h2>
+
+        <div className='exercises'>
+          {exercises.length > 0 ? (
             exercises.map((exercise) => <ExerciseComponent key={exercise._id} exercise={exercise} workoutId={workoutId} />)
           ) : (
-            <p>No exercises yet for this workout</p>
+            <p className='no-exercises'>No exercises yet for this workout</p>
           )}
         </div>
-        <button className='create-exercise' onClick={() => navigate(`/${workoutId}create-exercise`)}>
-          Create New Exercise
-        </button>
+
+        <div className='button-container'>
+          <button className='secondary-button' onClick={() => navigate(`/${workoutId}create-exercise`)}>
+            Create New Exercise
+          </button>
+        </div>
       </div>
     </div>
   )

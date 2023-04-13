@@ -4,6 +4,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import { useNavigate, useParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import Select from 'react-select'
+import { FaArrowLeft } from 'react-icons/fa'
 
  const EditWorkoutForm = () => {
   const { workoutId } = useParams()
@@ -43,6 +44,30 @@ import Select from 'react-select'
       })
     }
   }, [workoutId, workouts])
+
+  const validateDates = () => {
+    const startDate = new Date(workoutData.startDate)
+    const endDate = new Date(workoutData.endDate)
+    const currentDate = new Date()
+    
+    currentDate.setHours(0, 0, 0, 0)
+
+    if (startDate < currentDate) {
+      setError('Start date cannot be in the past')
+      return false
+    }
+    if (startDate > endDate) {
+      setError('Start date cannot be greater than end date')
+      return false
+    }
+    if (endDate < startDate) {
+      setError('End date cannot be less than start date')
+      return false
+    }
+    setError(null)
+    return true
+  }
+
 
   const frequency = [
     { value: 1, label: '1' },
@@ -97,6 +122,9 @@ import Select from 'react-select'
       return
     }
 
+     if (!validateDates()) {
+       return
+     }
     // handle form submission here
     const { title, startDate, endDate, frequency, type } = workoutData
 
@@ -134,67 +162,79 @@ import Select from 'react-select'
   }
 
   return (
-    <div className='container'>
-      <button type='button' onClick={() => navigate(`/`)}>
-        Back
-      </button>
-      <form onSubmit={handleSubmit}>
-        <h1>Edit Workout</h1>
-        <div className='main-section'>
-          <div className='choices'>
-            <div>
-              <label>Title:</label>
-              <input type='text' name='title' value={workoutData.title} onChange={handleInputChange} className={emptyFields.includes('title') ? 'error' : ''} />
-            </div>
+    <div className='form-container'>
+      <div className='card'>
+        <button type='button' onClick={() => navigate(`/`)} className='button-back'>
+          <FaArrowLeft size={25}/>
+        </button>
+        <form onSubmit={handleSubmit} className='form-section'>
+          <h1>Edit Workout</h1>
+          <div className='main-section'>
+            <div className='choices'>
+              <div>
+                <label>Title:</label>
+                <input
+                  type='text'
+                  name='title'
+                  value={workoutData.title}
+                  onChange={handleInputChange}
+                  className={emptyFields.includes('title') ? 'error' : ''}
+                />
+              </div>
 
-            <div>
-              <label>Start Date: {workoutData.startDate}</label>
-              <input
-                type='date'
-                name='startDate'
-                value={workoutData.startDate}
-                onChange={handleInputChange}
-                className={emptyFields.includes('startDate') ? 'error' : ''}
-              />
-            </div>
+              <div>
+                <label>Start Date: {workoutData.startDate}</label>
+                <input
+                  type='date'
+                  name='startDate'
+                  value={workoutData.startDate}
+                  onChange={handleInputChange}
+                  className={emptyFields.includes('startDate') ? 'error' : ''}
+                />
+              </div>
 
-            <div>
-              <label>End Date: {workoutData.endDate}</label>
-              <input
-                type='date'
-                name='endDate'
-                value={workoutData.endDate}
-                onChange={handleInputChange}
-                className={emptyFields.includes('endDate') ? 'error' : ''}
-              />
-            </div>
+              <div>
+                <label>End Date: {workoutData.endDate}</label>
+                <input
+                  type='date'
+                  name='endDate'
+                  value={workoutData.endDate}
+                  onChange={handleInputChange}
+                  className={emptyFields.includes('endDate') ? 'error' : ''}
+                />
+              </div>
 
-            <div>
-              <label>Frequency x week</label>
-              <Select
-                options={frequency}
-                value={frequency.find((option) => option.value === workoutData.frequency)}
-                onChange={handleFrequency}
-                className={emptyFields.includes('frequency') ? 'error' : ''}
-              />
-            </div>
+              <div className='select-container'>
+                <label>Frequency x week</label>
+                <Select
+                  options={frequency}
+                  value={frequency.find((option) => option.value === workoutData.frequency)}
+                  onChange={handleFrequency}
+                  className={emptyFields.includes('frequency') ? 'error' : ''}
+                />
+              </div>
 
-            <div>
-              <label>Type</label>
-              <Select
-                options={type}
-                value={type.find((option) => option.value === workoutData.type)}
-                onChange={handleType}
-                className={emptyFields.includes('type') ? 'error' : ''}
-              />
+              <div className='select-container'>
+                <label>Type</label>
+                <Select
+                  options={type}
+                  value={type.find((option) => option.value === workoutData.type)}
+                  onChange={handleType}
+                  className={emptyFields.includes('type') ? 'error' : ''}
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <button type='submit'>Update</button>
-        {error && <div className='error'>{error}</div>}
-      </form>
+          
+          <button type='submit' className='primary-button'>
+            Update
+          </button>
+          {error && <div className='error-message'>{error}</div>}
+        </form>
+      </div>
     </div>
   )
   }
 
 export default EditWorkoutForm
+
