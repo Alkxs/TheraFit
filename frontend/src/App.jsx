@@ -26,7 +26,7 @@ function App() {
             <Route path='/create-workout' element={<WorkoutForm />} />
             <Route path='/:workoutId/edit' element={<EditWorkoutForm />} />
             <Route path='/:workoutId/exercises' element={<WorkoutPage />} />
-            <Route path='/:workoutId/create-exercise' element={<ExerciseForm />} />
+            <Route path='/:workoutId/exercises/create-exercise' element={<ExerciseForm />} />
             <Route path='/:workoutId/exercises/:exerciseId/edit' element={<EditExerciseForm />} />
             <Route path='/:workoutId/exercises/:exerciseId/show-details' element={<ExerciseDetails />} />
           </Routes>

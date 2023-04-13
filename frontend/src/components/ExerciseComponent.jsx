@@ -32,8 +32,8 @@ const exerciseComponent = ({ exercise, workoutId }) => {
   }
 
   return (
-    <div className='exercise-component'>
-      <div className='exercise-details'>
+    <div className='workout-card'>
+      <div className='workout-details'>
         <h4>{exercise.title}</h4>
         <p>
           <strong>Load (kg): </strong> {exercise.load}

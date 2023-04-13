@@ -138,14 +138,18 @@ const CreateWorkout = () => {
 
   return (
     <div className='form-container'>
+
       <div className='card'>
+
       <button type='button' onClick={() => navigate(`/`)} className='button-back'>
           <FaArrowLeft size={25}/>
         </button>
+
       <form onSubmit={handleSubmit}
       className="form-section">
+
         <h1>Add a New Workout</h1>
-        <div className='main-section'>
+
           <div className='choices'>
             <div>
               <label>Title:</label>
@@ -194,9 +198,12 @@ const CreateWorkout = () => {
               />
             </div>
           </div>
-        </div>
 
-        <button type='submit' className="primary-button">Create Workout</button>
+        <button 
+        type='submit' className="primary-button"
+        >
+          Create Workout
+          </button>
         {error && <div className='error'>{error}</div>}
       </form>
     </div>

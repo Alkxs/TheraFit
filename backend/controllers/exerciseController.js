@@ -5,7 +5,6 @@ const mongoose = require('mongoose')
 const getExercises = async (req, res) => {
   // workout Id
   const { workoutId } = req.params
-
   if (!mongoose.Types.ObjectId.isValid(workoutId)) {
     return res.status(404).json({ error: 'No such workout' })
   }
@@ -13,6 +12,8 @@ const getExercises = async (req, res) => {
   const user_id = req.user._id
 
   const exercises = await Exercise.find({ user_id, workoutId }).sort({ createdAt: -1 })
+
+  console.log('this is the workout id', workoutId)
 
   res.status(200).json(exercises)
 }
@@ -38,29 +39,22 @@ const getExercise = async (req, res) => {
 
 // POST new exercise
 const createExercise = async (req, res) => {
-   const { title, load, reps, time, imageStart, imageEnd, explanation, video, workoutid } = req.body
+   const { title, load, reps, time, imageStart, imageEnd, explanation, video, workoutId } = req.body
 
   let emptyFields = []
 
   if(!title) {
     emptyFields.push('title')
   }
-  if(!load) {
-    emptyFields.push('load')
-  }
-  if(!reps) {
-    emptyFields.push('reps')
-  }
+  
   if (emptyFields.length > 0) {
-    return res.status(400).json({ error: 'Please fill in title, load and reps fields', emptyFields })
-  } else {
-    emptyFields = []
+    return res.status(400).json({ error: 'Please fill in the title', emptyFields })
   }
 
 // add doc to db
    try {
     const user_id = req.user._id 
-     const exercise = await Exercise.create({ title, load, reps, time, imageStart, imageEnd, explanation, video, workoutid, user_id })
+     const exercise = await Exercise.create({ title, load, reps, time, imageStart, imageEnd, explanation, video, workoutId, user_id })
      res.status(200).send(exercise)
    } catch (error) {
      res.status(400).json({ error: error.message })
@@ -70,7 +64,7 @@ const createExercise = async (req, res) => {
 // DELETE all exercises
 const deleteExercises = async (req, res) => {
   const { workoutId } = req.params
-console.log(req.params)
+
   if (!mongoose.Types.ObjectId.isValid(workoutId)) {
     return res.status(404).json({ error: 'Invalid workout ID' })
   }

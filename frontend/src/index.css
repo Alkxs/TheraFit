@@ -79,13 +79,44 @@ header a {
 .logo img {
   width: 15rem;
 }
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-username{
+  font-size: 1.4rem;
+}
+
+nav button {
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+  margin-left: 10px;
+}
 /* homepage */
 .home {
   margin: 4rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.workouts {
+  max-width: 120rem;
 }
 
 .main-title{
   font-size: 4.2rem;
+  font-weight: 600;
+  text-align: center;
 }
 /* Workout Form + Edit Workout Form */
 
@@ -93,8 +124,8 @@ header a {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   background-color: #f5f5f5;
+  padding: 4rem 0;
 }
 
 .card {
@@ -127,9 +158,16 @@ header a {
   gap: 2.4rem;
 }
 
+.choices {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
 .form-section label {
+  display: block;
   font-weight: 600;
-  margin-bottom: .4rem;
+  margin-bottom: 1rem;
 }
 
 .form-section input,
@@ -141,9 +179,9 @@ header a {
   width: 100%;
 }
 
-.select-container {
+/* .select-container {
   margin-bottom: 1rem;
-}
+} */
 
 .form-section input.error,
 .form-section select.error {
@@ -171,10 +209,8 @@ header a {
 }
 
 
-
-
 /* TO BE CHANGED WITH ACTUAL WORKOUT FORM */
-label, input {
+/* label, input {
   display: block;
 }
 input {
@@ -185,15 +221,6 @@ input {
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
-}
-form button {
-  background: var(--primary);
-  border: 0;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  cursor: pointer;
 }
 div.error {
   padding: 10px;
@@ -208,28 +235,8 @@ input.error {
 }
 select.error {
   border: 1px solid var(--error);
-}
-/* navbar */
-nav {
-  display: flex;
-  align-items: center;
-}
+} */
 
-.nav-username{
-  font-size: 1.4rem;
-}
-
-nav button {
-  background: #fff;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-  padding: 6px 10px;
-  border-radius: 4px;
-  font-family: "Poppins";
-  cursor: pointer;
-  font-size: 1em;
-  margin-left: 10px;
-}
 /* auth forms */
 form.signup, form.login {
   max-width: 400px;
@@ -238,32 +245,6 @@ form.signup, form.login {
   background: #fff;
   border-radius: 4px;
 }
-/* Extras */
-.main {
-display: flex;
-flex-direction: column;
-}
-.main-title {
-  font-weight: 400;
-  text-align: center;
-}
-
-/* .create-plan{
-  background-color: #fff;
-  color: var(--primary);
-  border: solid 1px var(--primary);
-  border-radius: 6px;
-  padding: 1rem 6rem;
-  margin: 0 2.5rem;
-  cursor: pointer;
-  font-size: 1rem;
-}
-.create-plan:hover{
-  background-color: var(--primary);
-  color: #fff;
-  transition: all .5s;
-}  */
-
 /* New workout component card */
 .workout-card {
   display: flex;
@@ -401,7 +382,28 @@ flex-direction: column;
   background-color: #159873;
 }
 
+/* Workout Page */
 
+.workout-page {
+  margin: 4rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  }
+
+.exercises {
+  max-width: 120rem;
+}
+
+.no-exercises {
+  padding: 5rem 0;
+  font-size: 1.8rem;
+  color: var(--error);
+}
+
+/* Media Queries */
 @media only screen and (max-width: 768px) {
   .workout-card {
     flex-direction: column;

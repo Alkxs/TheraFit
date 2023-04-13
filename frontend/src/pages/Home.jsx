@@ -33,7 +33,6 @@ const home = () => {
 
   return (
     <div className='home'>
-      <div className='main'>
         <h2 className='main-title'> Welcome {user.username}</h2>
         <div className='workouts'>
           {workouts ? (
@@ -50,8 +49,6 @@ const home = () => {
             Create New Workout
           </button>
         </div>
-
-      </div>
     </div>
   )
 }

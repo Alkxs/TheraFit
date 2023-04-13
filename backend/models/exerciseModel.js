@@ -8,11 +8,11 @@ const exerciseSchema = new mongoose.Schema(
     },
     load: {
       type: Number,
-      required: true,
+      required: false,
     },
     reps: {
       type: Number,
-      required: true,
+      required: false,
     },
     time: {
       type: Number,
@@ -28,7 +28,7 @@ const exerciseSchema = new mongoose.Schema(
     },
     explanation: {
       type: String,
-      required: true,
+      required: false,
     },
     video: {
       type: String,
@@ -38,7 +38,7 @@ const exerciseSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
-    workoutid: {
+    workoutId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Workout',
     },

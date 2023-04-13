@@ -32,7 +32,7 @@ const ExerciseDetails = () => {
 
       <div className='video'>{exercises.video}</div>
 
-      <button type='button' onClick={() => navigate(`/workoutpage/${workoutid}/exercises`)}>
+      <button type='button' onClick={() => navigate(`/${workoutid}/exercises`)}>
         Back
       </button>
     </div>
