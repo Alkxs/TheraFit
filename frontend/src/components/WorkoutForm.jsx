@@ -30,18 +30,16 @@ const CreateWorkout = () => {
   ]
 
   const type = [
-    { value: 'cardio', label: 'Cardio' },
-    { value: 'strength', label: 'Strength' },
-    { value: 'yoga', label: 'Yoga' },
-    { value: 'Aerobics', label: 'Aerobics' },
-    { value: 'Circuit Training', label: 'Circuit Training' },
-    { value: 'Cycling', label: 'Cycling' },
-    { value: 'Hiking', label: 'Hiking' },
-    { value: 'Running', label: 'Running' },
-    { value: 'Swimming', label: 'Swimming' },
-    { value: 'Walking', label: 'Walking' },
-    { value: 'Stretching', label: 'Stretching' },
-    { value: 'Cross Training', label: 'Cross Training' },
+    { value: 'cardio', label: 'cardio' },
+    { value: 'strength', label: 'strength' },
+    { value: 'yoga', label: 'yoga' },
+    { value: 'circuit-training', label: 'circuit-training' },
+    { value: 'cycling', label: 'cycling' },
+    { value: 'hiking', label: 'hiking' },
+    { value: 'running', label: 'running' },
+    { value: 'swimming', label: 'swimming' },
+    { value: 'walking', label: 'walking' },
+    { value: 'stretching', label: 'stretching' },
   ]
 
   const handleInputChange = (e) => {

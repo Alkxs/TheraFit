@@ -3,6 +3,7 @@ import { FaTrashAlt, FaEdit } from 'react-icons/fa'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { format, formatDistanceToNow } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
+import { workoutImage } from '../data/data'
 
 const WorkoutComponent = ({ workout }) => {
   const { _id: workoutId } = workout
@@ -14,6 +15,7 @@ const WorkoutComponent = ({ workout }) => {
     if (!user) {
       return
     }
+    
   const deleteExercisesRes = await fetch(`http://localhost:3000/${workoutId}/exercises`, {
     method: 'DELETE',
     headers: {
@@ -48,35 +50,51 @@ const WorkoutComponent = ({ workout }) => {
   const formattedStartDate = format(new Date(workout.startDate), 'dd-MM-yyyy')
   const formattedEndDate = format(new Date(workout.endDate), 'dd-MM-yyyy')
 
+  const workoutImg = workoutImage[workout.type]
+
   return (
-    <div className='workout-details'>
-      <h4>{workout.title}</h4>
-      <p>
-        <strong>Starting Date:</strong> {formattedStartDate}
-      </p>
-      <p>
-        <strong>Ending Date:</strong> {formattedEndDate}
-      </p>
-      <p>
-        <strong>Frequency:</strong> {workout.frequency}
-      </p>
-      <p>
-        <strong>Type:</strong> {workout.type}
-      </p>
+    <div className='workout-card'>
+      <div className='workout-img'>
+        <img src={workoutImg} alt={workout.title} onClick={()=>console.log(workoutId)}/>
+      </div>
 
-      <p>{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}</p>
+      <div className='workout-details'>
+        <div className='workout-title'>
+          <h4>{workout.title}</h4>
+        </div>
 
-      <span className='trash-icon' onClick={handleClickDelete}>
-        <FaTrashAlt />
-      </span>
-      <span className='edit-icon'>
-        <FaEdit onClick={handleClickEdit} />
-      </span>
+        <div className='workout-info'>
+          <p>
+            <strong>Starting Date:</strong> {formattedStartDate}
+          </p>
+          <p>
+            <strong>Ending Date:</strong> {formattedEndDate}
+          </p>
+          <p>
+            <strong>Frequency:</strong> {workout.frequency}
+          </p>
+          <p>
+            <strong>Type:</strong> {workout.type}
+          </p>
 
-      <div className='navbtn-container'>
-        <button className='navbtn' onClick={() => navigate(`/workoutpage/${workoutId}/exercises`)}>
-          See workout
-        </button>
+          <p>{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}
+          </p>
+        </div>
+
+        <div className='workout-btn-container'>
+          <button className='workout-btn' onClick={() => navigate(`/workoutpage/${workoutId}/exercises`)}>
+            See workout
+          </button>
+        </div>
+
+        <div className='workout-icons'>
+          <span className='workout-icon' onClick={handleClickDelete}>
+            <FaTrashAlt />
+          </span>
+          <span className='workout-icon'>
+            <FaEdit onClick={handleClickEdit} />
+          </span>
+        </div>
       </div>
     </div>
   )

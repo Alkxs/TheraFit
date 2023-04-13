@@ -69,14 +69,14 @@ const createExercise = async (req, res) => {
 
 // DELETE all exercises
 const deleteExercises = async (req, res) => {
-  const { workoutid } = req.params
+  const { workoutId } = req.params
 console.log(req.params)
-  if (!mongoose.Types.ObjectId.isValid(workoutid)) {
+  if (!mongoose.Types.ObjectId.isValid(workoutId)) {
     return res.status(404).json({ error: 'Invalid workout ID' })
   }
 
   try {
-    const result = await Exercise.deleteMany({ workoutid})
+    const result = await Exercise.deleteMany({ workoutId})
     res.status(200).json({ message: `${result.deletedCount} exercises have been deleted` })
   } catch (error) {
     console.error(error)

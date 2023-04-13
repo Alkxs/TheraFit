@@ -70,13 +70,13 @@ const createWorkout = async (req, res) => {
 
 // DELETE a workout
 const deleteWorkout = async (req, res) => {
-  const { id } = req.params
+  const { workoutId } = req.params
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(workoutId)) {
     return res.status(404).json({ error: 'No such workout' })
   }
  
-  const workout = await Workout.findOneAndDelete({_id: id})
+  const workout = await Workout.findOneAndDelete({_id: workoutId})
 
   if (!workout) {
     return res.status(404).json({ error: 'No such workout' })
@@ -88,15 +88,15 @@ const deleteWorkout = async (req, res) => {
 
 // PATCH a workout
   const updateWorkout = async (req, res) => {
-    const { id } = req.params
-console.log('Workout ID:', id)
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    const { workoutId } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(workoutId)) {
 
       return res.status(404).json({ error: 'No such workout' })
     }
 
     const workout = await Workout.findOneAndUpdate(
-      { _id: id },
+      { _id: workoutId },
       {
         ...req.body,
       },
