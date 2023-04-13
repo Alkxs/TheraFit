@@ -70,72 +70,14 @@ header a {
 /* homepage */
 .main-title{
   font-size: 4.2rem;
-  
+  margin-top: 2rem;
 }
 .home {
   display: grid;
   grid-template-columns: 3fr;
   gap: 10rem;
 }
-.workout-details {
-  background: #fff;
-  border-radius: 4px;
-  margin: 20px auto;
-  padding: 20px;
-  position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05); 
-}
-.workout-details h4 {
-  margin: 0 0 10px 0;
-  font-size: 1.2em;
-  color: var(--primary);
-}
-.workout-details p {
-  margin: 0;
-  font-size: 0.9em;
-  color: #555;
-}
-.workout-details .trash-icon {
-  cursor: pointer;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  background: #f1f1f1;
-  padding: 6px;
-  border-radius: 50%;
-  color: #333;
-  width: 40px;
-  height: 40px;
-}
-.workout-details .edit-icon {
-  cursor: pointer;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  cursor: pointer;
-  background: #f1f1f1;
-  padding: 6px;
-  border-radius: 50%;
-  color: #333;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.trash-icon {
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.edit-icon {
-  width: 20px;
-  height: 20px;
-  display: flex;
-}
+
 .navbtn-container {
   display: flex;
   justify-content: center;
@@ -238,13 +180,14 @@ flex-direction: column;
 .workout-card {
   display: flex;
   align-items: center;
-  padding: 1rem;
-  margin: 1rem;
+  padding: 1rem 2rem;
+  margin: 4rem;
   border: 1px solid #ccc;
   border-radius: 0.5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease-in-out;
   height: auto;
+  background-color: #ffffff;
 }
 
 .workout-card:hover {
@@ -263,6 +206,7 @@ flex-direction: column;
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
   padding: 2rem;
+  background-color: #fff3ad;
 }
 
 .workout-img img {
@@ -278,36 +222,52 @@ flex-direction: column;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  border-top-right-radius: 0.5;
-  border-bottom-right-radius: 0.5;
+  padding: 20px;
+  margin: 20px auto;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: .5rem;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  background-color: #9ccaa72b;
 }
 
 .workout-title {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
 }
 
 .workout-title h4 {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: bold;
   margin: 0;
+  color: var(--primary);
 }
 
 .workout-icon {
+  position: absolute;
   color: black;
   cursor: pointer;
   transition: color 0.3s ease-in-out;
 }
 
+.trash {
+  top: 2.5rem;
+  right: 2rem;
+}
+
+.edit {
+  bottom: 1.5rem;
+  right: 2rem;
+}
+
 .workout-info {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 10rem);
   gap: 1rem;
   align-items: center;
+  justify-content: center;
   margin-bottom: 1rem;
 }
 
@@ -315,21 +275,24 @@ flex-direction: column;
 .workout-info-values {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
+
 
 .workout-info p {
   margin-bottom: 0.5rem;
   font-size: 1rem;
+  color: #555;
 }
 
 .workout-btn-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .workout-btn {
-  padding: .7rem;
+  padding: .8rem 1rem;
   border: none;
   border-radius: 0.5rem;
   background-color: #1aac83;
@@ -344,29 +307,33 @@ flex-direction: column;
 }
 
 
-
-
 @media only screen and (max-width: 768px) {
   .workout-card {
     flex-direction: column;
+    padding: 2rem;
+    margin: 4rem;
   }
 
   .workout-img {
     margin-right: 0;
-    margin-bottom: 1rem;
+    height: 20rem;
     width: 100%;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0;
   }
 
   .workout-details {
-    width: 100%;
-  }
-
-  .workout-icons {
-    margin-top: 1rem;
-    justify-content: space-around;
-  }
-
-  .workout-icons .workout-icon {
-    margin: 0;
-  }
+  width: 100%;
+  height: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0.5rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0.5rem;
+}
 }

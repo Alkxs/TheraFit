@@ -1,13 +1,13 @@
-import cardio from '../assets/workout-images/cardio2.jpeg'
-import strength from '../assets/workout-images/strength2.jpg'
-import yoga from '../assets/workout-images/yoga.jpg'
-import circuitTraining from '../assets/workout-images/circuit-training.jpeg'
-import cycling from '../assets/workout-images/cycling.png'
-import hiking from '../assets/workout-images/hiking.png'
-import running from '../assets/workout-images/running.png'
-import swimming from '../assets/workout-images/swimming.png'
-import walking from '../assets/workout-images/walking.jpg'
-import stretching from '../assets/workout-images/stretching.gif'
+import cardio from '../assets/workout-icons/cardio.png'
+import strength from '../assets/workout-icons/strength.png'
+import yoga from '../assets/workout-icons/yoga.png'
+import circuitTraining from '../assets/workout-icons/circuit-training.jpeg'
+import cycling from '../assets/workout-icons/cycling.png'
+import hiking from '../assets/workout-icons/hiking.png'
+import running from '../assets/workout-icons/running.png'
+import swimming from '../assets/workout-icons/swimming.png'
+import walking from '../assets/workout-icons/walking.png'
+import stretching from '../assets/workout-icons/stretching.png'
 
 
 

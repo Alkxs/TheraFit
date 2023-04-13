@@ -61,9 +61,6 @@ const WorkoutComponent = ({ workout }) => {
       <div className='workout-details'>
         <div className='workout-title'>
           <h4>{workout.title}</h4>
-          <span className='workout-icon trash' onClick={handleClickDelete}>
-            <FaTrashAlt size={20} />
-          </span>
         </div>
 
         <div className='workout-info'>
@@ -95,17 +92,18 @@ const WorkoutComponent = ({ workout }) => {
         </div>
 
         <div className='workout-btn-container'>
-
           <button className='workout-btn' onClick={() => navigate(`/workoutpage/${workoutId}/exercises`)}>
             See workout
           </button>
 
-          <span className='workout-icon edit'>
-            <FaEdit onClick={handleClickEdit} size={20}/>
+          <span className='workout-icon trash' onClick={handleClickDelete}>
+            <FaTrashAlt size={20} />
           </span>
 
+          <span className='workout-icon edit'>
+            <FaEdit onClick={handleClickEdit} size={20} />
+          </span>
         </div>
-
       </div>
     </div>
   )
