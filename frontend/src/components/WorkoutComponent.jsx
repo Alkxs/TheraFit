@@ -55,46 +55,57 @@ const WorkoutComponent = ({ workout }) => {
   return (
     <div className='workout-card'>
       <div className='workout-img'>
-        <img src={workoutImg} alt={workout.title} onClick={()=>console.log(workoutId)}/>
+        <img src={workoutImg} alt={workout.title} onClick={() => console.log(workoutId)} />
       </div>
 
       <div className='workout-details'>
         <div className='workout-title'>
           <h4>{workout.title}</h4>
+          <span className='workout-icon trash' onClick={handleClickDelete}>
+            <FaTrashAlt size={20} />
+          </span>
         </div>
 
         <div className='workout-info'>
-          <p>
-            <strong>Starting Date:</strong> {formattedStartDate}
-          </p>
-          <p>
-            <strong>Ending Date:</strong> {formattedEndDate}
-          </p>
-          <p>
-            <strong>Frequency:</strong> {workout.frequency}
-          </p>
-          <p>
-            <strong>Type:</strong> {workout.type}
-          </p>
+          <div className='workout-info-labels'>
+            <p>
+              <strong>Starting Date:</strong>
+            </p>
+            <p>
+              <strong>Ending Date:</strong>
+            </p>
+            <p>
+              <strong>Frequency:</strong>
+            </p>
+            <p>
+              <strong>Type:</strong>
+            </p>
+            <p>
+              <strong>Created at:</strong>
+            </p>
+          </div>
 
-          <p>{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}
-          </p>
+          <div className='workout-info-values'>
+            <p>{formattedStartDate}</p>
+            <p>{formattedEndDate}</p>
+            <p>{`${workout.frequency} days per week`}</p>
+            <p>{workout.type}</p>
+            <p>{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}</p>
+          </div>
         </div>
 
         <div className='workout-btn-container'>
+
           <button className='workout-btn' onClick={() => navigate(`/workoutpage/${workoutId}/exercises`)}>
             See workout
           </button>
+
+          <span className='workout-icon edit'>
+            <FaEdit onClick={handleClickEdit} size={20}/>
+          </span>
+
         </div>
 
-        <div className='workout-icons'>
-          <span className='workout-icon' onClick={handleClickDelete}>
-            <FaTrashAlt />
-          </span>
-          <span className='workout-icon'>
-            <FaEdit onClick={handleClickEdit} />
-          </span>
-        </div>
       </div>
     </div>
   )
