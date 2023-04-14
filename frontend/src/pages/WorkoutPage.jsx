@@ -9,6 +9,9 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import ExerciseComponent from '../components/ExerciseComponent'
 import { FaArrowLeft } from 'react-icons/fa'
 
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+
 const WorkoutPage = () => {
   const { workoutId } = useParams()
   const { workouts } = useWorkoutsContext()
@@ -40,33 +43,44 @@ const WorkoutPage = () => {
     }
   }, [dispatch, user, workoutId])
 
+  const moveExercise = (dragIndex, hoverIndex) => {
+    const dragExercise = exercises[dragIndex]
+    const updatedExercises = [...exercises]
+    updatedExercises.splice(dragIndex, 1)
+    updatedExercises.splice(hoverIndex, 0, dragExercise)
+
+    dispatch({ type: 'SET_EXERCISES', payload: updatedExercises })
+  }
+
   return (
     <div className='workout-page'>
-        <button type='button' onClick={() => navigate(`/`)} className='button-back'>
-          <FaArrowLeft size={25} />
-        </button>
+      <button type='button' onClick={() => navigate(`/`)} className='button-back'>
+        <FaArrowLeft size={25} />
+      </button>
 
-        <h2 className='main-title'>{workout && workout.title}</h2>
+      <h2 className='main-title'>{workout && workout.title}</h2>
 
-        
-          {exercises.length > 0 ? (
-            <div className="exercises-container">
-              <div className='exercises'>
-                {exercises.map((exercise) => (
-                <ExerciseComponent key={exercise._id} exercise={exercise} workoutId={workoutId} />
-                ))}
-              </div>
+      {exercises.length > 0 ? (
+        <DndProvider backend={HTML5Backend}>
+          <div className='exercises-container'>
+            <p className='drag-instructions'>Rearrange exercises by clicking and dragging them</p>
+            <div className='exercises'>
+              {exercises.map((exercise, index) => (
+                <ExerciseComponent key={exercise._id} exercise={exercise} workoutId={workoutId} index={index} moveExercise={moveExercise} />
+              ))}
             </div>
-          ) : (
-            <p className='no-exercises'>No exercises found for this workout</p>
-          )}
+          </div>
+        </DndProvider>
+      ) : (
+        <p className='no-exercises'>No exercises found for this workout</p>
+      )}
 
-        <div className='button-container'>
-          <button className='secondary-button' onClick={() => navigate(`/${workoutId}/exercises/create-exercise`)}>
-            Create New Exercise
-          </button>
-        </div>
+      <div className='button-container'>
+        <button className='secondary-button' onClick={() => navigate(`/${workoutId}/exercises/create-exercise`)}>
+          Create New Exercise
+        </button>
       </div>
+    </div>
   )
 }
 export default WorkoutPage

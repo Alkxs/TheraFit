@@ -11,7 +11,7 @@ const getExercises = async (req, res) => {
   // user Id
   const user_id = req.user._id
 
-  const exercises = await Exercise.find({ user_id, workoutId }).sort({ createdAt: -1 })
+  const exercises = await Exercise.find({ user_id, workoutId }).sort({ createdAt: +1 })
 
   console.log('this is the workout id', workoutId)
 
@@ -81,30 +81,30 @@ const deleteExercises = async (req, res) => {
 
 // DELETE an exercise
 const deleteExercise = async (req, res) => {
-  const { id } = req.params
+  const { exerciseId } = req.params
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(exerciseId)) {
     return res.status(404).json({ error: 'No such exercise' })
   }
 
-  const exercise = await Exercise.findOneAndDelete({_id: id})
+  const exercise = await Exercise.findOneAndDelete({_id: exerciseId})
 
   if (!exercise) {
     return res.status(404).json({ error: 'No such exercise' })
   }
 
-  res.status(200).send(exercise)
+  res.status(200).json(exercise)
 }
 
 // PATCH an exercise
   const updateExercise = async (req, res) => {
-    const { id } = req.params
+    const { exerciseId } = req.params
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!mongoose.Types.ObjectId.isValid(exerciseId)) {
       return res.status(404).json({ error: 'No such exercise' })
     }
 
-    const exercise = await Exercise.findOneAndUpdate({_id: id}, {
+    const exercise = await Exercise.findOneAndUpdate({_id: exerciseId}, {
       ...req.body
     })
 
@@ -112,7 +112,7 @@ const deleteExercise = async (req, res) => {
       return res.status(404).json({ error: 'No such exercise' })
     }
 
-    res.status(200).send(exercise)
+    res.status(200).json(exercise)
   }
 
   module.exports = {

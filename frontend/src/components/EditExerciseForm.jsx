@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useExercisesContext } from '../hooks/useExercisesContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { useNavigate, useParams } from 'react-router-dom'
+import { FaArrowLeft } from 'react-icons/fa'
 
 const EditExerciseForm = () => {
 
@@ -21,7 +22,7 @@ const EditExerciseForm = () => {
     video: '',  
     })
 
-  const [error, setError] = useState(null)
+  const [error, setError] = useState('')
   const [emptyFields, setEmptyFields] = useState([])
 
   useEffect(() => {
@@ -64,7 +65,7 @@ const EditExerciseForm = () => {
 
     const exercise = { title, load, reps, time, imageStart, imageEnd, explanation, video }
 
-    const res = await fetch(`http://localhost:3000/${workoutId}/exercises/${exerciseId}`, {
+    const res = await fetch(`http://localhost:3000/${workoutId}/exercises/${exerciseId}/edit`, {
       method: 'PATCH',
       body: JSON.stringify(exercise),
       headers: {
@@ -79,7 +80,7 @@ const EditExerciseForm = () => {
       setEmptyFields(data.emptyFields || [])
     }
     if (res.ok) {
-      setError(null)
+      setError('')
       setEmptyFields([])
       console.log('exercise updated:', data)
       dispatch({ type: 'EDIT_EXERCISE', payload: data })
@@ -89,11 +90,13 @@ const EditExerciseForm = () => {
   }
 
   return (
-    <div className='container'>
-      <button type='button' onClick={() => navigate(`/${workoutId}/exercises`)}>
-        Back
+    <div className='form-container'>
+      <div className='card'>
+      <button type='button' onClick={() => navigate(`/${workoutId}/exercises`)} className='button-back'>
+        <FaArrowLeft size={25} />
       </button>
-      <form className='create' onSubmit={handleSubmit}>
+
+      <form className='form-section' onSubmit={handleSubmit}>
         <h1>Edit Exercise</h1>
         <div className='main-section'>
           <div className='choices'>
@@ -157,9 +160,12 @@ const EditExerciseForm = () => {
           </div>
         </div>
 
-        <button type='submit'>Edit Exercise</button>
+        <button type='submit' className='primary-button'>
+          Edit Exercise
+          </button>
         {error && <div className='error'>{error}</div>}
       </form>
+    </div>
     </div>
   )
 }
