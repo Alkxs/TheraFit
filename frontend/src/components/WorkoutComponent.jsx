@@ -103,7 +103,7 @@ const WorkoutComponent = ({ workout }) => {
               <FaTrashAlt size={20} />
             </span>
 
-            <button className='workout-btn' onClick={() => navigate(`/${workoutId}/exercises`)}>
+            <button className='primary-button' onClick={() => navigate(`/${workoutId}/exercises`)}>
               See workout
             </button>
 

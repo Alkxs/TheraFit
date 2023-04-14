@@ -40,6 +40,7 @@ body {
 
 .secondary-button {
   padding: 1rem 1.2rem;
+  margin-bottom: 4rem;
   border: none;
   border-radius: 0.5rem;
   background-color: #262626;
@@ -245,7 +246,7 @@ form.signup, form.login {
   background: #fff;
   border-radius: 4px;
 }
-/* New workout component card */
+/* Workout Component */
 .workout-card {
   display: flex;
   align-items: center;
@@ -259,9 +260,9 @@ form.signup, form.login {
   background-color: #ffffff;
 }
 
-.workout-card:hover {
-  box-shadow: 0 0 35px rgba(0, 0, 0, 0.2);
-}
+  .workout-card:hover {
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.2);
+  }
 
 .workout-img {
   width: 30%;
@@ -391,10 +392,19 @@ form.signup, form.login {
   justify-content: center;
   align-items: center;
   height: 100%;
+  gap: 4rem;
   }
 
+.exercises-container {
+  background-color: transparent;
+  border-radius: .5rem;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 .exercises {
-  max-width: 120rem;
+  width: 40rem;
+  max-width: 100rem;
 }
 
 .no-exercises {
@@ -403,6 +413,108 @@ form.signup, form.login {
   color: var(--error);
 }
 
+/* Exercise Component */
+
+.exercise-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+  padding: 2rem;
+  gap: 1rem;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.workout-card:hover {
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.2);
+}
+
+.exercise-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.exercise-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 .3rem;
+}
+
+.exercise-title h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+exercise-icon {
+  color: black;
+  cursor: pointer;
+}
+
+.exercise-trash:hover {
+  color: var(--error);
+  cursor: pointer;
+}
+
+.exercise-trash:hover > svg {
+  transform: scale(1.5);
+  transition: all 0.3s;
+}
+
+.exercise-info {
+  display: grid;
+  grid-template-columns: repeat(2, 8rem);
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem;
+}
+
+.exercise-info-labels {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+ .exercise-info-values {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.exercise-info p {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+.exercise-btn-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.exercise-edit:hover{
+  color: #ffa748;
+  cursor: pointer;
+}
+
+.exercise-edit:hover > svg {
+  transform: scale(1.5);
+  transition: all 0.3s;
+}
 /* Media Queries */
 @media only screen and (max-width: 768px) {
   .workout-card {

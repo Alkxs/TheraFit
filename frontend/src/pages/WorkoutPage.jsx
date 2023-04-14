@@ -48,13 +48,18 @@ const WorkoutPage = () => {
 
         <h2 className='main-title'>{workout && workout.title}</h2>
 
-        <div className='exercises'>
+        
           {exercises.length > 0 ? (
-            exercises.map((exercise) => <ExerciseComponent key={exercise._id} exercise={exercise} workoutId={workoutId} />)
+            <div className="exercises-container">
+              <div className='exercises'>
+                {exercises.map((exercise) => (
+                <ExerciseComponent key={exercise._id} exercise={exercise} workoutId={workoutId} />
+                ))}
+              </div>
+            </div>
           ) : (
             <p className='no-exercises'>No exercises found for this workout</p>
           )}
-        </div>
 
         <div className='button-container'>
           <button className='secondary-button' onClick={() => navigate(`/${workoutId}/exercises/create-exercise`)}>
