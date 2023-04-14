@@ -18,22 +18,34 @@ const Navbar = () => {
         <Link to='/'>
           <div className='logo-container'>
             {/* <h1>TheraFit</h1> */}
-            <div className="logo">
-              <img src={logo} alt="logo" />
+            <div className='logo'>
+              <img src={logo} alt='logo' />
             </div>
           </div>
         </Link>
         <nav>
           {user && (
-            <div>
-              <button onClick={handleClick}>Log out</button>
+            <div className='nav-container'>
+              <Link to='/'>
+                <div>
+                  <h4 className='font-nav'>{user.username}</h4>
+                </div>
+              </Link>
+              <div onClick={handleClick}>
+                <h4 className='font-nav'>Logout</h4>
+              </div>
             </div>
           )}
 
           {!user && (
-            <div>
-              <Link to='/api/user/signup'>Sign up</Link>
-              <Link to='/api/user/login'>Login</Link>
+            <div className='nav-container'>
+              <Link to='/api/user/signup'>
+                <h4 className='font-nav'>Signup</h4>
+              </Link>
+
+              <Link to='/api/user/login'>
+                <h4 className='font-nav'>Login</h4>
+              </Link>
             </div>
           )}
         </nav>

@@ -18,7 +18,6 @@ function App() {
     <div>
       <BrowserRouter>
         <Navbar />
-        <div className='pages'>
           <Routes>
             <Route path='/' element={user ? <Home /> : <Navigate to='/api/user/login' />} />
             <Route path='/api/user/signup' element={!user ? <Signup /> : <Navigate to='/' />} />
@@ -30,7 +29,6 @@ function App() {
             <Route path='/:workoutId/exercises/:exerciseId/edit' element={<EditExerciseForm />} />
             <Route path='/:workoutId/exercises/:exerciseId/show-details' element={<ExerciseDetails />} />
           </Routes>
-        </div>
       </BrowserRouter>
     </div>
   )

@@ -4,48 +4,69 @@ import { useNavigate } from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa"
 
 const ExerciseDetails = () => {
-  const { workoutid } = useParams()
+  const { workoutId, exerciseId } = useParams()
   const { exercises } = useExercisesContext()
   const navigate = useNavigate()
 
+  const exercise = exercises.find((e) => e._id === exerciseId)
+
+    if (!exercise) {
+      return <div>Exercise not found</div>
+    }
+
   return (
     <div className='exercise-details-container'>
-      <button type='button' onClick={() => navigate(`/`)} className='button-back'>
+      <button type='button' onClick={() => navigate(`/${workoutId}/exercises`)} className='button-back'>
         <FaArrowLeft size={25} />
       </button>
 
-      <div className='container'>
-        <h4>{exercises.title}</h4>
-        <p>
-          <strong>Load (kg): </strong> {exercises.load}
-        </p>
-        <p>
-          <strong>Reps: </strong> {exercises.reps}
-        </p>
-        <p>
-          <strong>Time </strong> {exercises.time}
-        </p>
-
-        <div className='img-container'>
-          <img className='imageStart' src={exercises.imageStart} alt='image start' />
+      <div className='exercise-details-card'>
+        <div className='workout-title'>
+          <h4>{exercise.title}</h4>
         </div>
 
-        <div className='img-container'>
-          <img className='imageEnd' src={exercises.imageEnd} alt='imageEnd' />
+        {exercise.imageStart && (<div className='imgs-container'>
+          <div className='img-container'>
+            <img className='imageStart' src={exercise.imageStart} alt='image start' />
+          </div>
+
+          <div className='img-container'>
+            <img className='imageEnd' src={exercise.imageEnd} alt='imageEnd' />
+          </div>
+        </div>
+        )}
+
+        <div className='explanation-container'>
+          <p className='explanation'>{exercise.explanation}</p>
         </div>
 
-        <p className='explanation'>{exercises.explanation}</p>
+        <div className='exercise-info'>
+          <div className='exercise-info-labels'>
+            <p>
+              <strong>Load (kg): </strong>
+            </p>
+            <p>
+              <strong>Reps: </strong>
+            </p>
+            <p>
+              <strong>Time </strong>
+            </p>
+          </div>
 
-        <div className='video'>{exercises.video}</div>
+          <div className='exercise-info-values'>
+            <p>{exercise.load}</p>
+            <p>{exercise.reps}</p>
+            <p>{exercise.time}</p>
+          </div>
+        </div>
 
-        <button type='button' onClick={() => navigate(`/${workoutid}/exercises`)}>
-          Back
-        </button>
+        {exercise.video && (<div className='video-container'>
+          <div className='video'>{exercise.video}</div>
+        </div>
+        )}
+        
       </div>
     </div>
   )
 }
 export default ExerciseDetails
-
-
-// title, load, reps, time, imageStart, imageEnd, explanation, video 
