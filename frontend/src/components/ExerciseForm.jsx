@@ -23,7 +23,7 @@ const ExerciseForm = () => {
     explanation: '',
     video: '',  
     })
-  
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [emptyFields, setEmptyFields] = useState([])
 
@@ -45,6 +45,8 @@ const ExerciseForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
+
     if (!user) {
       setError('You must be logged in')
       return
@@ -86,6 +88,7 @@ const ExerciseForm = () => {
       setEmptyFields(data.emptyFields || [])
     }
     if (res.ok) {
+      setLoading(false)
       setError('')
       setOptions({
         title: '',
@@ -109,6 +112,13 @@ const ExerciseForm = () => {
 
   return (
     <div className='form-container'>
+      {loading && (
+        <div className='loader-container'>
+          <div className='loader'></div>
+          <p className="loader-text">Creating exercise, please wait...</p>
+        </div>
+      )}
+
       <div className='card'>
         <button type='button' onClick={() => navigate(`/${workoutId}/exercises`)} className='button-back'>
           <FaArrowLeft size={25} />
@@ -151,12 +161,7 @@ const ExerciseForm = () => {
 
               <div>
                 <label>Initial body position (Upload Image):</label>
-                <input
-                  type='file'
-                  name='imageStartFile'
-                  onChange={handleInputChange}
-                  className={emptyFields.includes('imageStartFile') ? 'error' : ''}
-                />
+                <input type='file' name='imageStartFile' onChange={handleInputChange} className={emptyFields.includes('imageStartFile') ? 'error' : ''} />
               </div>
 
               <div>
@@ -172,12 +177,7 @@ const ExerciseForm = () => {
 
               <div>
                 <label>Final body position (Upload Image):</label>
-                <input
-                  type='file'
-                  name='imageEndFile'
-                  onChange={handleInputChange}
-                  className={emptyFields.includes('imageEndFile') ? 'error' : ''}
-                />
+                <input type='file' name='imageEndFile' onChange={handleInputChange} className={emptyFields.includes('imageEndFile') ? 'error' : ''} />
               </div>
 
               <div>

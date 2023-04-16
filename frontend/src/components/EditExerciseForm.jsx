@@ -23,7 +23,7 @@ const EditExerciseForm = () => {
     explanation: '',
     video: '',  
     })
-
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [emptyFields, setEmptyFields] = useState([])
 
@@ -66,7 +66,7 @@ const EditExerciseForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
+    setLoading(true)
     if (!user) {
       setError('You must be logged in')
       return
@@ -107,6 +107,7 @@ const EditExerciseForm = () => {
       setEmptyFields(data.emptyFields || [])
     }
     if (res.ok) {
+      setLoading(false)
       setError('')
       setEmptyFields([])
       console.log('exercise updated:', data)
@@ -118,6 +119,14 @@ const EditExerciseForm = () => {
 
   return (
     <div className='form-container'>
+      
+      {loading && (
+        <div className='loader-container'>
+          <div className='loader'></div>
+          <p className="loader-text">Updating exercise, please wait...</p>
+        </div>
+      )}
+
       <div className='card'>
         <button type='button' onClick={() => navigate(`/${workoutId}/exercises`)} className='button-back'>
           <FaArrowLeft size={25} />

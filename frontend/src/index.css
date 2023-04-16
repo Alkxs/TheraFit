@@ -56,12 +56,47 @@ body {
 .secondary-button:hover {
   background-color: #5e5e5e;
 }
-/* Signup & Login */
-.primary-button.login,
-.primary-button.signup {
-  margin: 1rem 0;
-  padding: 1rem 2.5rem;
+
+.loader-container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  gap: 2rem;
 }
+
+.loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  animation: spin 2s linear infinite;
+}
+
+.loader-text {
+  color: white;
+  font-size: 1.8rem;
+  letter-spacing: .2rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
 /* navigation bar */
 header {
   background: #ffffff;
