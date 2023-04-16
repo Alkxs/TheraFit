@@ -16,7 +16,7 @@ const Login = () => {
   return (
     <div className='form-container'>
       <div className='card'>
-        <form className='login' onSubmit={handleSubmit} className='form-section'>
+        <form onSubmit={handleSubmit} className='form-section'>
           <h1>Login</h1>
 
           <div className='choices'>

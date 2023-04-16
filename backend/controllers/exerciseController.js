@@ -13,8 +13,6 @@ const getExercises = async (req, res) => {
 
   const exercises = await Exercise.find({ user_id, workoutId }).sort({ createdAt: +1 })
 
-  console.log('this is the workout id', workoutId)
-
   res.status(200).json(exercises)
 }
 
@@ -39,7 +37,25 @@ const getExercise = async (req, res) => {
 
 // POST new exercise
 const createExercise = async (req, res) => {
-   const { title, load, reps, time, imageStart, imageEnd, explanation, video, workoutId } = req.body
+  console.log('Request body:', req.body)
+   const { title, load, reps, time, imageStartLink, imageEndLink, explanation, video, workoutId } = req.body
+
+   let imageFileStart, imageFileEnd
+
+   if (req.files.imageStartFile) {
+     imageFileStart = req.files.imageStartFile[0].path
+   } else {
+     imageFileStart = imageStartLink
+   }
+
+   if (req.files.imageEndFile) {
+     imageFileEnd = req.files.imageEndFile[0].path
+   } else {
+     imageFileEnd = imageEndLink
+   }
+
+   console.log('Image file start:', imageFileStart)
+   console.log('Image file end:', imageFileEnd)
 
   let emptyFields = []
 
@@ -48,13 +64,15 @@ const createExercise = async (req, res) => {
   }
   
   if (emptyFields.length > 0) {
+     console.log('Error while creating exercise:', error.message)
     return res.status(400).json({ error: 'Please fill in the title', emptyFields })
   }
 
 // add doc to db
    try {
     const user_id = req.user._id 
-     const exercise = await Exercise.create({ title, load, reps, time, imageStart, imageEnd, explanation, video, workoutId, user_id })
+
+     const exercise = await Exercise.create({ title, load, reps, time, imageFileStart, imageFileEnd, explanation, video, workoutId, user_id})
      res.status(200).send(exercise)
    } catch (error) {
      res.status(400).json({ error: error.message })

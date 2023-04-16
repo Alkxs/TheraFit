@@ -16,7 +16,7 @@ const Signup = () => {
   return (
     <div className='form-container'>
       <div className='card'>
-        <form className='signup' onSubmit={handleSubmit} className='form-section'>
+        <form onSubmit={handleSubmit} className='form-section'>
           <h1>Signup</h1>
 
           <div className='choices'>

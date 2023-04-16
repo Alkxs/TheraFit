@@ -25,13 +25,13 @@ const ExerciseDetails = () => {
           <h4>{exercise.title}</h4>
         </div>
 
-        {exercise.imageStart && (<div className='imgs-container'>
+        {exercise.imageFileStart && (<div className='imgs-container'>
           <div className='img-container'>
-            <img className='imageStart' src={exercise.imageStart} alt='image start' />
+            <img className='imageStart' src={exercise.imageFileStart} alt='image start' />
           </div>
 
           <div className='img-container'>
-            <img className='imageEnd' src={exercise.imageEnd} alt='imageEnd' />
+            <img className='imageEnd' src={exercise.imageFileEnd} alt='imageEnd' />
           </div>
         </div>
         )}

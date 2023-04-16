@@ -16,21 +16,31 @@ const ExerciseForm = () => {
     load: '',
     reps: '',
     time: '',
-    imageStart: '',
-    imageEnd: '',
+    imageStartLink: '',
+    imageStartFile: '',
+    imageEndLink: '',
+    imageEndFile: '',
     explanation: '',
     video: '',  
     })
   
-  const [error, setError] = useState(null)
+  const [error, setError] = useState('')
   const [emptyFields, setEmptyFields] = useState([])
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target
+    const { name, value, files } = e.target
+    
+    if (files) {
     setOptions({
       ...options,
-      [name]: value,
+      [name]: files[0],
     })
+    } else {
+      setOptions({
+        ...options,
+        [name]: value,
+      })
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -40,15 +50,31 @@ const ExerciseForm = () => {
       return
     }
 
-    const { title, load, reps, time, imageStart, imageEnd, explanation, video } = options
+    const { title, load, reps, time, imageStartLink, imageStartFile, imageEndLink, imageEndFile, explanation, video } = options
 
-    const exercise = { title, load, reps, time, imageStart, imageEnd, explanation, video, workoutId }
+    // const exercise = { title, load, reps, time, imageStart, imageEnd, explanation, video, workoutId }
+
+    const formData = new FormData()
+    formData.append("title", title)
+    formData.append("load", load)
+    formData.append("reps", reps)
+    formData.append("time", time)
+    formData.append("explanation", explanation)
+    formData.append("video", video)
+    formData.append("workoutId", workoutId)
+    formData.append("imageStartLink", imageStartLink)
+    if (imageStartFile) {
+      formData.append('imageStartFile', imageStartFile)
+    }
+    formData.append("imageEndLink", imageEndLink)
+    if (imageEndFile) {
+      formData.append('imageEndFile', imageEndFile)
+    }
 
     const res = await fetch(`http://localhost:3000/${workoutId}/exercises`, {
       method: 'POST',
-      body: JSON.stringify(exercise),
+      body: formData,
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${user.token}`,
       },
     })
@@ -60,14 +86,16 @@ const ExerciseForm = () => {
       setEmptyFields(data.emptyFields || [])
     }
     if (res.ok) {
-      setError(null)
+      setError('')
       setOptions({
         title: '',
         load: '',
         reps: '',
         time: '',
-        imageStart: '',
-        imageEnd: '',
+        imageStartLink: '',
+        imageStartFile: '',
+        imageEndLink: '',
+        imageEndFile: '',
         explanation: '',
         video: '',
       })
@@ -85,7 +113,7 @@ const ExerciseForm = () => {
         <button type='button' onClick={() => navigate(`/${workoutId}/exercises`)} className='button-back'>
           <FaArrowLeft size={25} />
         </button>
-        
+
         <form className='form-section' onSubmit={handleSubmit}>
           <h1>Add a New Exercise</h1>
           <div className='main-section'>
@@ -111,24 +139,44 @@ const ExerciseForm = () => {
               </div>
 
               <div>
-                <label>Initial body position</label>
+                <label>Initial body position (Image URL)</label>
                 <input
                   type='text'
-                  name='imageStart'
-                  value={options.imageStart}
+                  name='imageStartLink'
+                  value={options.imageStartLink}
                   onChange={handleInputChange}
-                  className={emptyFields.includes('imageStart') ? 'error' : ''}
+                  className={emptyFields.includes('imageStartLink') ? 'error' : ''}
                 />
               </div>
 
               <div>
-                <label>Final body position</label>
+                <label>Initial body position (Upload Image):</label>
+                <input
+                  type='file'
+                  name='imageStartFile'
+                  onChange={handleInputChange}
+                  className={emptyFields.includes('imageStartFile') ? 'error' : ''}
+                />
+              </div>
+
+              <div>
+                <label>Final body position (Image URL)</label>
                 <input
                   type='text'
-                  name='imageEnd'
-                  value={options.imageEnd}
+                  name='imageEndLink'
+                  value={options.imageEndLink}
                   onChange={handleInputChange}
-                  className={emptyFields.includes('imageEnd') ? 'error' : ''}
+                  className={emptyFields.includes('imageEndLink') ? 'error' : ''}
+                />
+              </div>
+
+              <div>
+                <label>Final body position (Upload Image):</label>
+                <input
+                  type='file'
+                  name='imageEndFile'
+                  onChange={handleInputChange}
+                  className={emptyFields.includes('imageEndFile') ? 'error' : ''}
                 />
               </div>
 
@@ -150,9 +198,7 @@ const ExerciseForm = () => {
             </div>
           </div>
 
-          <button 
-          type='submit' className='primary-button'
-          >
+          <button type='submit' className='primary-button'>
             Add Exercise
           </button>
           {error && <div className='error'>{error}</div>}

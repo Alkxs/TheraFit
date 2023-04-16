@@ -28,7 +28,7 @@ const Navbar = () => {
             <div className='nav-container'>
               <Link to='/'>
                 <div>
-                  <h4 className='font-nav'>{user.username}</h4>
+                  <h1 className='user'>{user.username}</h1>
                 </div>
               </Link>
               <div onClick={handleClick}>

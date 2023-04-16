@@ -64,7 +64,7 @@ body {
 }
 /* navigation bar */
 header {
-  background: #fff;
+  background: #ffffff;
 }
 
 header .container {
@@ -105,6 +105,14 @@ nav {
   font-weight: 600;
   font-size: 1.4rem;
   cursor: pointer;
+}
+
+.user {
+  font-weight: 400;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: .5rem;
+  border-radius: .5rem;
 }
 /* homepage */
 .home {
@@ -531,12 +539,11 @@ form.signup, form.login {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  padding: 4rem 0;
 }
 
 .exercise-details-card {
   width: 80%;
-  height: 80%;
   max-width: 120rem;
   background-color: #ffffff;
   border-radius: .5rem;
@@ -554,8 +561,13 @@ form.signup, form.login {
 
 .imgs-container{
   display: flex;
-  gap: 2rem;
   align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  margin: auto 6rem;
+  border: 1px solid #ccc;
+  border-radius: .5rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .img-container{
@@ -568,7 +580,8 @@ form.signup, form.login {
 .imageEnd {
   max-width: 100%;
   max-height: 200px;
-  object-fit: cover;
+  object-fit: contain;
+  border-radius: .5rem;
 }
 
 .explanation-container {
