@@ -192,7 +192,7 @@ const ExerciseForm = () => {
               </div>
 
               <div>
-                <label>Exercise Video</label>
+                <label>Exercise Video (Video URL)</label>
                 <input type='text' name='video' value={options.video} onChange={handleInputChange} className={emptyFields.includes('video') ? 'error' : ''} />
               </div>
             </div>

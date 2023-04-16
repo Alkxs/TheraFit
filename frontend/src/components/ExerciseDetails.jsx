@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import { useExercisesContext } from '../hooks/useExercisesContext'
 import { useNavigate } from "react-router-dom"
 import { FaArrowLeft } from "react-icons/fa"
+import ReactPlayer from 'react-player'
 
 const ExerciseDetails = () => {
   const { workoutId, exerciseId } = useParams()
@@ -25,16 +26,18 @@ const ExerciseDetails = () => {
           <h4>{exercise.title}</h4>
         </div>
 
-        {exercise.imageFileStart || exercise.imageFileEnd && (<div className='imgs-container'>
-          <div className='img-container'>
-            <img className='imageStart' src={exercise.imageFileStart} alt='image start' />
-          </div>
+        {exercise.imageFileStart ||
+          (exercise.imageFileEnd && (
+            <div className='imgs-container'>
+              <div className='img-container'>
+                <img className='imageStart' src={exercise.imageFileStart} alt='image start' />
+              </div>
 
-          <div className='img-container'>
-            <img className='imageEnd' src={exercise.imageFileEnd} alt='imageEnd' />
-          </div>
-        </div>
-        )}
+              <div className='img-container'>
+                <img className='imageEnd' src={exercise.imageFileEnd} alt='imageEnd' />
+              </div>
+            </div>
+          ))}
 
         <div className='explanation-container'>
           <p className='explanation'>{exercise.explanation}</p>
@@ -60,11 +63,24 @@ const ExerciseDetails = () => {
           </div>
         </div>
 
-        {exercise.video && (<div className='video-container'>
-          <div className='video'>{exercise.video}</div>
-        </div>
+        {exercise.video && (
+          <div className='video-container'>
+            <ReactPlayer
+              url={exercise.video}
+              width='50%'
+              height='auto'
+              controls
+              config={{
+                youtube: {
+                  playerVars: { showinfo: 1 },
+                },
+                vimeo: {
+                  playerOptions: { controls: 1 },
+                },
+              }}
+            />
+          </div>
         )}
-        
       </div>
     </div>
   )
