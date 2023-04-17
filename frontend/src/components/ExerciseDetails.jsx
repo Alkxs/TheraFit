@@ -26,18 +26,17 @@ const ExerciseDetails = () => {
           <h4>{exercise.title}</h4>
         </div>
 
-        {exercise.imageFileStart ||
-          (exercise.imageFileEnd && (
-            <div className='imgs-container'>
-              <div className='img-container'>
-                <img className='imageStart' src={exercise.imageFileStart} alt='image start' />
-              </div>
-
-              <div className='img-container'>
-                <img className='imageEnd' src={exercise.imageFileEnd} alt='imageEnd' />
-              </div>
+        {(exercise.imageStartFile || exercise.imageEndFile) && (
+          <div className='imgs-container'>
+            <div className='img-container'>
+              <img className='imageStart' src={exercise.imageStartFile} alt='image start' />
             </div>
-          ))}
+
+            <div className='img-container'>
+              <img className='imageEnd' src={exercise.imageEndFile} alt='imageEnd' />
+            </div>
+          </div>
+        )}
 
         <div className='explanation-container'>
           <p className='explanation'>{exercise.explanation}</p>

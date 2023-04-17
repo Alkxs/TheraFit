@@ -35,7 +35,10 @@ const exerciseComponent = ({ exercise, workoutId, index, moveExercise}) => {
 
     if (res.ok) {
       dispatch({ type: 'DELETE_EXERCISE', payload: data })
-    }
+    }  else {
+
+    console.error("Failed to delete exercise:", data.error);
+  }
   }
 
   const handleEdit = async () => {

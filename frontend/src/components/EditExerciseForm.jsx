@@ -18,7 +18,7 @@ const EditExerciseForm = () => {
     time: '',
     imageStartLink: '',
     imageStartFile: '',
-    imageEndlink: '',
+    imageEndLink: '',
     imageEndFile: '',
     explanation: '',
     video: '',  
@@ -163,7 +163,7 @@ const EditExerciseForm = () => {
                   name='imageStartLink'
                   value={options.imageStartLink}
                   onChange={handleInputChange}
-                  className={emptyFields.includes('imageStartLinkLink') ? 'error' : ''}
+                  className={emptyFields.includes('imageStartLink') ? 'error' : ''}
                 />
               </div>
 

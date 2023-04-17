@@ -1,5 +1,6 @@
 const Exercise = require('../models/exerciseModel')
 const mongoose = require('mongoose')
+const cloudinary = require('../config/cloudinary').cloudinary
 
 // GET all exercises
 const getExercises = async (req, res) => {
@@ -37,25 +38,25 @@ const getExercise = async (req, res) => {
 
 // POST new exercise
 const createExercise = async (req, res) => {
-  console.log('Request body:', req.body)
    const { title, load, reps, time, imageStartLink, imageEndLink, explanation, video, workoutId } = req.body
 
-   let imageFileStart, imageFileEnd
+   let imageStartFile, imageEndFile
+
+    let imageStartPublicId, imageEndPublicId
 
    if (req.files.imageStartFile) {
-     imageFileStart = req.files.imageStartFile[0].path
+     imageStartFile = req.files.imageStartFile[0].path
+     imageStartPublicId = req.files.imageStartFile[0].filename
    } else {
-     imageFileStart = imageStartLink
+     imageStartFile = imageStartLink
    }
 
    if (req.files.imageEndFile) {
-     imageFileEnd = req.files.imageEndFile[0].path
+     imageEndFile = req.files.imageEndFile[0].path
+     imageEndPublicId = req.files.imageEndFile[0].filename
    } else {
-     imageFileEnd = imageEndLink
+     imageEndFile = imageEndLink
    }
-
-   console.log('Image file start:', imageFileStart)
-   console.log('Image file end:', imageFileEnd)
 
   let emptyFields = []
 
@@ -64,7 +65,6 @@ const createExercise = async (req, res) => {
   }
   
   if (emptyFields.length > 0) {
-     console.log('Error while creating exercise:', error.message)
     return res.status(400).json({ error: 'Please fill in the title', emptyFields })
   }
 
@@ -72,7 +72,20 @@ const createExercise = async (req, res) => {
    try {
     const user_id = req.user._id 
 
-     const exercise = await Exercise.create({ title, load, reps, time, imageFileStart, imageFileEnd, explanation, video, workoutId, user_id})
+     const exercise = await Exercise.create({
+       title,
+       load,
+       reps,
+       time,
+       imageStartFile,
+       imageEndFile,
+       imageStartPublicId,
+       imageEndPublicId,
+       explanation,
+       video,
+       workoutId,
+       user_id,
+     })
      res.status(200).send(exercise)
    } catch (error) {
      res.status(400).json({ error: error.message })
@@ -105,10 +118,18 @@ const deleteExercise = async (req, res) => {
     return res.status(404).json({ error: 'No such exercise' })
   }
 
-  const exercise = await Exercise.findOneAndDelete({_id: exerciseId})
+  const exercise = await Exercise.findOneAndDelete({ _id: exerciseId }).lean()
 
   if (!exercise) {
     return res.status(404).json({ error: 'No such exercise' })
+  }
+
+  if (exercise.imageStartPublicId) {
+    await upload.uploader.destroy(exercise.imageStartPublicId)
+  }
+
+  if (exercise.imageEndPublicId) {
+    await upload.uploader.destroy(exercise.imageEndPublicId)
   }
 
   res.status(200).json(exercise)

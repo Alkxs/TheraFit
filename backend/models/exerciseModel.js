@@ -18,11 +18,11 @@ const exerciseSchema = new mongoose.Schema(
       type: Number,
       required: false,
     },
-    imageFileStart: {
+    imageStartFile: {
       type: String,
       required: false,
     },
-    imageFileEnd: {
+    imageEndFile: {
       type: String,
       required: false,
     },
@@ -41,6 +41,12 @@ const exerciseSchema = new mongoose.Schema(
     workoutId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Workout',
+    },
+    imageStartPublicId: {
+      type: String,
+    },
+    imageEndPublicId: {
+      type: String,
     },
   },
   { timestamps: true }
