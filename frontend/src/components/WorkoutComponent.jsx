@@ -71,15 +71,21 @@ const WorkoutComponent = ({ workout }) => {
 
           <div className='workout-info'>
             <div className='workout-info-labels'>
-              <p>
-                <strong>Starting Date:</strong>
-              </p>
-              <p>
-                <strong>Ending Date:</strong>
-              </p>
-              <p>
-                <strong>Frequency:</strong>
-              </p>
+              {workout.startDate && (
+                <p>
+                  <strong>Start Date:</strong>
+                </p>
+              )}
+              {workout.endDate && (
+                <p>
+                  <strong>End Date:</strong>
+                </p>
+              )}
+              {workout.frequency !== null && (
+                <p>
+                  <strong>Frequency:</strong>
+                </p>
+              )}
               <p>
                 <strong>Type:</strong>
               </p>
@@ -89,16 +95,15 @@ const WorkoutComponent = ({ workout }) => {
             </div>
 
             <div className='workout-info-values'>
-              <p>{formattedStartDate}</p>
-              <p>{formattedEndDate}</p>
-              <p>{`${workout.frequency} days per week`}</p>
+              {workout.startDate && <p>{formattedStartDate}</p>}
+              {workout.endDate && <p>{formattedEndDate}</p>}
+              {workout.frequency !== null && <p>{`${workout.frequency} days per week`}</p>}
               <p>{workout.type}</p>
               <p>{formatDistanceToNow(new Date(workout.createdAt), { addSuffix: true })}</p>
             </div>
           </div>
 
           <div className='workout-btn-container'>
-            
             <span className='workout-icon trash' onClick={handleClickDelete}>
               <FaTrashAlt size={20} />
             </span>

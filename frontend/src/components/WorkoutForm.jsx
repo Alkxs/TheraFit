@@ -14,31 +14,47 @@ const CreateWorkout = () => {
     title: '',
     startDate: '',
     endDate: '',
-    frequency: null,
-    type: null,
+    frequency: '',
+    type: '',
   })
-  const [error, setError] = useState(null)
+  const [error, setError] = useState('')
   const [emptyFields, setEmptyFields] = useState([])
 
   const validateDates = () => {
-    const startDate = new Date(options.startDate)
-    const endDate = new Date(options.endDate)
     const currentDate = new Date()
-
     currentDate.setHours(0, 0, 0, 0)
 
+    if (options.startDate) {
+    const startDate = new Date(options.startDate)
+
     if (startDate < currentDate) {
-      setError('Start date cannot be in the past')
+      setError('The start date must be today or later')
       return false
     }
+
+    if (options.endDate) {
+      const endDate = new Date(options.endDate);
+
     if (startDate > endDate) {
-      setError('Start date cannot be greater than end date')
+      setError('The end date must be later than the start date')
       return false
+        }
+      }
     }
+
+    if (options.endDate) {
+    const endDate = new Date(options.endDate);
+
+    if (options.startDate) {
+      const startDate = new Date(options.startDate);
+
     if (endDate < startDate) {
-      setError('End date cannot be less than start date')
+      setError('The start date must be earlier than the end date')
       return false
+        }
+      }
     }
+
     setError(null)
     return true
   }
@@ -53,7 +69,7 @@ const CreateWorkout = () => {
     { value: 7, label: '7' },
   ]
 
-  const type = [
+  const types = [
     { value: 'cardio', label: 'cardio' },
     { value: 'strength', label: 'strength' },
     { value: 'yoga', label: 'yoga' },
@@ -65,6 +81,8 @@ const CreateWorkout = () => {
     { value: 'walking', label: 'walking' },
     { value: 'stretching', label: 'stretching' },
   ]
+
+  const type = types.sort((a, b) => a.label.localeCompare(b.label))
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -124,8 +142,8 @@ const CreateWorkout = () => {
         title: '',
         startDate: '',
         endDate: '',
-        frequency: null,
-        type: null,
+        frequency: '',
+        type: '',
       })
       setEmptyFields([])
       console.log('new workout added:', data)
@@ -138,57 +156,53 @@ const CreateWorkout = () => {
 
   return (
     <div className='form-container'>
-
       <div className='card'>
-
-      <button type='button' onClick={() => navigate(`/`)} className='button-back'>
-          <FaArrowLeft size={25}/>
+        <button type='button' onClick={() => navigate(`/`)} className='button-back'>
+          <FaArrowLeft size={25} />
         </button>
 
-      <form onSubmit={handleSubmit}
-      className="form-section">
-
-        <h1>Add a New Workout</h1>
+        <form onSubmit={handleSubmit} className='form-section'>
+          <h1>Add a New Workout</h1>
 
           <div className='choices'>
             <div>
-              <label>Title:</label>
+              <label>Title</label>
               <input type='text' name='title' value={options.title} onChange={handleInputChange} className={emptyFields.includes('title') ? 'error' : ''} />
             </div>
 
             <div>
-              <label>Start Date: {options.startDate}</label>
+              <label>Start Date</label>
               <input
                 type='date'
                 name='startDate'
                 value={options.startDate}
                 onChange={handleInputChange}
-                className={emptyFields.includes('startDate') ? 'error' : ''}
               />
             </div>
 
             <div>
-              <label>End Date: {options.endDate}</label>
+              <label>End Date</label>
               <input
                 type='date'
                 name='endDate'
                 value={options.endDate}
                 onChange={handleInputChange}
-                className={emptyFields.includes('endDate') ? 'error' : ''}
               />
             </div>
 
             <div className='select-container'>
-              <label>Frequency x week</label>
+              <label>
+                Frequency 
+                <span className="frequency">(in days x week)</span>
+              </label>
               <Select
                 options={frequency}
                 value={frequency.find((option) => option.value === options.frequency)}
                 onChange={handleFrequency}
-                className={emptyFields.includes('frequency') ? 'error' : ''}
               />
             </div>
 
-            <div className="select-container">
+            <div className='select-container'>
               <label>Type</label>
               <Select
                 options={type}
@@ -199,15 +213,13 @@ const CreateWorkout = () => {
             </div>
           </div>
 
-        <button 
-        type='submit' className="primary-button"
-        >
-          Create Workout
+          <button type='submit' className='primary-button'>
+            Create Workout
           </button>
-        {error && <div className='error'>{error}</div>}
-      </form>
+          {error && <div className='error'>{error}</div>}
+        </form>
+      </div>
     </div>
-  </div>
   )
 }
 export default CreateWorkout

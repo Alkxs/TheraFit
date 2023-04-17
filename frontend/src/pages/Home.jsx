@@ -33,22 +33,20 @@ const home = () => {
 
   return (
     <div className='home'>
-        <h2 className='main-title'> Welcome {user.username}</h2>
-        <div className='workouts'>
-          {workouts ? (
-          workouts.map((workout) => <WorkoutComponent 
-          key={workout._id} 
-          workout={workout} />)
-          ) : (
-            <p>No workouts yet for this workout</p>
-          )}
-          </div>
+      <h2 className='main-title'> Welcome {user.username}</h2>
+      <div className='workouts'>
+        {workouts.length > 0 ? (
+          workouts.map((workout) => <WorkoutComponent key={workout._id} workout={workout} />)
+        ) : (
+          <p className='no-workouts'>There are currently no workouts created by this user</p>
+        )}
+      </div>
 
-        <div className='button-container'>
-          <button className='secondary-button' onClick={() => navigate(`/create-workout`)}>
-            Create New Workout
-          </button>
-        </div>
+      <div className='button-container'>
+        <button className='secondary-button' onClick={() => navigate(`/create-workout`)}>
+          Create New Workout
+        </button>
+      </div>
     </div>
   )
 }

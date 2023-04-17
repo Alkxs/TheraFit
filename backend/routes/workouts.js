@@ -5,7 +5,6 @@ const exercisesRoutes = require('./exercises')
 
 const { 
   getWorkouts,
-  getWorkout,
   createWorkout,
   deleteWorkout,
   updateWorkout
@@ -15,9 +14,6 @@ const requireAuth = require('../middleware/requireAuth')
 
 //GET all workouts
 router.get('/', requireAuth, getWorkouts)
- 
-//GET a single workout
-router.get('/:workoutId', getWorkout)
 
 //POST a new workout
 router.post('/', requireAuth, createWorkout) 

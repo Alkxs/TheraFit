@@ -8,24 +8,20 @@ const WorkoutSchema = new mongoose.Schema(
     },
     startDate: {
       type: Date,
-      required: true,
+      required: false,
     },
     endDate: {
       type: Date,
-      required: true,
+      required: false,
     },
     frequency: {
       type: Number,
-      required: true,
+      required: false,
     },
     type: {
       type: String,
       required: true,
     },
-    // user_id: {
-    //   type: String,
-    //   required: true,
-    // },
     user_id: {
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
 },

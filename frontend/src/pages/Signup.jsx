@@ -17,7 +17,7 @@ const Signup = () => {
     <div className='form-container'>
       <div className='card'>
         <form onSubmit={handleSubmit} className='form-section'>
-          <h1>Signup</h1>
+          <h1>Sign up</h1>
 
           <div className='choices'>
             <div>

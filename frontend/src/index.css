@@ -20,6 +20,7 @@ body {
   transition: all 0.5s;
   height: 100vh;
 }
+
 /* Reusable */
 .button-container {
   display: flex;
@@ -96,7 +97,6 @@ body {
   }
 }
 
-
 /* navigation bar */
 header {
   background: #ffffff;
@@ -167,6 +167,12 @@ nav {
   max-width: 120rem;
 }
 
+.no-workouts {
+  padding: 5rem 0;
+  font-size: 1.8rem;
+  color: var(--error);
+}
+
 /* Workout Component */
 
 .workout-card {
@@ -182,9 +188,9 @@ nav {
   background-color: #ffffff;
 }
 
-  .workout-card:hover {
-    box-shadow: 0 0 35px rgba(0, 0, 0, 0.2);
-  }
+.workout-card:hover {
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.2);
+}
 
 .workout-img {
   width: 30%;
@@ -197,7 +203,7 @@ nav {
   border-bottom-right-radius: 0;
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
-  padding: 2rem;
+  padding: 3rem;
   background-color: #fff3ad;
 }
 
@@ -263,7 +269,7 @@ nav {
 
 .workout-info {
   display: grid;
-  grid-template-columns: repeat(2, 10rem);
+  grid-template-columns: repeat(2, 12rem);
   gap: 1rem;
   align-items: center;
   justify-content: center;
@@ -369,6 +375,12 @@ nav {
 .form-section input.error,
 .form-section select.error {
   border-color: #ff4d4f;
+}
+
+.frequency {
+  font-size: .8rem;
+  font-weight: 100;
+  margin-left: .5rem;
 }
 
 .button-submit {

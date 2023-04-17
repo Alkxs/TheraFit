@@ -3,33 +3,33 @@ const router = express.Router({ mergeParams: true })
 const upload = require('../config/cloudinary')
 const { 
   getExercises, 
-  getExercise, 
   createExercise, 
   deleteExercises,
   deleteExercise, 
   updateExercise 
   } = require('../controllers/exerciseController')
 
-  const uploadFile = upload
+const requireAuth = require('../middleware/requireAuth')
+
+const uploadFile = upload
  
  //GET all exercises
-router.get('/', getExercises)
- 
-//GET a single exercise
-router.get('/:exerciseId', getExercise)
+router.get('/', requireAuth, getExercises)
 
 //POST a new exercise
-router.post('/', uploadFile.fields([{ name: 'imageStartFile' }, { name: 'imageEndFile' }]), createExercise) 
+router.post('/', requireAuth, uploadFile.fields([{ name: 'imageStartFile' }, { name: 'imageEndFile' }]), createExercise) 
 
 //DELETE all exercises (of a specific workout)
-router.delete('/', deleteExercises)
+router.delete('/', requireAuth, deleteExercises)
 
 //DELETE a single exercise
-router.delete('/:exerciseId', deleteExercise)
+router.delete('/:exerciseId', requireAuth, deleteExercise)
 
 //PATCH
 router.patch(
-  '/:exerciseId/edit',upload.fields([
+  '/:exerciseId/edit',
+  requireAuth, 
+  upload.fields([
     { name: 'imageStartFile', maxCount: 1 },
     { name: 'imageEndFile', maxCount: 1 },
   ]),

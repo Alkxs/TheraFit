@@ -32,7 +32,7 @@ const Navbar = () => {
                 </div>
               </Link>
               <div onClick={handleClick}>
-                <h4 className='font-nav'>Logout</h4>
+                <h4 className='font-nav'>Log out</h4>
               </div>
             </div>
           )}
@@ -40,11 +40,11 @@ const Navbar = () => {
           {!user && (
             <div className='nav-container'>
               <Link to='/api/user/signup'>
-                <h4 className='font-nav'>Signup</h4>
+                <h4 className='font-nav'>Sign up</h4>
               </Link>
 
               <Link to='/api/user/login'>
-                <h4 className='font-nav'>Login</h4>
+                <h4 className='font-nav'>Log in</h4>
               </Link>
             </div>
           )}

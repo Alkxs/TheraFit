@@ -18,25 +18,6 @@ const getExercises = async (req, res) => {
   res.status(200).json(exercises)
 }
 
-// GET a single exercise
-
-const getExercise = async (req, res) => {
-  // exercise Id
-  const { id } = req.params 
-
-  if(!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({error: 'No such exercise'})
-  }
-
-  const exercise = await Exercise.findById(id)
-
-  if (!exercise) {
-    return res.status(404).json({error: 'No such exercise'})
-  }
-
-  res.status(200).send(exercise)
-}
-
 // POST new exercise
 const createExercise = async (req, res) => {
    const { title, load, reps, time, imageStartLink, imageEndLink, explanation, video, workoutId } = req.body
@@ -192,7 +173,6 @@ const deleteExercise = async (req, res) => {
 
   module.exports = {
     getExercises,
-    getExercise,
     createExercise,
     deleteExercises,
     deleteExercise,
