@@ -129,8 +129,8 @@ const ExerciseForm = () => {
           <div className='main-section'>
             <div className='choices'>
               <div>
-                <label>Title:</label>
-                <input type='text' name='title' value={options.title} onChange={handleInputChange} className={emptyFields.includes('title') ? 'error' : ''} />
+                <label>Title</label>
+                <input type='text' name='title' value={options.title} onChange={handleInputChange} className={emptyFields.includes('title') ? 'error' : ''} placeholder="Insert title here" />
               </div>
 
               <div>
