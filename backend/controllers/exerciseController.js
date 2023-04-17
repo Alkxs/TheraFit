@@ -1,6 +1,7 @@
 const Exercise = require('../models/exerciseModel')
 const mongoose = require('mongoose')
-const cloudinary = require('../config/cloudinary').cloudinary
+const cloudinary = require('../config/cloudinaryInstance')
+
 
 // GET all exercises
 const getExercises = async (req, res) => {
@@ -125,11 +126,11 @@ const deleteExercise = async (req, res) => {
   }
 
   if (exercise.imageStartPublicId) {
-    await upload.uploader.destroy(exercise.imageStartPublicId)
+    await cloudinary.uploader.destroy(exercise.imageStartPublicId)
   }
 
   if (exercise.imageEndPublicId) {
-    await upload.uploader.destroy(exercise.imageEndPublicId)
+    await cloudinary.uploader.destroy(exercise.imageEndPublicId)
   }
 
   res.status(200).json(exercise)
@@ -143,9 +144,44 @@ const deleteExercise = async (req, res) => {
       return res.status(404).json({ error: 'No such exercise' })
     }
 
-    const exercise = await Exercise.findOneAndUpdate({_id: exerciseId}, {
-      ...req.body
-    })
+    const { title, load, reps, time, imageStartLink, imageEndLink, explanation, video, workoutId } = req.body
+
+    let imageStartFile, imageEndFile
+    let imageStartPublicId, imageEndPublicId
+
+     if (req.files.imageStartFile) {
+       imageStartFile = req.files.imageStartFile[0].path
+       imageStartPublicId = req.files.imageStartFile[0].filename
+     } else {
+       imageStartFile = imageStartLink
+     }
+
+     if (req.files.imageEndFile) {
+       imageEndFile = req.files.imageEndFile[0].path
+       imageEndPublicId = req.files.imageEndFile[0].filename
+     } else {
+       imageEndFile = imageEndLink
+     }
+
+     const exerciseData = {
+       title,
+       load,
+       reps,
+       time,
+       imageStartFile,
+       imageEndFile,
+       imageStartPublicId,
+       imageEndPublicId,
+       explanation,
+       video,
+       workoutId,
+     }
+
+    const exercise = await Exercise.findOneAndUpdate({ _id: exerciseId }, exerciseData, {
+      new: true, // Return the updated document
+      runValidators: true, // Validate the update operation
+    }
+    )
 
     if (!exercise) {
       return res.status(404).json({ error: 'No such exercise' })

@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router({ mergeParams: true })
-const multer = require('multer')
 const upload = require('../config/cloudinary')
 const { 
   getExercises, 
@@ -29,8 +28,12 @@ router.delete('/', deleteExercises)
 router.delete('/:exerciseId', deleteExercise)
 
 //PATCH
-router.patch('/:exerciseId/edit', updateExercise)
-
-
+router.patch(
+  '/:exerciseId/edit',upload.fields([
+    { name: 'imageStartFile', maxCount: 1 },
+    { name: 'imageEndFile', maxCount: 1 },
+  ]),
+  updateExercise
+)
 
 module.exports = router

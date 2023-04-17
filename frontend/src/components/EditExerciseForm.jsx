@@ -11,41 +11,37 @@ const EditExerciseForm = () => {
   const { user } = useAuthContext()
   const navigate = useNavigate()
 
-  const [options, setOptions] = useState({
-    title: '',
-    load: '',
-    reps: '',
-    time: '',
-    imageStartLink: '',
-    imageStartFile: '',
-    imageEndLink: '',
-    imageEndFile: '',
-    explanation: '',
-    video: '',  
-    })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [emptyFields, setEmptyFields] = useState([])
 
-  useEffect(() => {
+  const getInitialOptions = () => {
     const exercise = exercises.find((exercise) => exercise._id === exerciseId)
+    return exercise
+      ? {
+          ...exercise,
+          imageStartFile: '',
+          imageEndFile: '',
+        }
+      : {
+          title: '',
+          load: '',
+          reps: '',
+          time: '',
+          imageStartLink: '',
+          imageStartFile: '',
+          imageEndLink: '',
+          imageEndFile: '',
+          explanation: '',
+          video: '',
+        }
+  }
 
-    if (exercise) {
-      setOptions(exercise)
-    } else {
-      setOptions({
-        title: '',
-        load: '',
-        reps: '',
-        time: '',
-        imageStartLink: '',
-        imageStartFile: '',
-        imageEndlink: '',
-        imageEndFile: '',
-        explanation: '',
-        video: '',
-      })
-    }
+  const [options, setOptions] = useState(getInitialOptions)
+
+
+  useEffect(() => {
+    setOptions(getInitialOptions())
   }, [exerciseId, exercises])
 
   const handleInputChange = (e) => {
