@@ -12,7 +12,7 @@ import { FaArrowLeft } from 'react-icons/fa'
   const { user } = useAuthContext()
   const navigate = useNavigate()
 
-  const [workoutData, setWorkoutData] = useState({
+  const [options, setOptions] = useState({
     title: '',
     startDate: '',
     endDate: '',
@@ -33,13 +33,13 @@ import { FaArrowLeft } from 'react-icons/fa'
       ? format(new Date(workout.endDate), 'yyyy-MM-dd')
       : null
     
-      setWorkoutData({
+      setOptions({
         ...workout,
         startDate: formattedStartDate,
         endDate: formattedEndDate,
       })
     } else {
-      setWorkoutData({
+      setOptions({
         title: '',
         startDate: null,
         endDate: null,
@@ -53,16 +53,16 @@ import { FaArrowLeft } from 'react-icons/fa'
     const currentDate = new Date()
     currentDate.setHours(0, 0, 0, 0)
 
-    if (workoutData.startDate) {
-      const startDate = new Date(workoutData.startDate)
+    if (options.startDate) {
+      const startDate = new Date(options.startDate)
 
     if (startDate < currentDate) {
       setError('The start date must be today or later')
       return false
     }
 
-    if (workoutData.endDate) {
-      const endDate = new Date(workoutData.endDate);
+    if (options.endDate) {
+      const endDate = new Date(options.endDate);
     
 
     if (startDate > endDate) {
@@ -72,11 +72,11 @@ import { FaArrowLeft } from 'react-icons/fa'
       }
     }
 
-    if (workoutData.endDate) {
-    const endDate = new Date(workoutData.endDate)
+    if (options.endDate) {
+    const endDate = new Date(options.endDate)
 
-    if (workoutData.startDate) {
-      const startDate = new Date(workoutData.startDate)
+    if (options.startDate) {
+      const startDate = new Date(options.startDate)
 
     if (endDate < startDate) {
       setError('The start date must be earlier than the end date')
@@ -115,22 +115,22 @@ import { FaArrowLeft } from 'react-icons/fa'
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
-    setWorkoutData({
-      ...workoutData,
+    setOptions({
+      ...options,
       [name]: value,
     })
   }
 
   const handleFrequency = (selected) => {
-    setWorkoutData({
-      ...workoutData,
+    setOptions({
+      ...options,
       frequency: selected.value,
     })
   }
 
   const handleType = (selected) => {
-    setWorkoutData({
-      ...workoutData,
+    setOptions({
+      ...options,
       type: selected.value,
     })
   }
@@ -147,7 +147,7 @@ import { FaArrowLeft } from 'react-icons/fa'
        return
      }
     // handle form submission here
-    const { title, startDate, endDate, frequency, type } = workoutData
+    const { title, startDate, endDate, frequency, type } = options
 
     const workout = { title, startDate, endDate, frequency, type }
 
@@ -167,7 +167,7 @@ import { FaArrowLeft } from 'react-icons/fa'
     }
     if (res.ok) {
       setError(null)
-      setWorkoutData({
+      setOptions({
         title: '',
         startDate: '',
         endDate: '',
@@ -183,23 +183,24 @@ import { FaArrowLeft } from 'react-icons/fa'
   }
 
   return (
-    <div className='form-container'>
-      <div className='card'>
-        <button type='button' onClick={() => navigate(`/`)} className='button-back'>
-          <FaArrowLeft size={25}/>
-        </button>
+    <>
+      <button type='button' onClick={() => navigate(`/`)} className='button-small'>
+        <FaArrowLeft size={25} />
+        <span className='small-text'> Back to Workouts</span>
+      </button>
+      
+      <div className='form-container'>
+        <div className='card'>
+          <form onSubmit={handleSubmit} className='form-section'>
+            <h1>Edit Workout</h1>
 
-        <form onSubmit={handleSubmit} className='form-section'>
-          <h1>Edit Workout</h1>
-
-          
             <div className='choices'>
               <div>
                 <label>Title</label>
                 <input
                   type='text'
                   name='title'
-                  value={workoutData.title}
+                  value={options.title}
                   onChange={handleInputChange}
                   className={emptyFields.includes('title') ? 'error' : ''}
                 />
@@ -207,54 +208,41 @@ import { FaArrowLeft } from 'react-icons/fa'
 
               <div>
                 <label>Start Date</label>
-                <input
-                  type='date'
-                  name='startDate'
-                  value={workoutData.startDate}
-                  onChange={handleInputChange}
-                />
+                <input type='date' name='startDate' value={options.startDate} onChange={handleInputChange} />
               </div>
 
               <div>
                 <label>End Date</label>
-                <input
-                  type='date'
-                  name='endDate'
-                  value={workoutData.endDate}
-                  onChange={handleInputChange}
-                />
+                <input type='date' name='endDate' value={options.endDate} onChange={handleInputChange} />
               </div>
 
               <div className='select-container'>
-                <label>Frequency 
-                  <span className="frequency">(in days x week)</span>
-                   </label>
-                <Select
-                  options={frequency}
-                  value={frequency.find((option) => option.value === workoutData.frequency)}
-                  onChange={handleFrequency}
-                />
+                <label>
+                  Frequency
+                  <span className='frequency'>(in days x week)</span>
+                </label>
+                <Select options={frequency} value={frequency.find((option) => option.value === options.frequency)} onChange={handleFrequency} />
               </div>
 
               <div className='select-container'>
                 <label>Type</label>
                 <Select
                   options={type}
-                  value={type.find((option) => option.value === workoutData.type)}
+                  value={type.find((option) => option.value === options.type)}
                   onChange={handleType}
                   className={emptyFields.includes('type') ? 'error' : ''}
                 />
               </div>
             </div>
-          
-          <button type='submit' className='primary-button'>
-            Update Workout
-          </button>
-          {error && <div className='error-message'>{error}
-          </div>}
-        </form>
+
+            <button type='submit' className='primary-button'>
+              Update Workout
+            </button>
+            {error && <div className='error-message'>{error}</div>}
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   )
   }
 

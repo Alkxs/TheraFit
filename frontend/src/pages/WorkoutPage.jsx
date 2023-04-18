@@ -53,34 +53,37 @@ const WorkoutPage = () => {
   }
 
   return (
-    <div className='workout-page'>
-      <button type='button' onClick={() => navigate(`/`)} className='button-back'>
+    <>
+      <button type='button' onClick={() => navigate(`/`)} className='button-small'>
         <FaArrowLeft size={25} />
+        <span className='small-text'> Back to Workouts</span>
       </button>
 
-      <h2 className='main-title'>{workout && workout.title}</h2>
+      <div className='workout-page'>
+        <h2 className='main-title'>{workout && workout.title}</h2>
 
-      {exercises.length > 0 ? (
-        <DndProvider backend={HTML5Backend}>
-          <div className='exercises-container'>
-            <p className='drag-instructions'>Rearrange exercises by clicking and dragging them</p>
-            <div className='exercises'>
-              {exercises.map((exercise, index) => (
-                <ExerciseComponent key={exercise._id} exercise={exercise} workoutId={workoutId} index={index} moveExercise={moveExercise} />
-              ))}
+        {exercises.length > 0 ? (
+          <DndProvider backend={HTML5Backend}>
+            <div className='exercises-container'>
+              <p className='drag-instructions'>Rearrange exercises by clicking and dragging them</p>
+              <div className='exercises'>
+                {exercises.map((exercise, index) => (
+                  <ExerciseComponent key={exercise._id} exercise={exercise} workoutId={workoutId} index={index} moveExercise={moveExercise} />
+                ))}
+              </div>
             </div>
-          </div>
-        </DndProvider>
-      ) : (
-        <p className='no-exercises'>No exercises found for this workout</p>
-      )}
+          </DndProvider>
+        ) : (
+          <p className='no-exercises'>No exercises found for this workout</p>
+        )}
 
-      <div className='button-container'>
-        <button className='secondary-button' onClick={() => navigate(`/${workoutId}/exercises/create-exercise`)}>
-          Create New Exercise
-        </button>
+        <div className='button-container'>
+          <button className='secondary-button' onClick={() => navigate(`/${workoutId}/exercises/create-exercise`)}>
+            Create New Exercise
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 export default WorkoutPage

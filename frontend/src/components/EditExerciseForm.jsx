@@ -65,6 +65,19 @@ const EditExerciseForm = () => {
     setLoading(true)
     if (!user) {
       setError('You must be logged in')
+      setLoading(false)
+      return
+    }
+
+    if (options.imageStartLink && options.imageStartFile) {
+      setError('Please choose between pasting an image URL or uploading an image for the initial body position.')
+      setLoading(false)
+      return
+    }
+
+    if (options.imageEndLink && options.imageEndFile) {
+      setError('Please choose between pasting an image URL or uploading an image for the final body position.')
+      setLoading(false)
       return
     }
 
@@ -114,101 +127,107 @@ const EditExerciseForm = () => {
   }
 
   return (
-    <div className='form-container'>
-      
-      {loading && (
-        <div className='loader-container'>
-          <div className='loader'></div>
-          <p className="loader-text">Updating exercise, please wait...</p>
-        </div>
-      )}
+    <>
+      <button type='button' onClick={() => navigate(`/${workoutId}/exercises`)} className='button-small'>
+        <FaArrowLeft size={25} />
+        <span className='small-text'> Back to Exercises</span>
+      </button>
 
-      <div className='card'>
-        <button type='button' onClick={() => navigate(`/${workoutId}/exercises`)} className='button-back'>
-          <FaArrowLeft size={25} />
-        </button>
+      <div className='form-container'>
+        {loading && (
+          <div className='loader-container'>
+            <div className='loader'></div>
+            <p className='loader-text'>Updating exercise, please wait...</p>
+          </div>
+        )}
 
-        <form className='form-section' onSubmit={handleSubmit}>
-          <h1>Edit Exercise</h1>
-          <div className='main-section'>
-            <div className='choices'>
-              <div>
-                <label>Title:</label>
-                <input type='text' name='title' value={options.title} onChange={handleInputChange} className={emptyFields.includes('title') ? 'error' : ''} />
-              </div>
+        <div className='card'>
+          <form className='form-section' onSubmit={handleSubmit}>
+            <h1>Edit Exercise</h1>
+            <div className='main-section'>
+              <div className='choices'>
+                <h3>General Information</h3>
+                <div>
+                  <label>Title:</label>
+                  <input type='text' name='title' value={options.title} onChange={handleInputChange} className={emptyFields.includes('title') ? 'error' : ''} />
+                </div>
 
-              <div>
-                <label>Exercise Load</label>
-                <input type='number' name='load' value={options.load} onChange={handleInputChange} className={emptyFields.includes('load') ? 'error' : ''} />
-              </div>
+                <div>
+                  <label>Exercise Load</label>
+                  <input type='number' name='load' value={options.load} onChange={handleInputChange} className={emptyFields.includes('load') ? 'error' : ''} />
+                </div>
 
-              <div>
-                <label>Exercise Reps</label>
-                <input type='number' name='reps' value={options.reps} onChange={handleInputChange} className={emptyFields.includes('reps') ? 'error' : ''} />
-              </div>
+                <div>
+                  <label>Exercise Reps</label>
+                  <input type='number' name='reps' value={options.reps} onChange={handleInputChange} className={emptyFields.includes('reps') ? 'error' : ''} />
+                </div>
 
-              <div>
-                <label>Exercise Time</label>
-                <input type='number' name='time' value={options.time} onChange={handleInputChange} className={emptyFields.includes('time') ? 'error' : ''} />
-              </div>
+                <div>
+                  <label>Exercise Time</label>
+                  <input type='number' name='time' value={options.time} onChange={handleInputChange} className={emptyFields.includes('time') ? 'error' : ''} />
+                </div>
 
-              <div>
-                <label>Initial body position (Image URL)</label>
-                <input
-                  type='text'
-                  name='imageStartLink'
-                  value={options.imageStartLink}
-                  onChange={handleInputChange}
-                  className={emptyFields.includes('imageStartLink') ? 'error' : ''}
-                />
-              </div>
+                <h3>Images</h3>
+                <div className='input-container'>
+                  <label>Initial body position</label>
+                  <div className='input-group'>
+                    <input
+                      type='text'
+                      name='imageStartLink'
+                      value={options.imageStartLink}
+                      onChange={handleInputChange}
+                      className={emptyFields.includes('imageStartLink') ? 'error' : ''}
+                      placeholder='Insert image URL or choose a file to upload'
+                    />
+                    <span>or</span>
+                    <input type='file' name='imageStartFile' onChange={handleInputChange} className={emptyFields.includes('imageStartFile') ? 'error' : ''} />
+                  </div>
+                </div>
 
-              <div>
-                <label>Initial body position (Upload Image):</label>
-                <input type='file' name='imageStartFile' onChange={handleInputChange} className={emptyFields.includes('imageStartFile') ? 'error' : ''} />
-              </div>
+                <div className='input-container'>
+                  <label>Final body position</label>
+                  <div className='input-group'>
+                    <input
+                      type='text'
+                      name='imageEndLink'
+                      value={options.imageEndLink}
+                      onChange={handleInputChange}
+                      className={emptyFields.includes('imageEndLink') ? 'error' : ''}
+                      placeholder='Insert image URL or choose a file to upload'
+                    />
+                    <span>or</span>
+                    <input type='file' name='imageEndFile' onChange={handleInputChange} className={emptyFields.includes('imageEndFile') ? 'error' : ''} />
+                  </div>
+                </div>
 
-              <div>
-                <label>Final body position (Image URL)</label>
-                <input
-                  type='text'
-                  name='imageEndLink'
-                  value={options.imageEndLink}
-                  onChange={handleInputChange}
-                  className={emptyFields.includes('imageEndLink') ? 'error' : ''}
-                />
-              </div>
+                <h3>Exercise Explanation</h3>
+                <div>
+                  <label>Exercise explanation</label>
+                  <input
+                    type='text'
+                    name='explanation'
+                    value={options.explanation}
+                    onChange={handleInputChange}
+                    className={emptyFields.includes('explanation') ? 'error' : ''}
+                  />
+                </div>
 
-              <div>
-                <label>Final body position (Upload Image):</label>
-                <input type='file' name='imageEndFile' onChange={handleInputChange} className={emptyFields.includes('imageEndFile') ? 'error' : ''} />
-              </div>
-
-              <div>
-                <label>Exercise explanation</label>
-                <input
-                  type='text'
-                  name='explanation'
-                  value={options.explanation}
-                  onChange={handleInputChange}
-                  className={emptyFields.includes('explanation') ? 'error' : ''}
-                />
-              </div>
-
-              <div>
-                <label>Exercise Video (Video URL)</label>
-                <input type='text' name='video' value={options.video} onChange={handleInputChange} className={emptyFields.includes('video') ? 'error' : ''} />
+                <h3>Exercise Video</h3>
+                <div>
+                  <label>Exercise Video (Video URL)</label>
+                  <input type='text' name='video' value={options.video} onChange={handleInputChange} className={emptyFields.includes('video') ? 'error' : ''} />
+                </div>
               </div>
             </div>
-          </div>
 
-          <button type='submit' className='primary-button'>
-            Edit Exercise
-          </button>
-          {error && <div className='error'>{error}</div>}
-        </form>
+            <button type='submit' className='primary-button'>
+              Edit Exercise
+            </button>
+            {error && <div className='error'>{error}</div>}
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 export default EditExerciseForm

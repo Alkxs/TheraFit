@@ -155,12 +155,13 @@ const CreateWorkout = () => {
   }
 
   return (
+    <>
+      <button type='button' onClick={() => navigate(`/`)} className='button-small'>
+        <FaArrowLeft size={25} />
+        <span className='small-text'> Back to Workouts</span>
+      </button>
     <div className='form-container'>
       <div className='card'>
-        <button type='button' onClick={() => navigate(`/`)} className='button-back'>
-          <FaArrowLeft size={25} />
-        </button>
-
         <form onSubmit={handleSubmit} className='form-section'>
           <h1>Add a New Workout</h1>
 
@@ -220,6 +221,7 @@ const CreateWorkout = () => {
         </form>
       </div>
     </div>
+    </>
   )
 }
 export default CreateWorkout
