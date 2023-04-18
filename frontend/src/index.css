@@ -424,6 +424,8 @@ nav {
   display: inline-block;
 }
 
+/* Errors */
+
 .error-message {
   color: #ff4d4f;
   font-size: 14px;
@@ -445,6 +447,10 @@ input.error {
 
  select.error {
   border: 1px solid var(--error);
+}
+
+.select__control.error {
+  border-color: var(--error);
 }
 
 /* auth forms */
@@ -658,25 +664,25 @@ form.signup, form.login {
   border-radius: .5rem;
 }
 
-.explanation-container {
+.description-container {
   background-color: #f1f1f1;
   border-radius: .5rem;
   padding: 1.5rem;
   text-align: center;
 }
 
-.explanation {
+.description {
   margin: 0;
 }
 
-.exercise-info {
+.exercise-details-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.exercise-info-labels,
-.exercise-info-values {
+.exercise-details-info-labels,
+.exercise-details-info-values {
   display: flex;
   flex-direction: column;
   gap: 5px;

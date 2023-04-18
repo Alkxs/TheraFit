@@ -28,10 +28,10 @@ import { FaArrowLeft } from 'react-icons/fa'
     if (workout) {
       const formattedStartDate = workout.startDate
       ? format(new Date(workout.startDate), 'yyyy-MM-dd')
-      : null
+      : ''
     const formattedEndDate = workout.endDate
       ? format(new Date(workout.endDate), 'yyyy-MM-dd')
-      : null
+      : ''
     
       setOptions({
         ...workout,
@@ -41,8 +41,8 @@ import { FaArrowLeft } from 'react-icons/fa'
     } else {
       setOptions({
         title: '',
-        startDate: null,
-        endDate: null,
+        startDate: '',
+        endDate: '',
         frequency: '',
         type: '',
       })
@@ -84,7 +84,7 @@ import { FaArrowLeft } from 'react-icons/fa'
         }
       }
     }
-    setError(null)
+    setError('')
     return true
   }
 
@@ -166,7 +166,7 @@ import { FaArrowLeft } from 'react-icons/fa'
       setEmptyFields(data.emptyFields || [])
     }
     if (res.ok) {
-      setError(null)
+      setError('')
       setOptions({
         title: '',
         startDate: '',
@@ -238,7 +238,7 @@ import { FaArrowLeft } from 'react-icons/fa'
             <button type='submit' className='primary-button'>
               Update Workout
             </button>
-            {error && <div className='error-message'>{error}</div>}
+            {error && <div className='error'>{error}</div>}
           </form>
         </div>
       </div>

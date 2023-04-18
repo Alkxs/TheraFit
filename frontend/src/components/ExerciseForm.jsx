@@ -13,14 +13,15 @@ const ExerciseForm = () => {
 
   const [options, setOptions] = useState({
     title: '',
-    load: '',
+    sets: '',
     reps: '',
+    load: '',
     time: '',
     imageStartLink: '',
     imageStartFile: '',
     imageEndLink: '',
     imageEndFile: '',
-    explanation: '',
+    description: '',
     video: '',  
     })
   const [loading, setLoading] = useState(false)
@@ -65,15 +66,30 @@ const ExerciseForm = () => {
       return
     }
 
-    const { title, load, reps, time, imageStartLink, imageStartFile, imageEndLink, imageEndFile, explanation, video } = options
+    const isValidURL = (url) => {
+      try {
+        new URL(url)
+        return true
+      } catch (e) {
+        return false
+      }
+    }
 
+    const { title, sets, reps, load, time, imageStartLink, imageStartFile, imageEndLink, imageEndFile, description, video } = options
+
+    if (video && !isValidURL(video)) {
+      setError('Please provide a valid video URL')
+      setLoading(false)
+      return
+    }
 
     const formData = new FormData()
     formData.append("title", title)
-    formData.append("load", load)
-    formData.append("reps", reps)
-    formData.append("time", time)
-    formData.append("explanation", explanation)
+    if (sets !== '') {formData.append('sets', sets)}
+    if (reps !== '') {formData.append('reps', reps)}
+    if (load !== '') {formData.append('load', load)}
+    if (time !== '') {formData.append('time', time)}
+    formData.append("description", description)
     formData.append("video", video)
     formData.append("workoutId", workoutId)
     formData.append("imageStartLink", imageStartLink)
@@ -98,20 +114,22 @@ const ExerciseForm = () => {
     if (!res.ok) {
       setError(data.error)
       setEmptyFields(data.emptyFields || [])
+      setLoading(false)
     }
     if (res.ok) {
       setLoading(false)
       setError('')
       setOptions({
         title: '',
-        load: '',
+        sets: '',
         reps: '',
+        load: '',
         time: '',
         imageStartLink: '',
         imageStartFile: '',
         imageEndLink: '',
         imageEndFile: '',
-        explanation: '',
+        description: '',
         video: '',
       })
       setEmptyFields([])
@@ -149,18 +167,24 @@ const ExerciseForm = () => {
                 </div>
 
                 <div>
-                  <label>Exercise Load</label>
-                  <input type='number' name='load' value={options.load} onChange={handleInputChange} className={emptyFields.includes('load') ? 'error' : ''} />
+                  <label>Exercise Sets</label>
+                  <input type='number' name='sets' value={options.sets} onChange={handleInputChange}/>
                 </div>
 
                 <div>
                   <label>Exercise Reps</label>
-                  <input type='number' name='reps' value={options.reps} onChange={handleInputChange} className={emptyFields.includes('reps') ? 'error' : ''} />
+                  <input type='number' name='reps' value={options.reps} onChange={handleInputChange}/>
                 </div>
+                
+                <div>
+                  <label>Exercise Load</label>
+                  <input type='number' name='load' value={options.load} onChange={handleInputChange}/>
+                </div>
+
 
                 <div>
                   <label>Exercise Time</label>
-                  <input type='number' name='time' value={options.time} onChange={handleInputChange} className={emptyFields.includes('time') ? 'error' : ''} />
+                  <input type='number' name='time' value={options.time} onChange={handleInputChange}/>
                 </div>
 
                 <h3>Images</h3>
@@ -176,7 +200,7 @@ const ExerciseForm = () => {
                       placeholder='Insert image URL or choose a file to upload'
                     />
                     <span>or</span>
-                    <input type='file' name='imageStartFile' onChange={handleInputChange} className={emptyFields.includes('imageStartFile') ? 'error' : ''} />
+                    <input type='file' name='imageStartFile' onChange={handleInputChange}/>
                   </div>
                 </div>
 
@@ -188,30 +212,28 @@ const ExerciseForm = () => {
                       name='imageEndLink'
                       value={options.imageEndLink}
                       onChange={handleInputChange}
-                      className={emptyFields.includes('imageEndLink') ? 'error' : ''}
                       placeholder='Insert image URL or choose a file to upload'
                     />
                     <span>or</span>
-                    <input type='file' name='imageEndFile' onChange={handleInputChange} className={emptyFields.includes('imageEndFile') ? 'error' : ''} />
+                    <input type='file' name='imageEndFile' onChange={handleInputChange}/>
                   </div>
                 </div>
 
-                <h3>Exercise Explanation</h3>
+                <h3>Exercise description</h3>
                 <div>
-                  <label>Exercise explanation</label>
+                  <label>Exercise description</label>
                   <input
                     type='text'
-                    name='explanation'
-                    value={options.explanation}
+                    name='description'
+                    value={options.description}
                     onChange={handleInputChange}
-                    className={emptyFields.includes('explanation') ? 'error' : ''}
                   />
                 </div>
 
                 <h3>Exercise Video</h3>
                 <div>
                   <label>Exercise Video</label>
-                  <input type='text' name='video' value={options.video} onChange={handleInputChange} className={emptyFields.includes('video') ? 'error' : ''} placeholder='Insert video URL here' />
+                  <input type='text' name='video' value={options.video} onChange={handleInputChange} placeholder='Insert video URL here' />
                 </div>
               </div>
             </div>

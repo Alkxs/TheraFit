@@ -88,26 +88,37 @@ const exerciseComponent = ({ exercise, workoutId, index, moveExercise}) => {
 
       <div className='exercise-info'>
         <div className='exercise-info-labels'>
-          <p>
-            <strong>Load (kg): </strong>
-          </p>
-          <p>
-            <strong>Reps: </strong>
-          </p>
-          <p>
-            <strong>Time </strong>
-          </p>
+          {exercise.sets && (
+            <p>
+              <strong>Sets: </strong>
+            </p>
+          )}
+          {exercise.reps && (
+            <p>
+              <strong>Reps: </strong>
+            </p>
+          )}
+          {exercise.load && (
+            <p>
+              <strong>Load (kg): </strong>
+            </p>
+          )}
+          {exercise.time && (
+            <p>
+              <strong>Time:</strong>
+            </p>
+          )}
         </div>
 
         <div className='exercise-info-values'>
-          <p>{exercise.load}</p>
-          <p>{exercise.reps}</p>
-          <p>{exercise.time}</p>
+          {exercise.sets && <p>{exercise.sets}</p>}
+          {exercise.reps && <p>{exercise.reps}</p>}
+          {exercise.load && <p>{exercise.load}</p>}
+          {exercise.time && <p>{exercise.time}</p>}
         </div>
       </div>
 
       <div className='exercise-btn-container'>
-        
         <span className='exercise-icon exercise-grip'>
           <FaGripVertical size={20} />
         </span>

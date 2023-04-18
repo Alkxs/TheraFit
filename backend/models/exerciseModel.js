@@ -6,11 +6,15 @@ const exerciseSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    load: {
+    sets: {
       type: Number,
       required: false,
     },
     reps: {
+      type: Number,
+      required: false,
+    },
+    load: {
       type: Number,
       required: false,
     },
@@ -26,7 +30,7 @@ const exerciseSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    explanation: {
+    description: {
       type: String,
       required: false,
     },

@@ -20,19 +20,18 @@ const EditExerciseForm = () => {
     return exercise
       ? {
           ...exercise,
-          imageStartFile: '',
-          imageEndFile: '',
         }
       : {
           title: '',
-          load: '',
+          sets: '',
           reps: '',
+          load: '',
           time: '',
           imageStartLink: '',
           imageStartFile: '',
           imageEndLink: '',
           imageEndFile: '',
-          explanation: '',
+          description: '',
           video: '',
         }
   }
@@ -81,16 +80,23 @@ const EditExerciseForm = () => {
       return
     }
 
-    const { title, load, reps, time, imageStartLink, imageStartFile, imageEndLink, imageEndFile, explanation, video } = options
-
-    // const exercise = { title, load, reps, time, imageStart, imageEnd, explanation, video }
+    const { title, sets, reps, load, time, imageStartLink, imageStartFile, imageEndLink, imageEndFile, description, video } = options
 
     const formData = new FormData()
     formData.append('title', title)
-    formData.append('load', load)
-    formData.append('reps', reps)
-    formData.append('time', time)
-    formData.append('explanation', explanation)
+    if (sets !== '') {
+      formData.append('sets', sets)
+    }
+    if (reps !== '') {
+      formData.append('reps', reps)
+    }
+    if (load !== '') {
+      formData.append('load', load)
+    }
+    if (time !== '') {
+      formData.append('time', time)
+    }
+    formData.append('description', description)
     formData.append('video', video)
     formData.append('workoutId', workoutId)
     formData.append('imageStartLink', imageStartLink)
@@ -114,6 +120,7 @@ const EditExerciseForm = () => {
     if (!res.ok) {
       setError(data.error)
       setEmptyFields(data.emptyFields || [])
+      setLoading(false)
     }
     if (res.ok) {
       setLoading(false)
@@ -148,23 +155,29 @@ const EditExerciseForm = () => {
               <div className='choices'>
                 <h3>General Information</h3>
                 <div>
-                  <label>Title:</label>
+                  <label>Title</label>
                   <input type='text' name='title' value={options.title} onChange={handleInputChange} className={emptyFields.includes('title') ? 'error' : ''} />
                 </div>
 
                 <div>
-                  <label>Exercise Load</label>
-                  <input type='number' name='load' value={options.load} onChange={handleInputChange} className={emptyFields.includes('load') ? 'error' : ''} />
+                  <label>Exercise Sets</label>
+                  <input type='number' name='sets' value={options.sets} onChange={handleInputChange}/>
                 </div>
 
                 <div>
                   <label>Exercise Reps</label>
-                  <input type='number' name='reps' value={options.reps} onChange={handleInputChange} className={emptyFields.includes('reps') ? 'error' : ''} />
+                  <input type='number' name='reps' value={options.reps} onChange={handleInputChange}/>
                 </div>
 
                 <div>
+                  <label>Exercise Load</label>
+                  <input type='number' name='load' value={options.load} onChange={handleInputChange}/>
+                </div>
+
+
+                <div>
                   <label>Exercise Time</label>
-                  <input type='number' name='time' value={options.time} onChange={handleInputChange} className={emptyFields.includes('time') ? 'error' : ''} />
+                  <input type='number' name='time' value={options.time} onChange={handleInputChange}/>
                 </div>
 
                 <h3>Images</h3>
@@ -176,11 +189,10 @@ const EditExerciseForm = () => {
                       name='imageStartLink'
                       value={options.imageStartLink}
                       onChange={handleInputChange}
-                      className={emptyFields.includes('imageStartLink') ? 'error' : ''}
                       placeholder='Insert image URL or choose a file to upload'
                     />
                     <span>or</span>
-                    <input type='file' name='imageStartFile' onChange={handleInputChange} className={emptyFields.includes('imageStartFile') ? 'error' : ''} />
+                    <input type='file' name='imageStartFile' onChange={handleInputChange}/>
                   </div>
                 </div>
 
@@ -192,30 +204,28 @@ const EditExerciseForm = () => {
                       name='imageEndLink'
                       value={options.imageEndLink}
                       onChange={handleInputChange}
-                      className={emptyFields.includes('imageEndLink') ? 'error' : ''}
                       placeholder='Insert image URL or choose a file to upload'
                     />
                     <span>or</span>
-                    <input type='file' name='imageEndFile' onChange={handleInputChange} className={emptyFields.includes('imageEndFile') ? 'error' : ''} />
+                    <input type='file' name='imageEndFile' onChange={handleInputChange}/>
                   </div>
                 </div>
 
-                <h3>Exercise Explanation</h3>
+                <h3>Exercise description</h3>
                 <div>
-                  <label>Exercise explanation</label>
+                  <label>Exercise description</label>
                   <input
                     type='text'
-                    name='explanation'
-                    value={options.explanation}
+                    name='description'
+                    value={options.description}
                     onChange={handleInputChange}
-                    className={emptyFields.includes('explanation') ? 'error' : ''}
                   />
                 </div>
 
                 <h3>Exercise Video</h3>
                 <div>
                   <label>Exercise Video (Video URL)</label>
-                  <input type='text' name='video' value={options.video} onChange={handleInputChange} className={emptyFields.includes('video') ? 'error' : ''} />
+                  <input type='text' name='video' value={options.video} onChange={handleInputChange}/>
                 </div>
               </div>
             </div>

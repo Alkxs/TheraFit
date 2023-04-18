@@ -55,7 +55,7 @@ const CreateWorkout = () => {
       }
     }
 
-    setError(null)
+    setError('')
     return true
   }
 
@@ -137,7 +137,7 @@ const CreateWorkout = () => {
       setEmptyFields(data.emptyFields)
     }
     if (res.ok) {
-      setError(null)
+      setError('')
       setOptions({
         title: '',
         startDate: '',

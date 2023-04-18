@@ -40,26 +40,40 @@ const ExerciseDetails = () => {
             </div>
           )}
 
-          <div className='explanation-container'>
-            <p className='explanation'>{exercise.explanation}</p>
-          </div>
+          {exercise.description && (
+            <div className='description-container'>
+              <p className='description'>{exercise.description}</p>
+            </div>
+          )}
 
-          <div className='exercise-info'>
-            <div className='exercise-info-labels'>
-              <p>
-                <strong>Load (kg): </strong>
-              </p>
-              <p>
-                <strong>Reps: </strong>
-              </p>
-              <p>
-                <strong>Time </strong>
-              </p>
+          <div className='exercise-details-info'>
+            <div className='exercise-details-info-labels'>
+              {exercise.sets && (
+                <p>
+                  <strong>Sets: </strong>
+                </p>
+              )}
+              {exercise.reps && (
+                <p>
+                  <strong>Reps: </strong>
+                </p>
+              )}
+              {exercise.load && (
+                <p>
+                  <strong>Load (kg): </strong>
+                </p>
+              )}
+              {exercise.time && (
+                <p>
+                  <strong>Time </strong>
+                </p>
+              )}
             </div>
 
-            <div className='exercise-info-values'>
-              <p>{exercise.load}</p>
+            <div className='exercise-details-info-values'>
+              <p>{exercise.sets}</p>
               <p>{exercise.reps}</p>
+              <p>{exercise.load}</p>
               <p>{exercise.time}</p>
             </div>
           </div>

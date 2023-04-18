@@ -20,7 +20,7 @@ const getExercises = async (req, res) => {
 
 // POST new exercise
 const createExercise = async (req, res) => {
-   const { title, load, reps, time, imageStartLink, imageEndLink, explanation, video, workoutId } = req.body
+   const { title, sets, reps, load, time, imageStartLink, imageEndLink, description, video, workoutId } = req.body
 
    let imageStartFile, imageEndFile
 
@@ -47,7 +47,7 @@ const createExercise = async (req, res) => {
   }
   
   if (emptyFields.length > 0) {
-    return res.status(400).json({ error: 'Please fill in the title', emptyFields })
+    return res.status(400).json({ error: 'Please fill in the title at least', emptyFields })
   }
 
 // add doc to db
@@ -56,14 +56,15 @@ const createExercise = async (req, res) => {
 
      const exercise = await Exercise.create({
        title,
-       load,
+       sets,
        reps,
+       load,
        time,
        imageStartFile,
        imageEndFile,
        imageStartPublicId,
        imageEndPublicId,
-       explanation,
+       description,
        video,
        workoutId,
        user_id,
@@ -125,7 +126,7 @@ const deleteExercise = async (req, res) => {
       return res.status(404).json({ error: 'No such exercise' })
     }
 
-    const { title, load, reps, time, imageStartLink, imageEndLink, explanation, video, workoutId } = req.body
+    const { title, sets, reps, load, time, imageStartLink, imageEndLink, description, video, workoutId } = req.body
 
     let imageStartFile, imageEndFile
     let imageStartPublicId, imageEndPublicId
@@ -146,14 +147,15 @@ const deleteExercise = async (req, res) => {
 
      const exerciseData = {
        title,
-       load,
+       sets,
        reps,
+       load,
        time,
        imageStartFile,
        imageEndFile,
        imageStartPublicId,
        imageEndPublicId,
-       explanation,
+       description,
        video,
        workoutId,
      }
