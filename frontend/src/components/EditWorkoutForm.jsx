@@ -26,8 +26,12 @@ import { FaArrowLeft } from 'react-icons/fa'
     const workout = workouts.find((workout) => workout._id === workoutId)
 
     if (workout) {
-      const formattedStartDate = format(new Date(workout.startDate), 'yyyy-MM-dd')
-      const formattedEndDate = format(new Date(workout.endDate), 'yyyy-MM-dd')
+      const formattedStartDate = workout.startDate
+      ? format(new Date(workout.startDate), 'yyyy-MM-dd')
+      : null
+    const formattedEndDate = workout.endDate
+      ? format(new Date(workout.endDate), 'yyyy-MM-dd')
+      : null
     
       setWorkoutData({
         ...workout,
@@ -37,8 +41,8 @@ import { FaArrowLeft } from 'react-icons/fa'
     } else {
       setWorkoutData({
         title: '',
-        startDate: '',
-        endDate: '',
+        startDate: null,
+        endDate: null,
         frequency: '',
         type: '',
       })
@@ -49,16 +53,16 @@ import { FaArrowLeft } from 'react-icons/fa'
     const currentDate = new Date()
     currentDate.setHours(0, 0, 0, 0)
 
-    if (options.startDate) {
-      const startDate = new Date(options.startDate)
+    if (workoutData.startDate) {
+      const startDate = new Date(workoutData.startDate)
 
     if (startDate < currentDate) {
       setError('The start date must be today or later')
       return false
     }
 
-    if (options.endDate) {
-      const endDate = new Date(options.endDate);
+    if (workoutData.endDate) {
+      const endDate = new Date(workoutData.endDate);
     
 
     if (startDate > endDate) {
@@ -68,11 +72,11 @@ import { FaArrowLeft } from 'react-icons/fa'
       }
     }
 
-    if (options.endDate) {
-    const endDate = new Date(options.endDate)
+    if (workoutData.endDate) {
+    const endDate = new Date(workoutData.endDate)
 
-    if (options.startDate) {
-      const startDate = new Date(options.startDate)
+    if (workoutData.startDate) {
+      const startDate = new Date(workoutData.startDate)
 
     if (endDate < startDate) {
       setError('The start date must be earlier than the end date')
