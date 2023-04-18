@@ -17,9 +17,25 @@ const EditExerciseForm = () => {
 
   const getInitialOptions = () => {
     const exercise = exercises.find((exercise) => exercise._id === exerciseId)
+     let imageStartLink = exercise?.imageStartLink || ''
+     let imageEndLink = exercise?.imageEndLink || ''
+     const imageStartFile = exercise?.imageStartFile || ''
+     const imageEndFile = exercise?.imageEndFile || ''
+
+    if (imageStartFile && !imageStartFile.includes('res.cloudinary.com')) {
+     
+      imageStartLink = imageStartFile
+    }
+
+    if (imageEndFile && !imageEndFile.includes('res.cloudinary.com')) {
+      imageEndLink = imageEndFile
+    }
+
     return exercise
       ? {
           ...exercise,
+          imageStartLink,
+          imageEndLink,
         }
       : {
           title: '',
@@ -41,6 +57,7 @@ const EditExerciseForm = () => {
 
   useEffect(() => {
     setOptions(getInitialOptions())
+    console.log(getInitialOptions())
   }, [exerciseId, exercises])
 
   const handleInputChange = (e) => {
