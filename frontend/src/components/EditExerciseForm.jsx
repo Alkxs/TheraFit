@@ -64,15 +64,21 @@ const EditExerciseForm = () => {
   const handleInputChange = (e) => {
     const { name, value, files } = e.target
 
-   if (files) {
+    if (files) {
       setOptions({
         ...options,
         [name]: files[0],
+        [name.replace('File', 'Link')]: '',
       })
     } else {
-      setOptions({
-        ...options,
-        [name]: value,
+      setOptions((prevOptions) => {
+        const newOptions = { ...prevOptions, [name]: value }
+
+        if (name.endsWith('Link')) {
+          newOptions[name.replace('Link', 'File')] = ''
+        }
+
+        return newOptions
       })
     }
   }
@@ -86,13 +92,13 @@ const EditExerciseForm = () => {
       return
     }
 
-    if (options.imageStartLink && options.imageStartFile) {
+    if (options.imageStartLink && options.imageStartFile && options.imageStartFile.name) {
       setError('Please choose between pasting an image URL or uploading an image for the initial body position.')
       setLoading(false)
       return
     }
 
-    if (options.imageEndLink && options.imageEndFile) {
+    if (options.imageEndLink && options.imageEndFile && options.imageEndFile.name) {
       setError('Please choose between pasting an image URL or uploading an image for the final body position.')
       setLoading(false)
       return

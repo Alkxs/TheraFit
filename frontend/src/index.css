@@ -633,6 +633,7 @@ form.signup, form.login {
   display: flex;
   flex-direction: column;
   gap: 4rem;
+  padding-bottom: 4rem;
 }
 
 .exercise-details-title {
@@ -728,7 +729,6 @@ form.signup, form.login {
   align-items: center;
   border-radius: 0.5rem;
   margin: auto 4rem;
-  margin-bottom: 4rem;
   border: 1px solid #ccc;
   border-radius: .5rem;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);

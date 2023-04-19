@@ -46,6 +46,7 @@ const ExerciseDetails = () => {
             </div>
           )}
 
+          {(exercise.sets || exercise.reps || exercise.load || exercise.time &&
           <div className='exercise-details-info'>
             <div className='exercise-details-info-labels'>
               {exercise.sets && (
@@ -81,22 +82,31 @@ const ExerciseDetails = () => {
             </div>
 
             <div className='exercise-details-info-values'>
-              <div className='p-value'>
-                <p>{exercise.sets}</p>
-              </div>
-              <div className='p-value'>
-                <p>{exercise.reps}</p>
-              </div>
-              <div className='p-value'>
-                <p>{exercise.load}</p>
-              </div>
-              <div className='p-value'>
-                <p>
-                  {exercise.time} {exercise.timeUnit}
-                </p>
-              </div>
+              {exercise.sets && (
+                <div className='p-value'>
+                  <p>{exercise.sets}</p>
+                </div>
+              )}
+              {exercise.reps && (
+                <div className='p-value'>
+                  <p>{exercise.reps}</p>
+                </div>
+              )}
+              {exercise.load && (
+                <div className='p-value'>
+                  <p>{exercise.load}</p>
+                </div>
+              )}
+              {exercise.time && (
+                <div className='p-value'>
+                  <p>
+                    {exercise.time} {exercise.timeUnit}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
+          )}
 
           {exercise.video && (
             <div className='video-container'>
