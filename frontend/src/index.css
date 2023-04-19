@@ -624,7 +624,7 @@ form.signup, form.login {
 }
 
 .exercise-details-card {
-  width: 80%;
+  width: 70%;
   max-width: 120rem;
   background-color: #ffffff;
   border-radius: .5rem;
@@ -635,33 +635,42 @@ form.signup, form.login {
   gap: 4rem;
 }
 
-.exercise-title {
-  text-align: center;
-  margin-bottom: 10px;
+.exercise-details-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.exercise-details-title h4 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: var(--primary);
 }
 
 .imgs-container{
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
-  margin: auto 6rem;
+  justify-content: space-between;
+  padding: 3rem;
+  margin: auto 4rem;
   border: 1px solid #ccc;
   border-radius: .5rem;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  gap: 3rem;
 }
 
 .img-container{
-  width: 100%;
+  flex: 1;
   display: flex;
   justify-content: center;
 }
 
-.imageStart,
-.imageEnd {
+.exercise-image{
+  width: 100%;
   max-width: 100%;
-  max-height: 200px;
-  object-fit: contain;
+  max-height: 300px;
+  object-fit: cover;
   border-radius: .5rem;
 }
 
@@ -669,6 +678,7 @@ form.signup, form.login {
   background-color: #f1f1f1;
   border-radius: .5rem;
   padding: 1.5rem;
+  margin: auto 4rem;
   text-align: center;
 }
 
@@ -677,28 +687,59 @@ form.signup, form.login {
 }
 
 .exercise-details-info {
-  display: flex;
-  justify-content: space-between;
+  margin: auto 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
   align-items: center;
+  border: 1px solid #ccc;
+  border-radius: .5rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  padding: 3rem;
+  gap: 3rem;
 }
 
 .exercise-details-info-labels,
 .exercise-details-info-values {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+  font-size: 18px;
+}
+
+.p-label,
+.p-value {
+  border: 1px solid black;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: .5rem;
 }
 
 .video-container {
-  width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  margin: auto 4rem;
+  margin-bottom: 4rem;
+  border: 1px solid #ccc;
+  border-radius: .5rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 
 .video {
   width: 100%;
   max-width: 100%;
   height: auto;
+  aspect-ratio: 16 / 9;
 }
 
 /* Media Queries */

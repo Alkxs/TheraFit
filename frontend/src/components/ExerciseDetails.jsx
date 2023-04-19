@@ -24,18 +24,18 @@ const ExerciseDetails = () => {
 
       <div className='exercise-details-container'>
         <div className='exercise-details-card'>
-          <div className='workout-title'>
+          <div className='exercise-details-title'>
             <h4>{exercise.title}</h4>
           </div>
 
           {(exercise.imageStartFile || exercise.imageEndFile) && (
             <div className='imgs-container'>
               <div className='img-container'>
-                <img className='imageStart' src={exercise.imageStartFile} alt='image start' />
+                <img className='exercise-image' src={exercise.imageStartFile} alt='image start' />
               </div>
 
               <div className='img-container'>
-                <img className='imageEnd' src={exercise.imageEndFile} alt='imageEnd' />
+                <img className='exercise-image' src={exercise.imageEndFile} alt='imageEnd' />
               </div>
             </div>
           )}
@@ -49,43 +49,62 @@ const ExerciseDetails = () => {
           <div className='exercise-details-info'>
             <div className='exercise-details-info-labels'>
               {exercise.sets && (
-                <p>
-                  <strong>Sets: </strong>
-                </p>
+                <div className='p-label'>
+                  <p>
+                    <strong>Sets </strong>
+                  </p>
+                </div>
               )}
               {exercise.reps && (
-                <p>
-                  <strong>Reps: </strong>
-                </p>
+                <div className='p-label'>
+                  <p>
+                    <strong>Reps </strong>
+                  </p>
+                </div>
               )}
               {exercise.load && (
-                <p>
-                  <strong>
-                    Load <span className='small-text'>(kg)</span>:{' '}
-                  </strong>
-                </p>
+                <div className='p-label'>
+                  <p>
+                    <strong>
+                      Load <span className='small-text'>(kg)</span>{' '}
+                    </strong>
+                  </p>
+                </div>
               )}
               {exercise.time && (
-                <p>
-                  <strong>Time </strong>
-                </p>
+                <div className='p-label'>
+                  <p>
+                    <strong>Time </strong>
+                  </p>
+                </div>
               )}
             </div>
 
             <div className='exercise-details-info-values'>
-              <p>{exercise.sets}</p>
-              <p>{exercise.reps}</p>
-              <p>{exercise.load}</p>
-              <p>{exercise.time} {exercise.timeUnit}</p>
+              <div className='p-value'>
+                <p>{exercise.sets}</p>
+              </div>
+              <div className='p-value'>
+                <p>{exercise.reps}</p>
+              </div>
+              <div className='p-value'>
+                <p>{exercise.load}</p>
+              </div>
+              <div className='p-value'>
+                <p>
+                  {exercise.time} {exercise.timeUnit}
+                </p>
+              </div>
             </div>
           </div>
 
           {exercise.video && (
             <div className='video-container'>
               <ReactPlayer
+                className='video'
                 url={exercise.video}
-                width='50%'
-                height='auto'
+                width='100%'
+                height='100%'
                 controls
                 config={{
                   youtube: {
