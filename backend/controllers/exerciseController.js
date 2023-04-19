@@ -20,7 +20,7 @@ const getExercises = async (req, res) => {
 
 // POST new exercise
 const createExercise = async (req, res) => {
-   const { title, sets, reps, load, time, imageStartLink, imageEndLink, description, video, workoutId } = req.body
+   const { title, sets, reps, load, time, timeUnit, imageStartLink, imageEndLink, description, video, workoutId } = req.body
 
    let imageStartFile, imageEndFile
 
@@ -60,6 +60,7 @@ const createExercise = async (req, res) => {
        reps,
        load,
        time,
+       timeUnit,
        imageStartFile,
        imageEndFile,
        imageStartPublicId,
@@ -126,7 +127,7 @@ const deleteExercise = async (req, res) => {
       return res.status(404).json({ error: 'No such exercise' })
     }
 
-    const { title, sets, reps, load, time, imageStartLink, imageEndLink, description, video, workoutId } = req.body
+    const { title, sets, reps, load, time, timeUnit, imageStartLink, imageEndLink, description, video, workoutId } = req.body
 
     let imageStartFile, imageEndFile
     let imageStartPublicId, imageEndPublicId
@@ -151,6 +152,7 @@ const deleteExercise = async (req, res) => {
        reps,
        load,
        time,
+       timeUnit,
        imageStartFile,
        imageEndFile,
        imageStartPublicId,

@@ -22,6 +22,10 @@ const exerciseSchema = new mongoose.Schema(
       type: Number,
       required: false,
     },
+    timeUnit: {
+      type: String,
+      required: false,
+    },
     imageStartFile: {
       type: String,
       required: false,

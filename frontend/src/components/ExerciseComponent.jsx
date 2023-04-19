@@ -100,7 +100,7 @@ const exerciseComponent = ({ exercise, workoutId, index, moveExercise}) => {
           )}
           {exercise.load && (
             <p>
-              <strong>Load (kg): </strong>
+              <strong>Load <span className='small-text'>(kg)</span>: </strong>
             </p>
           )}
           {exercise.time && (
@@ -114,7 +114,7 @@ const exerciseComponent = ({ exercise, workoutId, index, moveExercise}) => {
           {exercise.sets && <p>{exercise.sets}</p>}
           {exercise.reps && <p>{exercise.reps}</p>}
           {exercise.load && <p>{exercise.load}</p>}
-          {exercise.time && <p>{exercise.time}</p>}
+          {exercise.time && <p>{exercise.time} {exercise.timeUnit}</p>}
         </div>
       </div>
 

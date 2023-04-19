@@ -17,25 +17,26 @@ const ExerciseForm = () => {
     reps: '',
     load: '',
     time: '',
+    timeUnit: '',
     imageStartLink: '',
     imageStartFile: '',
     imageEndLink: '',
     imageEndFile: '',
     description: '',
-    video: '',  
-    })
+    video: '',
+  })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [emptyFields, setEmptyFields] = useState([])
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target
-    
+
     if (files) {
-    setOptions({
-      ...options,
-      [name]: files[0],
-    })
+      setOptions({
+        ...options,
+        [name]: files[0],
+      })
     } else {
       setOptions({
         ...options,
@@ -43,6 +44,7 @@ const ExerciseForm = () => {
       })
     }
   }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -75,7 +77,7 @@ const ExerciseForm = () => {
       }
     }
 
-    const { title, sets, reps, load, time, imageStartLink, imageStartFile, imageEndLink, imageEndFile, description, video } = options
+    const { title, sets, reps, load, time, timeUnit, imageStartLink, imageStartFile, imageEndLink, imageEndFile, description, video } = options
 
     if (video && !isValidURL(video)) {
       setError('Please provide a valid video URL')
@@ -85,10 +87,11 @@ const ExerciseForm = () => {
 
     const formData = new FormData()
     formData.append("title", title)
-    if (sets !== '') {formData.append('sets', sets)}
-    if (reps !== '') {formData.append('reps', reps)}
-    if (load !== '') {formData.append('load', load)}
-    if (time !== '') {formData.append('time', time)}
+    if (sets) {formData.append('sets', sets)}
+    if (reps) {formData.append('reps', reps)}
+    if (load) {formData.append('load', load)}
+    if (time) {formData.append('time', time)}
+    if (timeUnit) {formData.append('timeUnit', timeUnit)}
     formData.append("description", description)
     formData.append("video", video)
     formData.append("workoutId", workoutId)
@@ -100,6 +103,7 @@ const ExerciseForm = () => {
     if (imageEndFile) {
       formData.append('imageEndFile', imageEndFile)
     }
+    
 
     const res = await fetch(`http://localhost:3000/${workoutId}/exercises`, {
       method: 'POST',
@@ -125,6 +129,7 @@ const ExerciseForm = () => {
         reps: '',
         load: '',
         time: '',
+        timeUnit: '',
         imageStartLink: '',
         imageStartFile: '',
         imageEndLink: '',
@@ -134,7 +139,7 @@ const ExerciseForm = () => {
       })
       setEmptyFields([])
       console.log('new exercise added:', data)
-      dispatch({ type: 'CREATE_EXERCISE', payload: data })
+      dispatch({ type: 'CREATE_EXERCISE', payload: {...data, timeUnit} })
 
       navigate(`/${workoutId}/exercises`)
     }
@@ -168,23 +173,27 @@ const ExerciseForm = () => {
 
                 <div>
                   <label>Exercise Sets</label>
-                  <input type='number' name='sets' value={options.sets} onChange={handleInputChange}/>
+                  <input type='number' name='sets' value={options.sets} onChange={handleInputChange} />
                 </div>
 
                 <div>
                   <label>Exercise Reps</label>
-                  <input type='number' name='reps' value={options.reps} onChange={handleInputChange}/>
-                </div>
-                
-                <div>
-                  <label>Exercise Load</label>
-                  <input type='number' name='load' value={options.load} onChange={handleInputChange}/>
+                  <input type='number' name='reps' value={options.reps} onChange={handleInputChange} />
                 </div>
 
+                <div>
+                  <label>Exercise Load</label>
+                  <input type='number' name='load' value={options.load} onChange={handleInputChange} placeholder='Insert number in Kg' />
+                </div>
 
                 <div>
                   <label>Exercise Time</label>
-                  <input type='number' name='time' value={options.time} onChange={handleInputChange}/>
+                  <input type='number' name='time' value={options.time} onChange={handleInputChange} />
+                  <select name='timeUnit' value={options.timeUnit} onChange={handleInputChange}>
+                    <option value='seconds'>Seconds</option>
+                    <option value='minutes'>Minutes</option>
+                    <option value='hours'>Hours</option>
+                  </select>
                 </div>
 
                 <h3>Images</h3>
@@ -200,7 +209,7 @@ const ExerciseForm = () => {
                       placeholder='Insert image URL or choose a file to upload'
                     />
                     <span>or</span>
-                    <input type='file' name='imageStartFile' onChange={handleInputChange}/>
+                    <input type='file' name='imageStartFile' onChange={handleInputChange} />
                   </div>
                 </div>
 
@@ -215,19 +224,14 @@ const ExerciseForm = () => {
                       placeholder='Insert image URL or choose a file to upload'
                     />
                     <span>or</span>
-                    <input type='file' name='imageEndFile' onChange={handleInputChange}/>
+                    <input type='file' name='imageEndFile' onChange={handleInputChange} />
                   </div>
                 </div>
 
                 <h3>Exercise description</h3>
                 <div>
                   <label>Exercise description</label>
-                  <input
-                    type='text'
-                    name='description'
-                    value={options.description}
-                    onChange={handleInputChange}
-                  />
+                  <input type='text' name='description' value={options.description} onChange={handleInputChange} />
                 </div>
 
                 <h3>Exercise Video</h3>

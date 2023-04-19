@@ -36,6 +36,7 @@ const EditExerciseForm = () => {
           ...exercise,
           imageStartLink,
           imageEndLink,
+          timeUnit: exercise.timeUnit || 'seconds',
         }
       : {
           title: '',
@@ -43,6 +44,7 @@ const EditExerciseForm = () => {
           reps: '',
           load: '',
           time: '',
+          timeUnit: 'seconds',
           imageStartLink: '',
           imageStartFile: '',
           imageEndLink: '',
@@ -57,13 +59,12 @@ const EditExerciseForm = () => {
 
   useEffect(() => {
     setOptions(getInitialOptions())
-    console.log(getInitialOptions())
   }, [exerciseId, exercises])
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target
 
-    if (files) {
+   if (files) {
       setOptions({
         ...options,
         [name]: files[0],
@@ -97,21 +98,24 @@ const EditExerciseForm = () => {
       return
     }
 
-    const { title, sets, reps, load, time, imageStartLink, imageStartFile, imageEndLink, imageEndFile, description, video } = options
+    const { title, sets, reps, load, time, timeUnit, imageStartLink, imageStartFile, imageEndLink, imageEndFile, description, video } = options
 
     const formData = new FormData()
     formData.append('title', title)
-    if (sets !== '') {
+    if (sets) {
       formData.append('sets', sets)
     }
-    if (reps !== '') {
+    if (reps) {
       formData.append('reps', reps)
     }
-    if (load !== '') {
+    if (load) {
       formData.append('load', load)
     }
-    if (time !== '') {
+    if (time) {
       formData.append('time', time)
+    }
+    if (timeUnit) {
+      formData.append('timeUnit', timeUnit)
     }
     formData.append('description', description)
     formData.append('video', video)
@@ -144,8 +148,7 @@ const EditExerciseForm = () => {
       setError('')
       setEmptyFields([])
       console.log('exercise updated:', data)
-      dispatch({ type: 'EDIT_EXERCISE', payload: data })
-
+      dispatch({ type: 'EDIT_EXERCISE', payload: { ...data, timeUnit }})
       navigate(`/${workoutId}/exercises/`)
     }
   }
@@ -178,23 +181,27 @@ const EditExerciseForm = () => {
 
                 <div>
                   <label>Exercise Sets</label>
-                  <input type='number' name='sets' value={options.sets} onChange={handleInputChange}/>
+                  <input type='number' name='sets' value={options.sets} onChange={handleInputChange} />
                 </div>
 
                 <div>
                   <label>Exercise Reps</label>
-                  <input type='number' name='reps' value={options.reps} onChange={handleInputChange}/>
+                  <input type='number' name='reps' value={options.reps} onChange={handleInputChange} />
                 </div>
 
                 <div>
                   <label>Exercise Load</label>
-                  <input type='number' name='load' value={options.load} onChange={handleInputChange}/>
+                  <input type='number' name='load' value={options.load} onChange={handleInputChange} />
                 </div>
-
 
                 <div>
                   <label>Exercise Time</label>
-                  <input type='number' name='time' value={options.time} onChange={handleInputChange}/>
+                  <input type='number' name='time' value={options.time} onChange={handleInputChange} />
+                  <select name='timeUnit' value={options.timeUnit} onChange={handleInputChange} key={exerciseId}>
+                    <option value='seconds'>Seconds</option>
+                    <option value='minutes'>Minutes</option>
+                    <option value='hours'>Hours</option>
+                  </select>
                 </div>
 
                 <h3>Images</h3>
@@ -209,7 +216,7 @@ const EditExerciseForm = () => {
                       placeholder='Insert image URL or choose a file to upload'
                     />
                     <span>or</span>
-                    <input type='file' name='imageStartFile' onChange={handleInputChange}/>
+                    <input type='file' name='imageStartFile' onChange={handleInputChange} />
                   </div>
                 </div>
 
@@ -224,25 +231,20 @@ const EditExerciseForm = () => {
                       placeholder='Insert image URL or choose a file to upload'
                     />
                     <span>or</span>
-                    <input type='file' name='imageEndFile' onChange={handleInputChange}/>
+                    <input type='file' name='imageEndFile' onChange={handleInputChange} />
                   </div>
                 </div>
 
                 <h3>Exercise description</h3>
                 <div>
                   <label>Exercise description</label>
-                  <input
-                    type='text'
-                    name='description'
-                    value={options.description}
-                    onChange={handleInputChange}
-                  />
+                  <input type='text' name='description' value={options.description} onChange={handleInputChange} />
                 </div>
 
                 <h3>Exercise Video</h3>
                 <div>
                   <label>Exercise Video (Video URL)</label>
-                  <input type='text' name='video' value={options.video} onChange={handleInputChange}/>
+                  <input type='text' name='video' value={options.video} onChange={handleInputChange} />
                 </div>
               </div>
             </div>

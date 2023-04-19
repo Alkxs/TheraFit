@@ -60,7 +60,9 @@ const ExerciseDetails = () => {
               )}
               {exercise.load && (
                 <p>
-                  <strong>Load (kg): </strong>
+                  <strong>
+                    Load <span className='small-text'>(kg)</span>:{' '}
+                  </strong>
                 </p>
               )}
               {exercise.time && (
@@ -74,7 +76,7 @@ const ExerciseDetails = () => {
               <p>{exercise.sets}</p>
               <p>{exercise.reps}</p>
               <p>{exercise.load}</p>
-              <p>{exercise.time}</p>
+              <p>{exercise.time} {exercise.timeUnit}</p>
             </div>
           </div>
 
