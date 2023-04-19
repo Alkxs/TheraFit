@@ -237,7 +237,7 @@ const ExerciseForm = () => {
                 </div>
 
                 <h3>Exercise Video</h3>
-                <div className="input-container">
+                <div className="">
                   <label>Exercise Video</label>
                   <input type='text' name='video' value={options.video} onChange={handleInputChange} placeholder='Insert video URL here' />
                 </div>

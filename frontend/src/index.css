@@ -561,22 +561,24 @@ form.signup, form.login {
 
 .exercise-info {
   display: grid;
-  grid-template-columns: repeat(2, 8rem);
-  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+  width: 80%;
+  gap: 2rem;
   align-items: center;
   justify-content: center;
   margin: 2rem;
 }
 
-.exercise-info-labels {
-  font-size: 14px;
+.exercise-info-labels,
+.exercise-info-values {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 1rem;
 }
 
-.exercise-info-values {
-  font-size: 14px;
+.exercise-label,
+.exercise-value {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -584,9 +586,25 @@ form.signup, form.login {
 }
 
 .exercise-info p {
-  margin-bottom: 0.5rem;
   font-size: 1rem;
   color: #555;
+}
+
+.exercise-info-labels {
+  align-items: flex-end;
+}
+.exercise-info-values {
+  align-items: flex-start;
+}
+
+.exercise-value p {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.exercise-value span {
+  margin-left: 0.5rem;
 }
 
 .exercise-btn-container {
@@ -636,17 +654,28 @@ form.signup, form.login {
   padding-bottom: 4rem;
 }
 
+
 .exercise-details-title {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+
 .exercise-details-title h4 {
   font-size: 2.5rem;
   font-weight: bold;
   margin: 0;
+}
+
+.exercise-details-card h5 {
+  font-weight: bold;
+  font-size: 1.5rem;
   color: var(--primary);
+}
+
+.imgs-title {
+  padding: 2rem;
 }
 
 .imgs-container{
@@ -654,6 +683,7 @@ form.signup, form.login {
   align-items: center;
   justify-content: space-between;
   padding: 3rem;
+  padding-top: 0;
   margin: auto 4rem;
   border: 1px solid #ccc;
   border-radius: .5rem;
@@ -664,7 +694,9 @@ form.signup, form.login {
 .img-container{
   flex: 1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .exercise-image{
@@ -676,27 +708,49 @@ form.signup, form.login {
 }
 
 .description-container {
-  background-color: #f1f1f1;
   border-radius: .5rem;
-  padding: 1.5rem;
+  padding: 3rem;
+  padding-top: 0;
   margin: auto 4rem;
   text-align: center;
+  border: 1px solid #ccc;
+  border-radius: .5rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.description-title {
+  padding: 2rem;
 }
 
 .description {
   margin: 0;
+  padding: 1.5rem;
+  background-color: #f1f1f1;
+  border-radius: .5rem;
 }
 
 .exercise-details-info {
   margin: auto 4rem;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  padding: 3rem;
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.exercise-details-info-title {
+  text-align: center;
+  padding: 2rem;
+}
+
+.parameters-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: center;
   align-items: center;
-  border: 1px solid #ccc;
   border-radius: .5rem;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
-  padding: 3rem;
   gap: 3rem;
 }
 
@@ -723,19 +777,40 @@ form.signup, form.login {
   border-radius: .5rem;
 }
 
+.p-value p {
+  display: inline-flex;
+  align-items: flex-start;
+  margin: 0;
+  justify-content: center;
+}
+
+.load-unit,
+.time-unit {
+  margin-left: .5rem;
+}
+
 .video-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 0.5rem;
   margin: auto 4rem;
+  padding: 3rem;
+  padding-top: 0;
   border: 1px solid #ccc;
   border-radius: .5rem;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
 
-.video {
+.video-title {
+  padding: 2rem;
+}
+
+.video-wrapper {
+  border-radius: 0.5rem;
+  overflow: hidden;
   width: 100%;
   max-width: 100%;
   height: auto;
@@ -743,6 +818,65 @@ form.signup, form.login {
 }
 
 /* Media Queries */
+@media (max-width: 500px) {
+  .user {
+    display: none;
+  }
+
+  .logo img {
+    width: 10rem;
+  }
+
+  .main-title{
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+  .workout-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .workout-info-labels,
+  .workout-info-values {
+    display: flex;
+    gap: 0;
+  }
+
+  .workout-info-labels p,
+  .workout-info-values p {
+    font-size: 12px;
+    margin-bottom: 0.5rem;
+  }
+
+  .workout-info-labels p strong {
+    min-width: 100px;
+  }
+
+  .workout-btn-container {
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .workout-btn {
+    padding: .8rem .5rem;
+    font-size: 0.8rem;
+  }
+
+  .workout-title h4 {
+  font-size: 1.8rem;
+}
+.workout-details {
+  height: 25rem;
+  overflow-y: scroll;
+}
+}
+
 @media only screen and (max-width: 768px) {
   .workout-card {
     flex-direction: column;
@@ -772,4 +906,9 @@ form.signup, form.login {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0.5rem;
 }
+
+  .workout-info {
+    display: flex;
+    justify-content: center;
+  }
 }

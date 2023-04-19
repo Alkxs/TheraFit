@@ -86,37 +86,67 @@ const exerciseComponent = ({ exercise, workoutId, index, moveExercise}) => {
         </span>
       </div>
 
-      <div className='exercise-info'>
-        <div className='exercise-info-labels'>
-          {exercise.sets && (
-            <p>
-              <strong>Sets: </strong>
-            </p>
-          )}
-          {exercise.reps && (
-            <p>
-              <strong>Reps: </strong>
-            </p>
-          )}
-          {exercise.load && (
-            <p>
-              <strong>Load <span className='small-text'>(kg)</span>: </strong>
-            </p>
-          )}
-          {exercise.time && (
-            <p>
-              <strong>Time:</strong>
-            </p>
-          )}
-        </div>
+      {(exercise.sets || exercise.reps || exercise.load || exercise.time) && (
+        <div className='exercise-info'>
+          <div className='exercise-info-labels'>
+            {exercise.sets && (
+              <div className='exercise-label'>
+                <p>
+                  <strong>Sets: </strong>
+                </p>
+              </div>
+            )}
+            {exercise.reps && (
+              <div className='exercise-label'>
+                <p>
+                  <strong>Reps: </strong>
+                </p>
+              </div>
+            )}
+            {exercise.load && (
+              <div className='exercise-label'>
+                <p>
+                  <strong>Load: </strong>
+                </p>
+              </div>
+            )}
+            {exercise.time && (
+              <div className='exercise-label'>
+                <p className='exercise-label-time'>
+                  <strong>Time: </strong>
+                </p>
+              </div>
+            )}
+          </div>
 
-        <div className='exercise-info-values'>
-          {exercise.sets && <p>{exercise.sets}</p>}
-          {exercise.reps && <p>{exercise.reps}</p>}
-          {exercise.load && <p>{exercise.load}</p>}
-          {exercise.time && <p>{exercise.time} {exercise.timeUnit}</p>}
+          <div className='exercise-info-values'>
+            {exercise.sets && (
+              <div className='exercise-value'>
+                <p>{exercise.sets}</p>
+              </div>
+            )}
+            {exercise.reps && (
+              <div className='exercise-value'>
+                <p>{exercise.reps}</p>
+              </div>
+            )}
+            {exercise.load && (
+              <div className='exercise-value '>
+                <p>
+                  {exercise.load} <span>kg</span>
+                </p>
+              </div>
+            )}
+            {exercise.time && (
+              <div className='exercise-value'>
+                <p>
+                  {exercise.time} <span>{exercise.timeUnit}</span>
+                </p>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
 
       <div className='exercise-btn-container'>
         <span className='exercise-icon exercise-grip'>

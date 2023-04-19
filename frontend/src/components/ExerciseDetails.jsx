@@ -31,10 +31,12 @@ const ExerciseDetails = () => {
           {(exercise.imageStartFile || exercise.imageEndFile) && (
             <div className='imgs-container'>
               <div className='img-container'>
+                <h5 className='imgs-title'>Initial Body Position</h5>
                 <img className='exercise-image' src={exercise.imageStartFile} alt='image start' />
               </div>
 
               <div className='img-container'>
+                <h5 className='imgs-title'>Final Body Position</h5>
                 <img className='exercise-image' src={exercise.imageEndFile} alt='imageEnd' />
               </div>
             </div>
@@ -42,76 +44,82 @@ const ExerciseDetails = () => {
 
           {exercise.description && (
             <div className='description-container'>
+              <h5 className='description-title'>Description</h5>
               <p className='description'>{exercise.description}</p>
             </div>
           )}
 
-          {(exercise.sets || exercise.reps || exercise.load || exercise.time &&
-          <div className='exercise-details-info'>
-            <div className='exercise-details-info-labels'>
-              {exercise.sets && (
-                <div className='p-label'>
-                  <p>
-                    <strong>Sets </strong>
-                  </p>
+          {(exercise.sets || exercise.reps || exercise.load || exercise.time) && (
+            <div className='exercise-details-info'>
+              <h5 className='exercise-details-info-title'>Exercise Parameters</h5>
+              <div className='parameters-container'>
+                <div className='exercise-details-info-labels'>
+                  {exercise.sets && (
+                    <div className='p-label'>
+                      <p>
+                        <strong>Sets </strong>
+                      </p>
+                    </div>
+                  )}
+                  {exercise.reps && (
+                    <div className='p-label'>
+                      <p>
+                        <strong>Reps </strong>
+                      </p>
+                    </div>
+                  )}
+                  {exercise.load && (
+                    <div className='p-label'>
+                      <p>
+                        <strong>Load</strong>
+                      </p>
+                    </div>
+                  )}
+                  {exercise.time && (
+                    <div className='p-label'>
+                      <p>
+                        <strong>Time </strong>
+                      </p>
+                    </div>
+                  )}
                 </div>
-              )}
-              {exercise.reps && (
-                <div className='p-label'>
-                  <p>
-                    <strong>Reps </strong>
-                  </p>
-                </div>
-              )}
-              {exercise.load && (
-                <div className='p-label'>
-                  <p>
-                    <strong>
-                      Load <span className='small-text'>(kg)</span>{' '}
-                    </strong>
-                  </p>
-                </div>
-              )}
-              {exercise.time && (
-                <div className='p-label'>
-                  <p>
-                    <strong>Time </strong>
-                  </p>
-                </div>
-              )}
-            </div>
 
-            <div className='exercise-details-info-values'>
-              {exercise.sets && (
-                <div className='p-value'>
-                  <p>{exercise.sets}</p>
+                <div className='exercise-details-info-values'>
+                  {exercise.sets && (
+                    <div className='p-value'>
+                      <p>{exercise.sets}</p>
+                    </div>
+                  )}
+                  {exercise.reps && (
+                    <div className='p-value'>
+                      <p>{exercise.reps}</p>
+                    </div>
+                  )}
+                  {exercise.load && (
+                    <div className='p-value'>
+                      <p>
+                        {exercise.load} <span className='load-unit'>kg</span>
+                      </p>
+                    </div>
+                  )}
+                  {exercise.time && (
+                    <div className='p-value time-value'>
+                      <p>
+                        {exercise.time}
+                        <span className='time-unit'>{exercise.timeUnit}</span>
+                      </p>
+                    </div>
+                  )}
                 </div>
-              )}
-              {exercise.reps && (
-                <div className='p-value'>
-                  <p>{exercise.reps}</p>
-                </div>
-              )}
-              {exercise.load && (
-                <div className='p-value'>
-                  <p>{exercise.load}</p>
-                </div>
-              )}
-              {exercise.time && (
-                <div className='p-value'>
-                  <p>
-                    {exercise.time} {exercise.timeUnit}
-                  </p>
-                </div>
-              )}
+              </div>
             </div>
-          </div>
           )}
 
           {exercise.video && (
             <div className='video-container'>
+              <h5 className="video-title">Video</h5>
+              <div className='video-wrapper'>
               <ReactPlayer
-                className='video'
                 url={exercise.video}
                 width='100%'
                 height='100%'
@@ -125,6 +133,7 @@ const ExerciseDetails = () => {
                   },
                 }}
               />
+            </div>
             </div>
           )}
         </div>
