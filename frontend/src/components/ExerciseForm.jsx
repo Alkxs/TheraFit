@@ -166,34 +166,36 @@ const ExerciseForm = () => {
             <div className='main-section'>
               <div className='choices'>
                 <h3>General Information</h3>
-                <div>
+                <div className="input-container">
                   <label>Title</label>
                   <input type='text' name='title' value={options.title} onChange={handleInputChange} className={emptyFields.includes('title') ? 'error' : ''} />
                 </div>
 
-                <div>
+                <div className="input-container">
                   <label>Exercise Sets</label>
                   <input type='number' name='sets' value={options.sets} onChange={handleInputChange} />
                 </div>
 
-                <div>
+                <div className="input-container">
                   <label>Exercise Reps</label>
                   <input type='number' name='reps' value={options.reps} onChange={handleInputChange} />
                 </div>
 
-                <div>
+                <div className="input-container">
                   <label>Exercise Load</label>
                   <input type='number' name='load' value={options.load} onChange={handleInputChange} placeholder='Insert number in Kg' />
                 </div>
 
-                <div>
+                <div className='input-container'>
                   <label>Exercise Time</label>
-                  <input type='number' name='time' value={options.time} onChange={handleInputChange} />
-                  <select name='timeUnit' value={options.timeUnit} onChange={handleInputChange}>
-                    <option value='seconds'>Seconds</option>
-                    <option value='minutes'>Minutes</option>
-                    <option value='hours'>Hours</option>
-                  </select>
+                  <div className='input-group'>
+                    <input type='number' name='time' value={options.time} onChange={handleInputChange} />
+                    <select name='timeUnit' value={options.timeUnit} onChange={handleInputChange}>
+                      <option value='seconds'>Seconds</option>
+                      <option value='minutes'>Minutes</option>
+                      <option value='hours'>Hours</option>
+                    </select>
+                  </div>
                 </div>
 
                 <h3>Images</h3>
@@ -229,13 +231,13 @@ const ExerciseForm = () => {
                 </div>
 
                 <h3>Exercise description</h3>
-                <div>
+                <div className="input-container">
                   <label>Exercise description</label>
                   <input type='text' name='description' value={options.description} onChange={handleInputChange} />
                 </div>
 
                 <h3>Exercise Video</h3>
-                <div>
+                <div className="input-container">
                   <label>Exercise Video</label>
                   <input type='text' name='video' value={options.video} onChange={handleInputChange} placeholder='Insert video URL here' />
                 </div>
