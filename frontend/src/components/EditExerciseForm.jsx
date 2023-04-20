@@ -246,8 +246,17 @@ const EditExerciseForm = () => {
                 <h3>Exercise description</h3>
                 <div className='input-container'>
                   <label>Exercise description</label>
-                  <input type='text' name='description' value={options.description} onChange={handleInputChange} />
+                  <textarea
+                    name='description'
+                    value={options.description}
+                    onChange={handleInputChange}
+                    rows='4'
+                    cols='40'
+                    placeholder='Enter your description here'
+                  >
+                  </textarea>
                 </div>
+               
 
                 <h3>Exercise Video</h3>
                 <div className='input-container'>

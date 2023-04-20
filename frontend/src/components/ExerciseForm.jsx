@@ -166,22 +166,22 @@ const ExerciseForm = () => {
             <div className='main-section'>
               <div className='choices'>
                 <h3>General Information</h3>
-                <div className="input-container">
+                <div className='input-container'>
                   <label>Title</label>
                   <input type='text' name='title' value={options.title} onChange={handleInputChange} className={emptyFields.includes('title') ? 'error' : ''} />
                 </div>
 
-                <div className="input-container">
+                <div className='input-container'>
                   <label>Exercise Sets</label>
                   <input type='number' name='sets' value={options.sets} onChange={handleInputChange} />
                 </div>
 
-                <div className="input-container">
+                <div className='input-container'>
                   <label>Exercise Reps</label>
                   <input type='number' name='reps' value={options.reps} onChange={handleInputChange} />
                 </div>
 
-                <div className="input-container">
+                <div className='input-container'>
                   <label>Exercise Load</label>
                   <input type='number' name='load' value={options.load} onChange={handleInputChange} placeholder='Insert number in Kg' />
                 </div>
@@ -231,13 +231,20 @@ const ExerciseForm = () => {
                 </div>
 
                 <h3>Exercise description</h3>
-                <div className="input-container">
+                <div className='input-container'>
                   <label>Exercise description</label>
-                  <input type='text' name='description' value={options.description} onChange={handleInputChange} />
+                  <textarea
+                    name='description'
+                    value={options.description}
+                    onChange={handleInputChange}
+                    rows='4'
+                    cols='40'
+                    placeholder='Enter your description here'
+                  ></textarea>
                 </div>
 
                 <h3>Exercise Video</h3>
-                <div className="">
+                <div className=''>
                   <label>Exercise Video</label>
                   <input type='text' name='video' value={options.video} onChange={handleInputChange} placeholder='Insert video URL here' />
                 </div>

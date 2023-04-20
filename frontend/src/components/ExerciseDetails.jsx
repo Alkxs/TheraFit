@@ -45,7 +45,7 @@ const ExerciseDetails = () => {
           {exercise.description && (
             <div className='description-container'>
               <h5 className='description-title'>Description</h5>
-              <p className='description'>{exercise.description}</p>
+              <pre className='description'>{exercise.description}</pre>
             </div>
           )}
 

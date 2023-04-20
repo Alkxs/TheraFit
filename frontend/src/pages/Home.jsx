@@ -35,7 +35,7 @@ const home = () => {
     <div className='home'>
       <h2 className='main-title'> Welcome {user.username}</h2>
       <div className='workouts'>
-        {workouts.length > 0 ? (
+        {workouts && workouts.length > 0 ? (
           workouts.map((workout) => <WorkoutComponent key={workout._id} workout={workout} />)
         ) : (
           <p className='no-workouts'>There are currently no workouts created by this user</p>
