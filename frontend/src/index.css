@@ -18,7 +18,10 @@ body {
   background: #f1f1f1;
   font-family: "Poppins";
   transition: all 0.5s;
+  min-width: 100vh;
+  min-height: 100vh;
   height: 100vh;
+  width: 100vw;
 }
 
 h3 {
@@ -129,6 +132,7 @@ h3 {
 /* navigation bar */
 header {
   background: #ffffff;
+  width: 100%;
 }
 
 header .container {
@@ -137,6 +141,9 @@ header .container {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 120rem;
 }
 header a {
   color: #000;
@@ -207,6 +214,7 @@ nav {
 .workout-card {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 1rem 2rem;
   margin: 4rem;
   border: 1px solid #ccc;
@@ -227,7 +235,6 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-top-left-radius: 0.5rem;
@@ -271,34 +278,9 @@ nav {
   color: var(--primary);
 }
 
-.workout-icon {
-  border: 1px solid black;
-  padding: .7rem;
-  color: black;
-  border-radius: 100%;
-  cursor: pointer;
-  transition: color 0.3s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.workout-icon:hover {
-  scale: 105%;
-  transition: all .3s;
-}
-
-.trash:hover {
-  background-color: var(--error);
-}
-
-.edit:hover {
-  background-color: #ffa748;
-}
-
 .workout-info {
   display: grid;
-  grid-template-columns: repeat(2, 12rem);
+  grid-template-columns: repeat(2, 10rem);
   gap: 1rem;
   align-items: center;
   justify-content: center;
@@ -310,6 +292,11 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
+}
+
+.workout-info-labels{
+  align-items: end;
 }
 
 
@@ -338,6 +325,31 @@ nav {
 
 .workout-btn:hover {
   background-color: #159873;
+}
+
+.workout-icon {
+  border: 1px solid black;
+  padding: .7rem;
+  color: black;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.workout-icon:hover {
+  scale: 105%;
+  transition: all .3s;
+}
+
+.trash:hover {
+  background-color: var(--error);
+}
+
+.edit:hover {
+  background-color: #ffa748;
 }
 
 /* Forms */
@@ -819,8 +831,21 @@ form.signup, form.login {
 
 /* Media Queries */
 @media (max-width: 500px) {
+
+  body {
+  overflow-x: hidden;
+  }
+
+  header {
+    width: 100%;
+  }
+
   .user {
     display: none;
+  }
+
+  .font-nav {
+    font-size: 1rem;
   }
 
   .logo img {
@@ -833,10 +858,23 @@ form.signup, form.login {
   text-align: center;
 }
 
+  .workouts {
+    width: 30rem;
+  }
+
+  .workout-img {
+    padding: 3rem;
+    height: 15rem;
+  }
+
+  .workout-title{
+    font-size: .5rem;
+  }
+
   .workout-info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    grid-template-columns: repeat(2, 8rem);
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 
   .workout-info-labels,
@@ -851,10 +889,6 @@ form.signup, form.login {
     margin-bottom: 0.5rem;
   }
 
-  .workout-info-labels p strong {
-    min-width: 100px;
-  }
-
   .workout-btn-container {
     align-items: center;
     justify-content: space-between;
@@ -863,21 +897,64 @@ form.signup, form.login {
     width: 100%;
   }
 
-  .workout-btn {
+  .primary-button {
     padding: .8rem .5rem;
     font-size: 0.8rem;
   }
 
   .workout-title h4 {
-  font-size: 1.8rem;
-}
-.workout-details {
+  font-size: 1.5rem;
+  }
+
+  .workout-details {
   height: 25rem;
   overflow-y: scroll;
-}
+  } 
+
+  .workout-icon {
+    border: none;
+  }
+  /* forms */
+
+  .card {
+    margin: 0 2rem;
+  }
+
+  /* exercise details */
+
+  .exercise-details-card h5 {
+    font-size: 1rem;
+  }
+
+  .exercise-image {
+    max-height: 10rem;
+  }
+
+  .imgs-container,
+  .description-container,
+  .video-container {
+    padding: 1.5rem;
+  }
+
+  .imgs-title,
+  .description-title,
+  .exercise-details-info-title,
+  .video-title {
+    padding: 1.5rem;
+  }
+
 }
 
-@media only screen and (max-width: 768px) {
+@media (max-width: 768px) {
+
+  .main-title {
+    font-size: 3rem;
+  }
+
+  .workouts {
+    width: 40rem;
+  }
+
   .workout-card {
     flex-direction: column;
     padding: 2rem;
@@ -910,5 +987,65 @@ form.signup, form.login {
   .workout-info {
     display: flex;
     justify-content: center;
+  }
+
+  .workout-title h4 {
+  font-size: 2rem;
+  }
+
+  /* Forms */
+
+  .card {
+    max-width: 450px;
+  }
+  
+  /* Exercises*/
+
+  .exercises-container,
+  .exercises {
+    max-width: 450px;
+  }
+
+  .drag-instructions {
+    font-size: 14px;
+  }
+
+  /* Exercise Details */
+
+  .imgs-container {
+    flex-direction: column;
+  }
+
+  .exercise-image {
+    max-height: 10rem;
+  }
+
+  .exercise-details-container .exercise-details-card h5 {
+    font-size: 1rem;
+  }
+
+  .exercise-details-card h5 {
+    font-size: .8rem !important;
+  }
+
+}
+
+@media (min-width: 769px) {
+
+  .workout-card {
+    margin: 4rem 6rem;
+  }
+
+  /* exercise details */
+  
+}
+
+@media (max-width: 1100px) {
+  .imgs-container {
+    flex-direction: column;
+  }
+
+  .exercise-details-card h5 {
+    font-size: 1.5rem;
   }
 }
