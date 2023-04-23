@@ -11,12 +11,9 @@ export const DemoUserContextProvider = ({ children }) => {
   const [isDemoUser, setIsDemoUser] = useState(false)
 
   useEffect(() => {
-
-    if (user) {
-      setIsDemoUser(true)
-    } else {
-      setIsDemoUser(false)
-    }
+    const isDemoUser = user && user.email === 'test@test.com'
+    setIsDemoUser(isDemoUser)
+    console.log(isDemoUser)
   }, [user])
 
   return <DemoUserContext.Provider value={{ isDemoUser, setIsDemoUser }}>{children}</DemoUserContext.Provider>

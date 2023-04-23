@@ -10,13 +10,13 @@ import { DemoUserContextProvider } from './context/DemoUserContext'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthContextProvider>
-      <WorkoutsContextProvider>
-        <ExercisesContextProvider>
-          <DemoUserContextProvider>
+      <DemoUserContextProvider>
+        <WorkoutsContextProvider>
+          <ExercisesContextProvider>
             <App />
-          </DemoUserContextProvider>
-        </ExercisesContextProvider>
-      </WorkoutsContextProvider>
+          </ExercisesContextProvider>
+        </WorkoutsContextProvider>
+      </DemoUserContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 )
