@@ -1,16 +1,15 @@
-// Hooks
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-// Custom Hooks
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
-// components
+import DemoUserContext from '../context/DemoUserContext'
 import WorkoutComponent from '../components/WorkoutComponent'
 
 const home = () => {
   const { workouts, dispatch } = useWorkoutsContext()
   const { user } = useAuthContext()
   const navigate = useNavigate()
+  const { isDemoUser } = useContext(DemoUserContext)
 
   useEffect(() => {
     const fetchWorkouts = async() => {
@@ -43,7 +42,17 @@ const home = () => {
       </div>
 
       <div className='button-container'>
-        <button className='secondary-button' onClick={() => navigate(`/create-workout`)}>
+        <button
+          className='secondary-button'
+          onClick={
+            !isDemoUser
+              ? () => navigate(`/create-workout`)
+              : () =>
+                  alert(
+                    'Demo mode active: The current features are not available for use. To access full functionality, please create a new account and log in.'
+                  )
+          }
+        >
           Create New Workout
         </button>
       </div>

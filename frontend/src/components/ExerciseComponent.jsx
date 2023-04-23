@@ -1,6 +1,8 @@
 import { useExercisesContext } from '../hooks/useExercisesContext'
 import { FaTrashAlt, FaEdit, FaGripVertical } from 'react-icons/fa'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { useContext } from 'react'
+import DemoUserContext from '../context/DemoUserContext'
 import { useNavigate } from 'react-router-dom'
 import { useDrag, useDrop } from 'react-dnd'
 
@@ -13,6 +15,7 @@ const exerciseComponent = ({ exercise, workoutId, index, moveExercise}) => {
   const { dispatch } = useExercisesContext()
   const { user } = useAuthContext()
   const navigate = useNavigate()
+  const { isDemoUser, setIsDemoUser } = useContext(DemoUserContext)
 
   const handleDelete = async () => {
     if (!user) {
@@ -81,7 +84,17 @@ const exerciseComponent = ({ exercise, workoutId, index, moveExercise}) => {
           <h4>{exercise.title}</h4>
         </div>
 
-        <span className='exercise-icon exercise-trash' onClick={handleDelete}>
+        <span
+          className='exercise-icon exercise-trash'
+          onClick={
+            !isDemoUser
+              ? handleDelete
+              : () =>
+                  alert(
+                    'Demo mode active: The current features are not available for use. To access full functionality, please create a new account and log in.'
+                  )
+          }
+        >
           <FaTrashAlt size={20} />
         </span>
       </div>
@@ -158,7 +171,17 @@ const exerciseComponent = ({ exercise, workoutId, index, moveExercise}) => {
         </button>
 
         <span className='exercise-icon exercise-edit'>
-          <FaEdit size={20} onClick={handleEdit} />
+          <FaEdit
+            size={20}
+            onClick={
+              !isDemoUser
+                ? handleEdit
+                : () =>
+                    alert(
+                      'Demo mode active: The current features are not available for use. To access full functionality, please create a new account and log in.'
+                    )
+            }
+          />
         </span>
       </div>
     </div>

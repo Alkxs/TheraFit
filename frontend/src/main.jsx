@@ -5,13 +5,16 @@ import './index.css'
 import { AuthContextProvider } from './context/AuthContext'
 import { WorkoutsContextProvider } from './context/WorkoutsContext'
 import { ExercisesContextProvider } from './context/ExercisesContext'
+import { DemoUserContextProvider } from './context/DemoUserContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthContextProvider>
       <WorkoutsContextProvider>
         <ExercisesContextProvider>
-          <App />
+          <DemoUserContextProvider>
+            <App />
+          </DemoUserContextProvider>
         </ExercisesContextProvider>
       </WorkoutsContextProvider>
     </AuthContextProvider>

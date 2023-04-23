@@ -1,14 +1,12 @@
-// Hooks
-import { useEffect } from 'react'
+
+import { useEffect, useContext } from 'react'
+import DemoUserContext from '../context/DemoUserContext'
 import { useNavigate, useParams } from 'react-router-dom'
-// Custom Hooks
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
 import { useExercisesContext } from '../hooks/useExercisesContext'
 import { useAuthContext } from '../hooks/useAuthContext'
-//components
 import ExerciseComponent from '../components/ExerciseComponent'
 import { FaArrowLeft } from 'react-icons/fa'
-
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
@@ -18,6 +16,7 @@ const WorkoutPage = () => {
   const { exercises, dispatch } = useExercisesContext()
   const { user } = useAuthContext()
   const navigate = useNavigate()
+  const { isDemoUser, setIsDemoUser } = useContext(DemoUserContext)
 
   const workout = workouts.find((w) => w._id === workoutId)
 
@@ -78,7 +77,17 @@ const WorkoutPage = () => {
         )}
 
         <div className='button-container'>
-          <button className='secondary-button' onClick={() => navigate(`/${workoutId}/exercises/create-exercise`)}>
+          <button
+            className='secondary-button'
+            onClick={
+              !isDemoUser
+                ? () => navigate(`/${workoutId}/exercises/create-exercise`)
+                : () =>
+                    alert(
+                      'Demo mode active: The current features are not available for use. To access full functionality, please create a new account and log in.'
+                    )
+            }
+          >
             Create New Exercise
           </button>
         </div>

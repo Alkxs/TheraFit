@@ -1,6 +1,8 @@
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
 import { FaTrashAlt, FaEdit } from 'react-icons/fa'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { useContext } from 'react'
+import DemoUserContext from '../context/DemoUserContext'
 import { format, formatDistanceToNow } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
 import { workoutImage } from '../data/data'
@@ -10,6 +12,7 @@ const WorkoutComponent = ({ workout }) => {
   const { dispatch } = useWorkoutsContext()
   const { user } = useAuthContext()
   const navigate = useNavigate()
+  const { isDemoUser, setIsDemoUser } = useContext(DemoUserContext)
 
   const handleClickDelete = async () => {
     if (!user) {
@@ -104,7 +107,17 @@ const WorkoutComponent = ({ workout }) => {
           </div>
 
           <div className='workout-btn-container'>
-            <span className='workout-icon trash' onClick={handleClickDelete}>
+            <span
+              className='workout-icon trash'
+              onClick={
+                !isDemoUser
+                  ? handleClickDelete
+                  : () =>
+                      alert(
+                        'Demo mode active: The current features are not available for use. To access full functionality, please create a new account and log in.'
+                      )
+              }
+            >
               <FaTrashAlt size={20} />
             </span>
 
@@ -113,7 +126,17 @@ const WorkoutComponent = ({ workout }) => {
             </button>
 
             <span className='workout-icon edit'>
-              <FaEdit onClick={handleClickEdit} size={20} />
+              <FaEdit
+                onClick={
+                  !isDemoUser
+                    ? handleClickEdit
+                    : () =>
+                        alert(
+                          'Demo mode active: The current features are not available for use. To access full functionality, please create a new account and log in.'
+                        )
+                }
+                size={20}
+              />
             </span>
           </div>
         </div>
