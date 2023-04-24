@@ -25,7 +25,7 @@ const WorkoutComponent = ({ workout }) => {
         return
       }
 
-    const deleteExercisesRes = await fetch(`http://localhost:3000/${workoutId}/exercises`, {
+    const deleteExercisesRes = await fetch(`https://therafit.onrender.com/${workoutId}/exercises`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -37,12 +37,12 @@ const WorkoutComponent = ({ workout }) => {
     const deletedExercises = await deleteExercisesRes.json()
     dispatch({ type: 'DELETE_EXERCISES', payload: deletedExercises })
 
-    const deleteWorkoutRes = await fetch(`http://localhost:3000/${workoutId}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      })
+    const deleteWorkoutRes = await fetch(`https://therafit.onrender.com/${workoutId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    })
 
       if (!deleteWorkoutRes.ok) {
         console.log('Workout could not be deleted')

@@ -24,7 +24,7 @@ const WorkoutPage = () => {
    
     const fetchExercises = async () => {
 
-      const res = await fetch(`http://localhost:3000/${workoutId}/exercises`, {
+      const res = await fetch(`https://therafit.onrender.com/${workoutId}/exercises`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

@@ -28,7 +28,7 @@ const exerciseComponent = ({ exercise, workoutId, index, moveExercise}) => {
       return
     }
 
-    const res = await fetch(`http://localhost:3000/${workoutId}/exercises/${exerciseId}`, {
+    const res = await fetch(`https://therafit.onrender.com/${workoutId}/exercises/${exerciseId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${user.token}`,

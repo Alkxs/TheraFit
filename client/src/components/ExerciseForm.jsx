@@ -105,7 +105,7 @@ const ExerciseForm = () => {
     }
     
 
-    const res = await fetch(`http://localhost:3000/${workoutId}/exercises`, {
+    const res = await fetch(`https://therafit.onrender.com/${workoutId}/exercises`, {
       method: 'POST',
       body: formData,
       headers: {

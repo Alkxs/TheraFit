@@ -13,10 +13,10 @@ const home = () => {
 
   useEffect(() => {
     const fetchWorkouts = async() => {
-      const res = await fetch('http://localhost:3000/', {
+      const res = await fetch('https://therafit.onrender.com/', {
         headers: {
-          'Authorization': `Bearer ${user.token}`
-        }
+          Authorization: `Bearer ${user.token}`,
+        },
       })
       const data = await res.json()
       

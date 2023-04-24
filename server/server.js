@@ -11,7 +11,9 @@ const workoutRoutes = require('./routes/workouts')
 app.use(express.json())
 //app.use(express.urlencoded({extended: true}))
 
-app.use(cors())
+app.use(cors({
+  origin: 'https://therafit.netlify.app'
+}))
 
 app.use((req, res, next) => {
   console.log(req.path, req.method)

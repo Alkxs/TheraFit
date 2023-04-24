@@ -135,12 +135,12 @@ const EditExerciseForm = () => {
       formData.append('imageEndFile', imageEndFile)
     }
 
-    const res = await fetch(`http://localhost:3000/${workoutId}/exercises/${exerciseId}/edit`, {
+    const res = await fetch(`https://therafit.onrender.com/${workoutId}/exercises/${exerciseId}/edit`, {
       method: 'PATCH',
       body: formData,
       headers: {
         Authorization: `Bearer ${user.token}`,
-      }
+      },
     })
     const data = await res.json()
 

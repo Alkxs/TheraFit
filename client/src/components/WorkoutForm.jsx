@@ -122,13 +122,13 @@ const CreateWorkout = () => {
 
     const workout = { title, startDate, endDate, frequency, type }
 
-    const res = await fetch('http://localhost:3000/', {
+    const res = await fetch('https://therafit.onrender.com/', {
       method: 'POST',
       body: JSON.stringify(workout),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.token}`
-      }
+        Authorization: `Bearer ${user.token}`,
+      },
     })
     const data = await res.json()
 
