@@ -25,10 +25,10 @@ app.use(
   })
 )
 
-app.use((req, res, next) => {
-  console.log(req.path, req.method)
-  next()
+app.use((error, req, res, next) => {
+  res.status(500).json({ error: error.message })
 })
+
 
 //routes
 app.use('/', workoutRoutes)

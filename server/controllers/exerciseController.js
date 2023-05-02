@@ -19,62 +19,62 @@ const getExercises = async (req, res) => {
 }
 
 // POST new exercise
-const createExercise = async (req, res) => {
-   const { title, sets, reps, load, time, timeUnit, imageStartLink, imageEndLink, description, video, workoutId } = req.body
+const createExercise = async (req, res, next) => {
+  try {
+    const { title, sets, reps, load, time, timeUnit, imageStartLink, imageEndLink, description, video, workoutId } = req.body
 
-   let imageStartFile, imageEndFile
-
+    let imageStartFile, imageEndFile
     let imageStartPublicId, imageEndPublicId
 
-   if (req.files.imageStartFile) {
-     imageStartFile = req.files.imageStartFile[0].path
-     imageStartPublicId = req.files.imageStartFile[0].filename
-   } else {
-     imageStartFile = imageStartLink
-   }
+    if (req.files.imageStartFile) {
+      imageStartFile = req.files.imageStartFile[0].path
+      imageStartPublicId = req.files.imageStartFile[0].filename
+    } else {
+      imageStartFile = imageStartLink
+    }
 
-   if (req.files.imageEndFile) {
-     imageEndFile = req.files.imageEndFile[0].path
-     imageEndPublicId = req.files.imageEndFile[0].filename
-   } else {
-     imageEndFile = imageEndLink
-   }
+    if (req.files.imageEndFile) {
+      imageEndFile = req.files.imageEndFile[0].path
+      imageEndPublicId = req.files.imageEndFile[0].filename
+    } else {
+      imageEndFile = imageEndLink
+    }
 
-  let emptyFields = []
+    let emptyFields = []
 
-  if(!title) {
-    emptyFields.push('title')
-  }
-  
-  if (emptyFields.length > 0) {
-    return res.status(400).json({ error: 'Please fill in the title at least', emptyFields })
-  }
+    if (!title) {
+      emptyFields.push('title')
+    }
 
-// add doc to db
-   try {
-    const user_id = req.user._id 
+    if (emptyFields.length > 0) {
+      return res.status(400).json({ error: 'Please fill in the title at least', emptyFields })
+    }
 
-     const exercise = await Exercise.create({
-       title,
-       sets,
-       reps,
-       load,
-       time,
-       timeUnit,
-       imageStartFile,
-       imageEndFile,
-       imageStartPublicId,
-       imageEndPublicId,
-       description,
-       video,
-       workoutId,
-       user_id,
-     })
-     res.status(200).send(exercise)
-   } catch (error) {
+    // add doc to db
+    const user_id = req.user._id
+
+    const exercise = await Exercise.create({
+      title,
+      sets,
+      reps,
+      load,
+      time,
+      timeUnit,
+      imageStartFile,
+      imageEndFile,
+      imageStartPublicId,
+      imageEndPublicId,
+      description,
+      video,
+      workoutId,
+      user_id,
+    })
+
+    res.status(200).send(exercise)
+  } catch (error) {
     console.error('Error in createExercise:', error)
-     res.status(400).json({ error: error.message })
-   }
+    next(error) // Pass the error to the error handler
+  }
 }
 
 // DELETE all exercises
