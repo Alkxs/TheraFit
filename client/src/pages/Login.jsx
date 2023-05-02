@@ -45,7 +45,7 @@ const Login = () => {
               </div>
 
               <div className='button-container'>
-                <button disabled={isLoading} className='primary-button login'>
+                <button disabled={loading} className='primary-button login'>
                   Log in
                 </button>
               </div>
