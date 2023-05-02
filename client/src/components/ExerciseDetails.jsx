@@ -30,15 +30,19 @@ const ExerciseDetails = () => {
 
           {(exercise.imageStartFile || exercise.imageEndFile) && (
             <div className='imgs-container'>
-              <div className='img-container'>
-                <h5 className='imgs-title'>Initial Body Position</h5>
-                <img className='exercise-image' src={exercise.imageStartFile} alt='image start' />
-              </div>
+              {exercise.imageStartFile && (
+                <div className='img-container'>
+                  <h5 className='imgs-title'>Initial Body Position</h5>
+                  <img className='exercise-image' src={exercise.imageStartFile} alt='image start' />
+                </div>
+              )}
 
-              <div className='img-container'>
-                <h5 className='imgs-title'>Final Body Position</h5>
-                <img className='exercise-image' src={exercise.imageEndFile} alt='imageEnd' />
-              </div>
+              {exercise.imageEndFile && (
+                <div className='img-container'>
+                  <h5 className='imgs-title'>Final Body Position</h5>
+                  <img className='exercise-image' src={exercise.imageEndFile} alt='imageEnd' />
+                </div>
+              )}
             </div>
           )}
 
@@ -117,23 +121,23 @@ const ExerciseDetails = () => {
 
           {exercise.video && (
             <div className='video-container'>
-              <h5 className="video-title">Video</h5>
+              <h5 className='video-title'>Video</h5>
               <div className='video-wrapper'>
-              <ReactPlayer
-                url={exercise.video}
-                width='100%'
-                height='100%'
-                controls
-                config={{
-                  youtube: {
-                    playerVars: { showinfo: 1 },
-                  },
-                  vimeo: {
-                    playerOptions: { controls: 1 },
-                  },
-                }}
-              />
-            </div>
+                <ReactPlayer
+                  url={exercise.video}
+                  width='100%'
+                  height='100%'
+                  controls
+                  config={{
+                    youtube: {
+                      playerVars: { showinfo: 1 },
+                    },
+                    vimeo: {
+                      playerOptions: { controls: 1 },
+                    },
+                  }}
+                />
+              </div>
             </div>
           )}
         </div>
