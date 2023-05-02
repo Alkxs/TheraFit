@@ -17,7 +17,7 @@ const uploadFile = upload
 router.get('/', requireAuth, getExercises)
 
 //POST a new exercise
-router.post('/', requireAuth, uploadFile.fields([{ name: 'imageStartFile' }, { name: 'imageEndFile' }]), createExercise) 
+router.post('/', requireAuth, uploadFile.fields([{ name: 'imageStartFile', maxCount: 1 }, { name: 'imageEndFile', maxCount: 1 }]), createExercise) 
 
 //DELETE all exercises (of a specific workout)
 router.delete('/', requireAuth, deleteExercises)

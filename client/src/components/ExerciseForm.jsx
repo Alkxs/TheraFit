@@ -117,9 +117,9 @@ const ExerciseForm = () => {
     const data = await res.json()
 
     if (!res.ok) {
+      setLoading(false)
       setError(data.error)
       setEmptyFields(data.emptyFields || [])
-      setLoading(false)
     }
     if (res.ok) {
       setLoading(false)

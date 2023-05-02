@@ -15,7 +15,7 @@ const Signup = () => {
 
   return (
     <>
-      {!loading && (
+      {loading && (
         <div className='loader-container'>
           <div className='loader'></div>
           <p className='loader-text'>
