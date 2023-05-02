@@ -72,6 +72,7 @@ const createExercise = async (req, res) => {
      })
      res.status(200).send(exercise)
    } catch (error) {
+    console.error('Error in createExercise:', error)
      res.status(400).json({ error: error.message })
    }
 }

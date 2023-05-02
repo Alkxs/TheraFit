@@ -106,7 +106,8 @@ const ExerciseForm = () => {
     }
     
 
-    const res = await fetch(`${apiUrl}/${workoutId}/exercises`, {
+    try {
+      const res = await fetch(`${apiUrl}/${workoutId}/exercises`, {
       method: 'POST',
       body: formData,
       headers: {
@@ -143,6 +144,13 @@ const ExerciseForm = () => {
       dispatch({ type: 'CREATE_EXERCISE', payload: {...data, timeUnit} })
 
       navigate(`/${workoutId}/exercises`)
+    }
+    } catch (error) {
+      console.error(error);
+    setError("An unexpected error occurred. Please try again later.");
+  } finally {
+    setLoading(false);
+  }
     }
   }
 
