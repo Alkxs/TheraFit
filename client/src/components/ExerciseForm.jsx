@@ -146,11 +146,9 @@ const ExerciseForm = () => {
       navigate(`/${workoutId}/exercises`)
     }
     } catch (error) {
-      console.error(error);
-    setError("An unexpected error occurred. Please try again later.");
+    setError('An unexpected error occurred, please try again later.')
   } finally {
-    setLoading(false);
-  }
+    setLoading(false)
     }
   }
 
