@@ -107,7 +107,6 @@ const ExerciseForm = () => {
     
 
     try {
-      console.log(`${apiUrl}/${workoutId}/exercises`)
       const res = await fetch(`${apiUrl}/${workoutId}/exercises`, {
       method: 'POST',
       body: formData,
@@ -117,7 +116,6 @@ const ExerciseForm = () => {
     })
   
     const data = await res.json()
-    console.log(data)
     if (!res.ok) {
       setLoading(false)
       setError(data.error)
