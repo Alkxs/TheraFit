@@ -29,10 +29,10 @@ app.use(
   })
 )
 
-app.use((req, res, next) => {
-  console.log(req.path, req.method)
-  next()
-})
+// app.use((req, res, next) => {
+//   console.log(req.path, req.method)
+//   next()
+// })
 
 //routes
 app.use('/', workoutRoutes)
@@ -40,6 +40,11 @@ app.use('/api/user', userRoutes)
 
 // connect to DB
 connectDB()
+
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
 
 //listen for requests
  app.listen(process.env.PORT || 3000, () => {
