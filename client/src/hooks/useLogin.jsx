@@ -4,11 +4,11 @@ import { apiUrl } from '../api.js'
 
 export const useLogin = () => {
   const [error, setError] = useState(null)
-  const [isLoading, setIsLoading] = useState(null)
+  const [loading, setLoading] = useState(null)
   const { dispatch } = useAuthContext()
 
   const login = async (username, email, password) => {
-    setIsLoading(true)
+    setLoading(true)
     setError(null)
     console.log(apiUrl)
     const res = await fetch(`${apiUrl}/api/user/login`, {
@@ -20,7 +20,7 @@ export const useLogin = () => {
     console.log(data)
 
     if (!res.ok) {
-      setIsLoading(false)
+      setLoading(false)
       setError(data.error)
     }
     if (res.ok) {
@@ -30,9 +30,9 @@ export const useLogin = () => {
       //update the auth context
       dispatch({ type: 'LOGIN', payload: data })
 
-      setIsLoading(false)
+      setLoading(false)
     }
   }
 
-  return { login, isLoading, error }
+  return { login, loading, error }
 }

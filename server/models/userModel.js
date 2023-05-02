@@ -25,11 +25,11 @@ userSchema.statics.signup = async function(username, email, password){
     throw Error('All fields must be filled')
    }
    if(!validator.isEmail(email)) {
-    throw Error('Invalid email format')
+    throw Error('Please enter a valid email address in the format: yourname@example.com')
    }
    if(!validator.isStrongPassword(password)) {
     throw Error(
-      'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, two numbes, one special character.'
+      'Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.'
     )
    }
 

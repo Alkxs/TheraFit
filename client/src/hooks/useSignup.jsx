@@ -4,11 +4,11 @@ import { apiUrl } from '../api'
 
 export const useSignup = () => {
   const [error, setError] = useState(null)
-  const [isLoading, setIsLoading] = useState(null)
+  const [loading, setLoading] = useState(false)
   const { dispatch } = useAuthContext()
 
   const signup = async (username, email, password) => {
-    setIsLoading(true)
+    setLoading(true)
     setError(null)
 
     const res = await fetch(`${apiUrl}/api/user/signup`, {
@@ -19,7 +19,7 @@ export const useSignup = () => {
     const data = await res.json()
 
     if (!res.ok) {
-      setIsLoading(false)
+      setLoading(false)
       setError(data.error)
     }
     if (res.ok) {
@@ -29,9 +29,9 @@ export const useSignup = () => {
       //update the auth context
       dispatch({type: 'LOGIN', payload: data})
 
-      setIsLoading(false)
+      setLoading(false)
     }
   }
 
-  return { signup, isLoading, error }
+  return { signup, loading, error }
 }
