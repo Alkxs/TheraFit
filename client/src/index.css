@@ -282,7 +282,7 @@ nav {
 
 .workout-info {
   display: grid;
-  grid-template-columns: repeat(2, 10rem);
+  grid-template-columns: repeat(2, 12rem);
   gap: 1rem;
   align-items: center;
   justify-content: center;
@@ -996,6 +996,7 @@ form.signup, form.login {
   .workout-info {
     display: flex;
     justify-content: center;
+    align-items: center;
   }
 
   .workout-title h4 {
