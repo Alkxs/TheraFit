@@ -3,6 +3,7 @@ import { useExercisesContext } from '../hooks/useExercisesContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FaArrowLeft } from 'react-icons/fa'
+import { apiUrl } from '../api.js'
 
 const EditExerciseForm = () => {
 
@@ -135,7 +136,7 @@ const EditExerciseForm = () => {
       formData.append('imageEndFile', imageEndFile)
     }
 
-    const res = await fetch(`https://therafit.onrender.com/${workoutId}/exercises/${exerciseId}/edit`, {
+    const res = await fetch(`${apiUrl}/${workoutId}/exercises/${exerciseId}/edit`, {
       method: 'PATCH',
       body: formData,
       headers: {

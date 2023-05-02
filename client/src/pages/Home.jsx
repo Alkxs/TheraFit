@@ -4,6 +4,7 @@ import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import DemoUserContext from '../context/DemoUserContext'
 import WorkoutComponent from '../components/WorkoutComponent'
+import { apiUrl } from '../api.js'
 
 const home = () => {
   const { workouts, dispatch } = useWorkoutsContext()
@@ -13,7 +14,7 @@ const home = () => {
 
   useEffect(() => {
     const fetchWorkouts = async() => {
-      const res = await fetch('https://therafit.onrender.com/', {
+      const res = await fetch(`${apiUrl}/`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

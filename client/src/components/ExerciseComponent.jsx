@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import DemoUserContext from '../context/DemoUserContext'
 import { useNavigate } from 'react-router-dom'
 import { useDrag, useDrop } from 'react-dnd'
+import { apiUrl } from '../api.js'
 
 const itemTypes = {
   EXERCISE: 'exercise',
@@ -28,7 +29,7 @@ const exerciseComponent = ({ exercise, workoutId, index, moveExercise}) => {
       return
     }
 
-    const res = await fetch(`https://therafit.onrender.com/${workoutId}/exercises/${exerciseId}`, {
+    const res = await fetch(`${apiUrl}/${workoutId}/exercises/${exerciseId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${user.token}`,

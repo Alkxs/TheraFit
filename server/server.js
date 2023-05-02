@@ -1,19 +1,29 @@
 const express = require('express')
-const app = express()
 const mongoose = require('mongoose')
 const cors = require('cors')
 const connectDB = require('./config/database')
-require('dotenv').config({path: './config/.env'})
 const userRoutes = require('./routes/user')
 const workoutRoutes = require('./routes/workouts')
+require('dotenv').config({path: './config/.env'})
+const app = express()
+
+const frontendUrl = process.env.NODE_ENV === 'production' ? 'https://therafit.netlify.app' : 'http://localhost:5173'
 
 //middleware
 app.use(express.json())
-//app.use(express.urlencoded({extended: true}))
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      const allowedOrigins = [frontendUrl]
 
-app.use(cors({
-  origin: 'https://therafit.netlify.app'
-}))
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
+  })
+)
 
 app.use((req, res, next) => {
   console.log(req.path, req.method)
@@ -28,7 +38,7 @@ app.use('/api/user', userRoutes)
 connectDB()
 
 //listen for requests
- app.listen(process.env.PORT, () => {
+ app.listen(process.env.PORT || 3000, () => {
   console.log(`server is running on port ${process.env.PORT}, you better catch it!`)
  })
  

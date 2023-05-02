@@ -4,6 +4,7 @@ import { useExercisesContext } from '../hooks/useExercisesContext'
 import { useAuthContext } from "../hooks/useAuthContext"
 import { useParams } from 'react-router-dom'
 import { FaArrowLeft } from "react-icons/fa"
+import { apiUrl } from '../api.js'
 
 const ExerciseForm = () => {
   const { workoutId } = useParams()
@@ -105,7 +106,7 @@ const ExerciseForm = () => {
     }
     
 
-    const res = await fetch(`https://therafit.onrender.com/${workoutId}/exercises`, {
+    const res = await fetch(`${apiUrl}/${workoutId}/exercises`, {
       method: 'POST',
       body: formData,
       headers: {

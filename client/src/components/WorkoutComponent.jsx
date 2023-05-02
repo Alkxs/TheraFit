@@ -6,6 +6,7 @@ import DemoUserContext from '../context/DemoUserContext'
 import { format, formatDistanceToNow } from 'date-fns'
 import { useNavigate } from 'react-router-dom'
 import { workoutImage } from '../data/data'
+import { apiUrl } from '../api'
 
 const WorkoutComponent = ({ workout }) => {
   const { _id: workoutId } = workout
@@ -25,7 +26,7 @@ const WorkoutComponent = ({ workout }) => {
         return
       }
 
-    const deleteExercisesRes = await fetch(`https://therafit.onrender.com/${workoutId}/exercises`, {
+    const deleteExercisesRes = await fetch(`${apiUrl}/${workoutId}/exercises`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -37,7 +38,7 @@ const WorkoutComponent = ({ workout }) => {
     const deletedExercises = await deleteExercisesRes.json()
     dispatch({ type: 'DELETE_EXERCISES', payload: deletedExercises })
 
-    const deleteWorkoutRes = await fetch(`https://therafit.onrender.com/${workoutId}`, {
+    const deleteWorkoutRes = await fetch(`${apiUrl}/${workoutId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${user.token}`,

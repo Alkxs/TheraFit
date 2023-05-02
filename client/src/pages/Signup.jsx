@@ -32,7 +32,12 @@ const Signup = () => {
 
             <div>
               <label>Password:</label>
-              <input type='password' autoComplete='current-password' onChange={(e) => setPassword(e.target.value)} value={password} />
+              <input
+                type='password'
+                autoComplete='current-password'
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+              />
             </div>
 
             <div className='button-container'>

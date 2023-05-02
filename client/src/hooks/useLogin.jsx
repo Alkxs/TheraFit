@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
+import { apiUrl } from '../api.js'
 
 export const useLogin = () => {
   const [error, setError] = useState(null)
@@ -9,8 +10,8 @@ export const useLogin = () => {
   const login = async (username, email, password) => {
     setIsLoading(true)
     setError(null)
-
-    const res = await fetch('https://therafit.onrender.com/api/user/login', {
+    console.log(apiUrl)
+    const res = await fetch(`${apiUrl}/api/user/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, email, password }),

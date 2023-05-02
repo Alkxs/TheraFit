@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import Select from 'react-select'
 import { FaArrowLeft } from 'react-icons/fa'
+import { apiUrl } from '../api.js'
 
  const EditWorkoutForm = () => {
   const { workoutId } = useParams()
@@ -151,7 +152,7 @@ import { FaArrowLeft } from 'react-icons/fa'
 
     const workout = { title, startDate, endDate, frequency, type }
 
-    const res = await fetch(`https://therafit.onrender.com/${workoutId}/edit`, {
+    const res = await fetch(`${apiUrl}/${workoutId}/edit`, {
       method: 'PATCH',
       body: JSON.stringify(workout),
       headers: {

@@ -9,6 +9,7 @@ import ExerciseComponent from '../components/ExerciseComponent'
 import { FaArrowLeft } from 'react-icons/fa'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import { apiUrl } from '../api.js'
 
 const WorkoutPage = () => {
   const { workoutId } = useParams()
@@ -24,7 +25,7 @@ const WorkoutPage = () => {
    
     const fetchExercises = async () => {
 
-      const res = await fetch(`https://therafit.onrender.com/${workoutId}/exercises`, {
+      const res = await fetch(`${apiUrl}/${workoutId}/exercises`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

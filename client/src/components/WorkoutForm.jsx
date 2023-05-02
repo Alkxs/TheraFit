@@ -4,6 +4,7 @@ import Select from 'react-select'
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { FaArrowLeft } from "react-icons/fa"
+import { apiUrl } from '../api.js'
 
 const CreateWorkout = () => {
   const { dispatch } = useWorkoutsContext()
@@ -122,7 +123,7 @@ const CreateWorkout = () => {
 
     const workout = { title, startDate, endDate, frequency, type }
 
-    const res = await fetch('https://therafit.onrender.com/', {
+    const res = await fetch(`${apiUrl}/`, {
       method: 'POST',
       body: JSON.stringify(workout),
       headers: {

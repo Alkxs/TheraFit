@@ -13,7 +13,6 @@ export const DemoUserContextProvider = ({ children }) => {
   useEffect(() => {
     const isDemoUser = user && user.email === 'test@test.com'
     setIsDemoUser(isDemoUser)
-    console.log(isDemoUser)
   }, [user])
 
   return <DemoUserContext.Provider value={{ isDemoUser, setIsDemoUser }}>{children}</DemoUserContext.Provider>
