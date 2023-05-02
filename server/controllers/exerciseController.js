@@ -29,6 +29,8 @@ const createExercise = async (req, res, next) => {
     if (req.files.imageStartFile) {
       imageStartFile = req.files.imageStartFile[0].path
       imageStartPublicId = req.files.imageStartFile[0].filename
+      console.log('Image start file:', imageStartFile)
+      console.log('Image start public ID:', imageStartPublicId)
     } else {
       imageStartFile = imageStartLink
     }
@@ -36,6 +38,8 @@ const createExercise = async (req, res, next) => {
     if (req.files.imageEndFile) {
       imageEndFile = req.files.imageEndFile[0].path
       imageEndPublicId = req.files.imageEndFile[0].filename
+    console.log('Image end file:', imageEndFile)
+    console.log('Image end public ID:', imageEndPublicId)
     } else {
       imageEndFile = imageEndLink
     }
