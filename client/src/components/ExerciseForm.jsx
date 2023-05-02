@@ -162,7 +162,7 @@ const ExerciseForm = () => {
         {loading && (
           <div className='loader-container'>
             <div className='loader'></div>
-            <p className='loader-text'>Creating exercise, please wait...</p>
+            <p className='loader-text'>Creating exercise, this may take a few moments. Thank you for your patience!</p>
           </div>
         )}
 

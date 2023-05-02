@@ -171,7 +171,7 @@ const EditExerciseForm = () => {
         {loading && (
           <div className='loader-container'>
             <div className='loader'></div>
-            <p className='loader-text'>Updating exercise, please wait...</p>
+            <p className='loader-text'>Updating exercise, this may take a few moments. Thank you for your patience!</p>
           </div>
         )}
 
@@ -254,10 +254,8 @@ const EditExerciseForm = () => {
                     rows='4'
                     cols='40'
                     placeholder='Enter your description here'
-                  >
-                  </textarea>
+                  ></textarea>
                 </div>
-               
 
                 <h3>Exercise Video</h3>
                 <div className='input-container'>
