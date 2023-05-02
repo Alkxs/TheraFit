@@ -48,6 +48,6 @@ app.use((err, req, res, next) => {
 
 //listen for requests
  app.listen(process.env.PORT || 3000, () => {
-  console.log(`server is running on port ${process.env.PORT}, you better catch it!`)
+  console.log(`server is running, you better catch it!`)
  })
  
