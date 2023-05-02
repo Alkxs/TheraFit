@@ -5,9 +5,13 @@ const connectDB = require('./config/database')
 const userRoutes = require('./routes/user')
 const workoutRoutes = require('./routes/workouts')
 require('dotenv').config({path: './config/.env'})
+const morgan = require('morgan')
 const app = express()
 
+
 const frontendUrl = process.env.NODE_ENV === 'production' ? 'https://therafit.netlify.app' : 'http://localhost:5173'
+
+app.use(morgan('dev'))
 
 //middleware
 app.use(express.json())
@@ -25,10 +29,10 @@ app.use(
   })
 )
 
-app.use((error, req, res, next) => {
-  res.status(500).json({ error: error.message })
+app.use((req, res, next) => {
+  console.log(req.path, req.method)
+  next()
 })
-
 
 //routes
 app.use('/', workoutRoutes)
