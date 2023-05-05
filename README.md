@@ -283,4 +283,4 @@ Remember to always keep your environment variables and sensitive information sec
 
 ### License
 
-TheraFit is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+TheraFit is licensed under the MIT License. See the [LICENSE](LICENSE.txt) file for details.
