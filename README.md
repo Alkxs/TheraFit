@@ -267,8 +267,14 @@ CLOUDINARY_API_SECRET=<your_cloudinary_api_secret>
 
 Replace the placeholders with your own values.
 
+6. Demo user: To showcase the functionality of TheraFit, a demo user has been created. This user allows you to view the app's features but does not provide access to full functionality. The demo user credentials are as follows:
 
-6. Run the application: In the server directory, run the following command to start both the client and server concurrently in development mode:
+Username: test
+Email: test@test.com
+Password: Test123.
+
+
+7. Run the application: In the server directory, run the following command to start both the client and server concurrently in development mode:
 
 ```
 npm run dev
