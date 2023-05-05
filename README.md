@@ -74,8 +74,6 @@ TheraFit is a comprehensive workout management app designed to help patients and
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
- +++ take it from profile readme +++
-
 ### Links
 
 - [Code Source](https://github.com/Alkxs/TheraFit/tree/main)
