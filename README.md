@@ -8,7 +8,7 @@
 
  # TheraFit - Workout Planner App
 
- <img src="./client/public/logo-color.png" alt="Logo" width="320">
+ <img src="./client/public/logo.png" alt="Logo" width="320">
   
  <h3 align="center">Plan. Customize. Progress.</h3>
 
