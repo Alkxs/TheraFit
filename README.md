@@ -8,7 +8,7 @@
 
  # TheraFit - Workout Planner App
 
- <img src="./client/public/logo-color.png" alt="Logo" width="320">
+ <img src="./client/public/logo.png" alt="Logo" width="320">
   
  <h3 align="center">Plan. Customize. Progress.</h3>
 
@@ -55,7 +55,7 @@ TheraFit is a comprehensive workout management app designed to help patients and
 
 ### Demo
 
-<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzgzZGQ4YjhlNmI2NTQ3ZjkwYTJlZjQ0NTM0MjUyYWI4OGMyZGJjZCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/w4C3dJPr8J58eMncd5/giphy.gif" alt="TheraFit GIF" width="100%">
+<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzgzZGQ4YjhlNmI2NTQ3ZjkwYTJlZjQ0NTM0MjUyYWI4OGMyZGJjZCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/w4C3dJPr8J58eMncd5/giphy.gif" alt="TheraFit GIF" >
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -73,8 +73,6 @@ TheraFit is a comprehensive workout management app designed to help patients and
 </details>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
- +++ take it from profile readme +++
 
 ### Links
 
@@ -285,4 +283,4 @@ Remember to always keep your environment variables and sensitive information sec
 
 ### License
 
-TheraFit is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+TheraFit is licensed under the MIT License. See the [LICENSE](LICENSE.txt) file for details.
